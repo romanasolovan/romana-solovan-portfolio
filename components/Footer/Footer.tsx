@@ -13,7 +13,7 @@ export default function Footer() {
             <Link href="/about">ABOUT</Link>
           </li>
           <li className={css.portLink}>
-            <Link href="/profile">PROFILE</Link>
+            <Link href="/portfolio">PROFILE</Link>
           </li>
         </ul>
       </nav>

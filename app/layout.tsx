@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Romana Solovan | Front-End Developer ",
+  title: "Romana Solovan",
   description: "Portfolio of Romana Solovan, front-end developer",
-  icons: {
-    icon: "./shopping-bag.svg",
-  },
+  // icons: {
+  //   icon: "/268085_heart-icon.svg",
+  // },
 };
 
 export default function RootLayout({
