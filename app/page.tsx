@@ -1,3 +1,4 @@
+import AboutSection from "@/components/Sections/AboutSection/AboutSection";
 import "./globals.css";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
           I build clean, responsive interfaces and love turning designs into
           real, usable products.
         </p>
+        <AboutSection />
       </main>
     </section>
   );

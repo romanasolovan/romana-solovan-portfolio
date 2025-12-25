@@ -4,6 +4,7 @@
 //   tech: string[];
 //   liveUrl?: string;
 //   githubUrl?: string;
+// type?: string;
 // };
 
 // const projects = [
@@ -20,5 +21,7 @@
 //       "Implemented dynamic pagination and category filtering.",
 //       "Built accessible modal windows and keyboard navigation.",
 //     ],
+//.   type: [
+//         "team project"],
 //   },
 // ];
