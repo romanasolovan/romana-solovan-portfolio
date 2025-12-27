@@ -13,6 +13,7 @@ const navItems: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Skills", href: "/skills" },
+  { label: "Contacts", href: "/contact" },
 ];
 
 export default function Navigation() {
