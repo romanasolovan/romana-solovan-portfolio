@@ -20,7 +20,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://your-domain.com"), // set after deploy
+  metadataBase: new URL("https://your-domain.com"),
   title: "Romana Solovan",
   description:
     "Portfolio of Romana Solovan, front-end developer building clean, responsive and accessible web interfaces.",
@@ -32,14 +32,12 @@ export const metadata: Metadata = {
     siteName: "Romana Solovan Portfolio",
     locale: "en_US",
     type: "website",
-    // images: ["/og.png"], // add later if you create og image
   },
   twitter: {
     card: "summary_large_image",
     title: "Romana Solovan | Front-End Developer",
     description:
       "Portfolio of Romana Solovan, front-end developer building modern UI.",
-    // images: ["/og.png"], // add later
   },
   robots: {
     index: true,

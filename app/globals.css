@@ -1,22 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
 
   /* Layout tokens: consistent across sections */
   --container-max: 1100px;
   --container-pad: 24px;
-  --section-min-height: calc(100vh - 56px); /* account for thin header height */
-  --section-gap: 24px;
+  --section-min-height: 100vh;
   --radius: 16px;
-}
-
-/* Generic container styling */
-.container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 var(--container-pad);
+  --header-height: 56px;
 }
 
 @theme inline {
@@ -27,28 +20,23 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 html,
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
   margin: 0;
-  max-width: 100vw;
-  overflow-x: hidden;
+  padding: 0;
+  width: 100%;
   height: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 ul,
@@ -76,8 +64,76 @@ h3 {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #000000;
 }
+
 .appMain {
-  flex: 1; /* pushes footer down */
-  padding: 24px;
+  flex: 1;
+  padding: 0; /* CRITICAL: No padding for full-page sections */
+}
+
+/* ========================================
+   SECTION BASE STYLES - FULL PAGE
+   ======================================== */
+
+.section {
+  min-height: 100vh; /* Full viewport height */
+  width: 100%; /* Full width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0; /* Vertical padding for content breathing room */
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.section.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Alternating section backgrounds */
+.section-dark {
+  background: #000000;
+}
+
+.section-darker {
+  background: #09090b; /* zinc-950 */
+}
+
+/* ========================================
+   CONTAINER FOR CONTENT WITHIN SECTIONS
+   ======================================== */
+
+.section-container {
+  max-width: var(--container-max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* Wide container for portfolio grid */
+.section-container-wide {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .section-container,
+  .section-container-wide {
+    padding: 0 16px;
+  }
 }

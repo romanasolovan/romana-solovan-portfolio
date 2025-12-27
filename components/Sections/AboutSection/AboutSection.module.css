@@ -1,4 +1,111 @@
-.aboutSection {
-  color: aliceblue;
-  margin-top: 150px;
+/* .about {
+} */
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.paragraph {
+  font-size: 1.125rem;
+  color: #d4d4d8; /* zinc-300 */
+  line-height: 1.75;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.primaryBtn {
+  background: #ffffff;
+  color: #000000;
+}
+
+.primaryBtn:hover {
+  background: #e5e5e5;
+}
+
+.secondaryBtn {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+.secondaryBtn:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+.highlights {
+  background: #18181b; /* zinc-900 */
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid #27272a; /* zinc-800 */
+}
+
+.highlightItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.highlightItem:last-child {
+  margin-bottom: 0;
+}
+
+.icon {
+  width: 3rem;
+  height: 3rem;
+  background: #27272a; /* zinc-800 */
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.highlightTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.highlightDesc {
+  font-size: 0.875rem;
+  color: #a1a1aa; /* zinc-400 */
+}
+
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
 }

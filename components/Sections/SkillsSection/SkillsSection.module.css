@@ -1,0 +1,81 @@
+.skills {
+}
+
+.header {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #a1a1aa; /* zinc-400 */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.category {
+}
+
+.categoryTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.skillsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skill {
+}
+
+.skillHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.skillName {
+  font-weight: 500;
+  color: #e4e4e7; /* zinc-200 */
+}
+
+.skillLevel {
+  color: #71717a; /* zinc-500 */
+}
+
+.progressBar {
+  height: 0.75rem;
+  background: #18181b; /* zinc-900 */
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 9999px;
+  transition: width 1s ease;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+}

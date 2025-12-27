@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 import css from "./Site.module.css";
 
 type NavItem = {
@@ -7,10 +7,10 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Skills", href: "/skills" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Portfolio", href: "#portfolio" },
+  { label: "Skills", href: "#skills" },
 ];
 
 export default function Navigation() {
@@ -19,9 +19,9 @@ export default function Navigation() {
       <ul className={css.navList}>
         {navItems.map((item) => (
           <li key={item.href} className={css.navItem}>
-            <Link className={css.navLink} href={item.href}>
+            <a className={css.navLink} href={item.href}>
               {item.label}
-            </Link>
+            </a>
           </li>
         ))}
       </ul>
