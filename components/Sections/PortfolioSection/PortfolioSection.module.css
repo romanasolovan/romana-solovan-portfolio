@@ -105,6 +105,42 @@
   margin-left: 0.25rem;
 }
 
+/* View More Button */
+.viewMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.viewMoreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #ffffff;
+  color: #000000;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.viewMoreButton:hover {
+  background: #e5e5e5;
+  gap: 12px;
+}
+
+.viewMoreIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.viewMoreButton:hover .viewMoreIcon {
+  transform: translateX(4px);
+}
+
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;

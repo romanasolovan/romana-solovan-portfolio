@@ -8,9 +8,15 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <AboutSection />
-      <PortfolioSection />
-      <SkillsSection />
+      <div id="about">
+        <AboutSection showViewMore={true} />
+      </div>
+      <div id="portfolio">
+        <PortfolioSection showViewMore={true} limitProjects={2} />
+      </div>
+      <div id="skills">
+        <SkillsSection showViewMore={true} />
+      </div>
     </>
   );
 }

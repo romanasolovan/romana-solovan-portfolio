@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import css from "./PortfolioSection.module.css";
 
-const projects = [
+const allProjects = [
   {
     id: 1,
     title: "E-Commerce Platform",
@@ -39,8 +40,19 @@ const projects = [
   },
 ];
 
-export default function PortfolioSection() {
+interface PortfolioSectionProps {
+  showViewMore?: boolean;
+  limitProjects?: number;
+}
+
+export default function PortfolioSection({
+  showViewMore = false,
+  limitProjects,
+}: PortfolioSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const projects = limitProjects
+    ? allProjects.slice(0, limitProjects)
+    : allProjects;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,15 +75,18 @@ export default function PortfolioSection() {
 
   return (
     <section
-      id="portfolio"
       ref={sectionRef}
       className={`section section-dark ${css.portfolio}`}
     >
       <div className="section-container-wide">
         <div className={css.header}>
-          <h2 className={css.title}>Featured Projects</h2>
+          <h2 className={css.title}>
+            {showViewMore ? "Featured Projects" : "All Projects"}
+          </h2>
           <p className={css.subtitle}>
-            A collection of my recent work and side projects
+            {showViewMore
+              ? "A glimpse of my recent work"
+              : "A comprehensive collection of my work and side projects"}
           </p>
         </div>
 
@@ -96,6 +111,27 @@ export default function PortfolioSection() {
             </div>
           ))}
         </div>
+
+        {showViewMore && (
+          <div className={css.viewMoreContainer}>
+            <Link href="/portfolio" className={css.viewMoreButton}>
+              View All Projects
+              <svg
+                className={css.viewMoreIcon}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

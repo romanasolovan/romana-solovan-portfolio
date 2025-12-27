@@ -20,7 +20,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL("https://romana-solovan-portfolio.vercel.app"),
   title: "Romana Solovan",
   description:
     "Portfolio of Romana Solovan, front-end developer building clean, responsive and accessible web interfaces.",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Romana Solovan | Front-End Developer",
     description:
       "Projects, skills, and contact info for Romana Solovan — front-end developer.",
-    url: "https://your-domain.com",
+    url: "https://romana-solovan-portfolio.vercel.app",
     siteName: "Romana Solovan Portfolio",
     locale: "en_US",
     type: "website",

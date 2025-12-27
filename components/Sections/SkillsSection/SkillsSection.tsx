@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import css from "./SkillsSection.module.css";
 
 const skillCategories = [
@@ -23,7 +24,13 @@ const skillCategories = [
   },
 ];
 
-export default function SkillsSection() {
+interface SkillsSectionProps {
+  showViewMore?: boolean;
+}
+
+export default function SkillsSection({
+  showViewMore = false,
+}: SkillsSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -47,13 +54,14 @@ export default function SkillsSection() {
 
   return (
     <section
-      id="skills"
       ref={sectionRef}
       className={`section section-darker ${css.skills}`}
     >
       <div className="section-container">
         <div className={css.header}>
-          <h2 className={css.title}>Skills & Expertise</h2>
+          <h2 className={css.title}>
+            {showViewMore ? "Skills Overview" : "Skills & Expertise"}
+          </h2>
           <p className={css.subtitle}>Technologies and tools I work with</p>
         </div>
 
@@ -80,6 +88,27 @@ export default function SkillsSection() {
             </div>
           ))}
         </div>
+
+        {showViewMore && (
+          <div className={css.viewMoreContainer}>
+            <Link href="/skills" className={css.viewMoreButton}>
+              View All Skills
+              <svg
+                className={css.viewMoreIcon}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

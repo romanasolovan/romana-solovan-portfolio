@@ -1,10 +1,9 @@
-import React from "react";
+import SkillsSection from "@/components/Sections/SkillsSection/SkillsSection";
 
 export default function SkillsPage() {
   return (
-    <section>
-      <h1>Skills</h1>
-      <p>Your skills list and toolset will live here.</p>
-    </section>
+    <div className="min-h-screen bg-zinc-950 text-white py-20">
+      <SkillsSection showViewMore={false} />
+    </div>
   );
 }

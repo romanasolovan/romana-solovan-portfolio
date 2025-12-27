@@ -1,10 +1,9 @@
-import React from "react";
+import PortfolioSection from "@/components/Sections/PortfolioSection/PortfolioSection";
 
 export default function PortfolioPage() {
   return (
-    <section>
-      <h1>Portfolio</h1>
-      <p>Detailed projects will live here.</p>
-    </section>
+    <div className="min-h-screen bg-black text-white py-20">
+      <PortfolioSection showViewMore={false} />
+    </div>
   );
 }

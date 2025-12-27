@@ -1,8 +1,15 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import css from "./AboutSection.module.css";
 
-export default function AboutSection() {
+interface AboutSectionProps {
+  showViewMore?: boolean;
+}
+
+export default function AboutSection({
+  showViewMore = false,
+}: AboutSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -25,13 +32,11 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className={`section section-darker ${css.about}`}
-    >
+    <section ref={sectionRef} className={`section section-darker ${css.about}`}>
       <div className="section-container">
-        <h2 className={css.title}>Get to Know Me</h2>
+        <h2 className={css.title}>
+          {showViewMore ? "About Me" : "Get to Know Me"}
+        </h2>
         <div className={css.content}>
           <div className={css.textContent}>
             <p className={css.paragraph}>
@@ -40,19 +45,30 @@ export default function AboutSection() {
               love for clean code, I transform ideas into interactive,
               user-friendly applications.
             </p>
-            <p className={css.paragraph}>
-              When I&apos;m not coding, you&apos;ll find me exploring new
-              technologies, contributing to open-source projects, or sharing
-              knowledge with the developer community.
-            </p>
-            <div className={css.buttonGroup}>
-              <a href="#contact" className={css.primaryBtn}>
-                Get in Touch
-              </a>
-              <a href="#portfolio" className={css.secondaryBtn}>
-                View Work
-              </a>
-            </div>
+            {showViewMore && (
+              <p className={css.paragraph}>
+                When I&apos;m not coding, you&apos;ll find me exploring new
+                technologies, contributing to open-source projects, or sharing
+                knowledge with the developer community.
+              </p>
+            )}
+            {!showViewMore && (
+              <>
+                <p className={css.paragraph}>
+                  When I&apos;m not coding, you&apos;ll find me exploring new
+                  technologies, contributing to open-source projects, or sharing
+                  knowledge with the developer community.
+                </p>
+                <div className={css.buttonGroup}>
+                  <a href="#contact" className={css.primaryBtn}>
+                    Get in Touch
+                  </a>
+                  <Link href="/portfolio" className={css.secondaryBtn}>
+                    View Work
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
           <div className={css.highlights}>
             <div className={css.highlightItem}>
@@ -82,6 +98,27 @@ export default function AboutSection() {
             </div>
           </div>
         </div>
+
+        {showViewMore && (
+          <div className={css.viewMoreContainer}>
+            <Link href="/about" className={css.viewMoreButton}>
+              View More
+              <svg
+                className={css.viewMoreIcon}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

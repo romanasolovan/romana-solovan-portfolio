@@ -79,10 +79,43 @@
   transform: scale(0.98);
 }
 
-/* Optional: Active state for current page */
-.navLink[aria-current="page"] {
+/* Active state for current page */
+.navLinkActive {
   color: #ffffff;
   background: #3f3f46; /* zinc-700 */
+}
+
+/* ========================================
+   VIEW MORE BUTTON COMPONENT
+   ======================================== */
+
+.viewMoreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #ffffff;
+  color: #000000;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.viewMoreButton:hover {
+  background: #e5e5e5;
+  gap: 12px;
+}
+
+.viewMoreIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.viewMoreButton:hover .viewMoreIcon {
+  transform: translateX(4px);
 }
 
 /* ========================================
