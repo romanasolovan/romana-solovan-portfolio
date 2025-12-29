@@ -83,7 +83,7 @@ h3 {
   align-items: center;
   justify-content: center;
   padding: 80px 0; /* Vertical padding for content breathing room */
-  opacity: 0;
+  /* opacity: 0; */
   transform: translateY(30px);
   transition:
     opacity 1s ease,
@@ -135,5 +135,296 @@ h3 {
   .section-container,
   .section-container-wide {
     padding: 0 16px;
+  }
+}
+
+/* ========================================
+   PAGE UTILITIES FOR CONSISTENT SPACING
+   ======================================== */
+
+/* Page container - consistent padding/margin for all pages */
+.page-container {
+  min-height: 100vh;
+  padding: 80px 0;
+  background: #000000;
+}
+
+/* Page header - used at top of dedicated pages */
+.page-header {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.page-subtitle {
+  font-size: 1.25rem;
+  color: #a1a1aa; /* zinc-400 */
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* Page content wrapper */
+.page-content {
+  /* This ensures sections inside have proper spacing */
+}
+
+/* Section spacing adjustments for standalone pages */
+.page-container .section {
+  min-height: auto; /* Remove min-height for page sections */
+  padding: 60px 0;
+}
+
+/* First section in page should have less top padding */
+.page-container .section:first-of-type {
+  padding-top: 0;
+}
+
+/* ========================================
+   RESPONSIVE PAGE STYLES
+   ======================================== */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 60px 0;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+    padding: 0 16px;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .page-container .section {
+    padding: 40px 0;
+  }
+}
+
+/* ========================================
+   SECTION UTILITIES
+   ======================================== */
+
+.section-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.section-intro {
+  font-size: 1.125rem;
+  color: #a1a1aa;
+  text-align: center;
+  max-width: 42rem;
+  margin: -1.5rem auto 3rem;
+}
+
+/* ========================================
+   CONTENT GRID (for timeline)
+   ======================================== */
+
+.content-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  position: relative;
+}
+
+.timeline-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 40px;
+  top: 80px;
+  bottom: -48px;
+  width: 2px;
+  background: #27272a;
+}
+
+.timeline-marker {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.timeline-icon {
+  width: 4rem;
+  height: 4rem;
+  background: #18181b;
+  border: 3px solid #27272a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-content {
+  padding-bottom: 1rem;
+}
+
+.timeline-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #ffffff;
+}
+
+.timeline-description {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #d4d4d8;
+}
+
+/* ========================================
+   STRENGTHS GRID
+   ======================================== */
+
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.strength-card {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.strength-card:hover {
+  border-color: #3f3f46;
+  transform: translateY(-4px);
+}
+
+.strength-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.strength-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #ffffff;
+}
+
+.strength-description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #a1a1aa;
+  margin: 0;
+}
+
+/* ========================================
+   FACTS GRID (Fun Facts)
+   ======================================== */
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.fact-card {
+  background: #09090b;
+  border: 1px solid #27272a;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+}
+
+.fact-card:hover {
+  border-color: #3f3f46;
+  background: #18181b;
+}
+
+.fact-emoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.fact-text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #d4d4d8;
+  margin: 0;
+}
+
+.fact-text strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .section-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-item {
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+  }
+
+  .timeline-item:not(:last-child)::before {
+    left: 30px;
+  }
+
+  .timeline-icon {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+
+  .timeline-title {
+    font-size: 1.25rem;
+  }
+
+  .timeline-description {
+    font-size: 1rem;
+  }
+
+  .strengths-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,51 @@
+/* src/components/Projects/ProjectList/ProjectList.module.css */
+
+/**
+ * GRID LAYOUT
+ * Responsive grid that adapts to screen size
+ */
+.grid {
+  display: grid;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Two-column grid (default) */
+.gridTwoCol {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Three-column grid (for full portfolio page) */
+.gridThreeCol {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/**
+ * EMPTY STATE
+ * Shown when no projects exist
+ */
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #a1a1aa; /* zinc-400 */
+  font-size: 1.125rem;
+}
+
+/**
+ * RESPONSIVE BREAKPOINTS
+ */
+
+/* Tablet: always 2 columns */
+@media (max-width: 1024px) {
+  .gridThreeCol {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: single column */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

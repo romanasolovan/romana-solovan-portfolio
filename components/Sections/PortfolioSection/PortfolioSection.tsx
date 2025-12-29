@@ -1,44 +1,11 @@
+// src/components/Sections/PortfolioSection/PortfolioSection.tsx
+
 "use client";
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
+import { projects, getFeaturedProjects } from "@/data/projects";
+import ProjectList from "@/components/Projects/ProjectList/ProjectList";
 import css from "./PortfolioSection.module.css";
-
-const allProjects = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description:
-      "A full-featured online store with cart, checkout, and admin dashboard",
-    tech: ["Next.js", "TypeScript", "Tailwind"],
-    icon: "🛍️",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Task Management App",
-    description: "Collaborative workspace for teams with real-time updates",
-    tech: ["React", "Node.js", "MongoDB"],
-    icon: "✓",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Portfolio Website",
-    description:
-      "Modern portfolio site with smooth animations and interactions",
-    tech: ["Next.js", "Framer Motion", "CSS"],
-    icon: "🎨",
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "Weather Dashboard",
-    description: "Real-time weather data with interactive maps and forecasts",
-    tech: ["React", "API Integration", "Charts"],
-    icon: "🌤️",
-    link: "#",
-  },
-];
 
 interface PortfolioSectionProps {
   showViewMore?: boolean;
@@ -50,9 +17,11 @@ export default function PortfolioSection({
   limitProjects,
 }: PortfolioSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const projects = limitProjects
-    ? allProjects.slice(0, limitProjects)
-    : allProjects;
+
+  // Get limited or all projects
+  const displayProjects = limitProjects
+    ? getFeaturedProjects(limitProjects)
+    : projects;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -90,27 +59,11 @@ export default function PortfolioSection({
           </p>
         </div>
 
-        <div className={css.grid}>
-          {projects.map((project) => (
-            <div key={project.id} className={css.card}>
-              <div className={css.cardImage}>{project.icon}</div>
-              <div className={css.cardContent}>
-                <h3 className={css.cardTitle}>{project.title}</h3>
-                <p className={css.cardDescription}>{project.description}</p>
-                <div className={css.techTags}>
-                  {project.tech.map((tech, idx) => (
-                    <span key={idx} className={css.tag}>
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <a href={project.link} className={css.projectLink}>
-                  View Project <span className={css.arrow}>→</span>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Use the new ProjectList component */}
+        <ProjectList
+          projects={displayProjects}
+          columns={showViewMore ? 2 : 3}
+        />
 
         {showViewMore && (
           <div className={css.viewMoreContainer}>

@@ -1,28 +1,205 @@
-.title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
+/* ========================================
+   SECTION BASE
+   ======================================== */
+.about {
 }
 
-.content {
+/* ========================================
+   GRID LAYOUT
+   ======================================== */
+.grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   align-items: center;
 }
 
-.textContent {
+/* ========================================
+   IMAGE CAROUSEL - LEFT SIDE
+   ======================================== */
+.imageContainer {
+  position: relative;
+  height: 500px;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.slideInLeft {
+  animation: slideInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.imageSlide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.imageSlideActive {
+  opacity: 1;
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 4px solid #27272a;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 0%,
+    transparent 40%,
+    transparent 100%
+  );
+}
+
+.indicators {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.indicatorActive {
+  width: 2rem;
+  background: #ffffff;
+}
+
+/* ========================================
+   TEXT CONTENT - RIGHT SIDE
+   ======================================== */
+.content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.slideInRight {
+  animation: slideInRight 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   TITLE - TYPING ANIMATION
+   ======================================== */
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  min-height: 4rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.slideInRight .title {
+  animation: fadeInUp 0.8s ease 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.typingCursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   TEXT WRAPPER
+   ======================================== */
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fadeInUp {
+  animation: fadeInUp 0.8s ease 0.8s forwards;
 }
 
 .paragraph {
   font-size: 1.125rem;
-  color: #d4d4d8; /* zinc-300 */
+  color: #d4d4d8;
   line-height: 1.75;
 }
 
+/* ========================================
+   BUTTONS
+   ======================================== */
 .buttonGroup {
   display: flex;
   gap: 1rem;
@@ -35,6 +212,8 @@
   border-radius: 0.5rem;
   font-weight: 500;
   transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .primaryBtn {
@@ -44,88 +223,55 @@
 
 .primaryBtn:hover {
   background: #e5e5e5;
+  transform: translateY(-2px);
 }
 
 .secondaryBtn {
   border: 2px solid #ffffff;
   color: #ffffff;
+  background: transparent;
 }
 
 .secondaryBtn:hover {
   background: #ffffff;
   color: #000000;
+  transform: translateY(-2px);
 }
 
-.highlights {
-  background: #18181b; /* zinc-900 */
-  border-radius: 1rem;
-  padding: 2rem;
-  border: 1px solid #27272a; /* zinc-800 */
-}
-
-.highlightItem {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.highlightItem:last-child {
-  margin-bottom: 0;
-}
-
-.icon {
-  width: 3rem;
-  height: 3rem;
-  background: #27272a; /* zinc-800 */
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.highlightTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.highlightDesc {
-  font-size: 0.875rem;
-  color: #a1a1aa; /* zinc-400 */
-}
-
-/* View More Button */
+/* ========================================
+   VIEW MORE BUTTON
+   ======================================== */
 .viewMoreContainer {
   display: flex;
-  justify-content: center;
-  margin-top: 3rem;
+  justify-content: flex-start;
+  margin-top: 1rem;
 }
 
 .viewMoreButton {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 24px;
-  background: #ffffff;
-  color: #000000;
+  padding: 10px 20px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #3f3f46;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .viewMoreButton:hover {
-  background: #e5e5e5;
+  background: #18181b;
+  border-color: #52525b;
   gap: 12px;
+  transform: translateY(-2px);
 }
 
 .viewMoreIcon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   transition: transform 0.2s ease;
 }
 
@@ -133,12 +279,50 @@
   transform: translateX(4px);
 }
 
-@media (max-width: 768px) {
-  .content {
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+  .grid {
     grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .imageContainer {
+    order: 2;
+    height: 400px;
+  }
+
+  .content {
+    order: 1;
   }
 
   .title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
     font-size: 2.25rem;
+    min-height: 3rem;
+  }
+
+  .paragraph {
+    font-size: 1rem;
+  }
+
+  .imageContainer {
+    height: 350px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    text-align: center;
   }
 }

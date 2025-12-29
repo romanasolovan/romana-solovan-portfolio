@@ -1,7 +1,8 @@
+import HeroSection from "@/components/Sections/HeroSection/HeroSection";
 import AboutSection from "@/components/Sections/AboutSection/AboutSection";
 import PortfolioSection from "@/components/Sections/PortfolioSection/PortfolioSection";
 import SkillsSection from "@/components/Sections/SkillsSection/SkillsSection";
-import HeroSection from "@/components/Sections/HeroSection/HeroSection";
+import ContactSection from "@/components/Sections/ContactSection/ContactSection";
 import "./globals.css";
 
 export default function Home() {
@@ -16,6 +17,9 @@ export default function Home() {
       </div>
       <div id="skills">
         <SkillsSection showViewMore={true} />
+      </div>
+      <div id="contact">
+        <ContactSection showViewMore={true} />
       </div>
     </>
   );

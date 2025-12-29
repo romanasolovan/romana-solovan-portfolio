@@ -1,0 +1,210 @@
+/* ========================================
+   CONTACT SECTION
+   ======================================== */
+.contact {
+  text-align: center;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+.header {
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fadeIn {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #a1a1aa; /* zinc-400 */
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* ========================================
+   GRID OF CONTACT METHODS
+   ======================================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* ========================================
+   CONTACT CARD
+   ======================================== */
+.card {
+  background: #09090b; /* zinc-950 */
+  border: 1px solid #27272a; /* zinc-800 */
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fadeInUp {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card:hover {
+  background: #18181b; /* zinc-900 */
+  border-color: #3f3f46; /* zinc-700 */
+  transform: translateY(-8px);
+}
+
+.iconWrapper {
+  width: 4rem;
+  height: 4rem;
+  background: #18181b; /* zinc-900 */
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #27272a;
+  transition: all 0.3s ease;
+}
+
+.card:hover .iconWrapper {
+  background: #27272a;
+  border-color: #3f3f46;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  color: #ffffff;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cardValue {
+  font-size: 0.875rem;
+  color: #a1a1aa; /* zinc-400 */
+  margin: 0;
+}
+
+/* ========================================
+   VIEW MORE BUTTON
+   ======================================== */
+.viewMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  opacity: 0;
+}
+
+.viewMoreContainer.fadeIn {
+  animation: fadeIn 0.8s ease 0.6s forwards;
+}
+
+.viewMoreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 1rem 2rem;
+  background: #ffffff;
+  color: #000000;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.viewMoreButton:hover {
+  background: #e5e5e5;
+  gap: 12px;
+  transform: translateY(-2px);
+}
+
+.viewMoreIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.2s ease;
+}
+
+.viewMoreButton:hover .viewMoreIcon {
+  transform: translateX(4px);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid .card:last-child {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .grid .card:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 2rem 1.5rem;
+  }
+}

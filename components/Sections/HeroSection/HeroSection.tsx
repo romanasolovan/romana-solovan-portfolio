@@ -34,11 +34,11 @@ export default function HeroSection() {
         <div className={css.content}>
           <h1 className={css.title}>Hi, I&apos;m Romana Solovan</h1>
           <p className={css.subtitle}>
-            Front-End Developer | Next.js, React, TypeScript
+            Front-End Developer · React · Next.js · TypeScript
           </p>
           <p className={css.description}>
-            I build clean, responsive interfaces and love turning designs into
-            real, usable products.
+            Former early childhood educator turned developer, creating
+            intuitive, accessible interfaces that feel good to use.
           </p>
         </div>
       </div>
