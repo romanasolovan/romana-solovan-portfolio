@@ -2,28 +2,148 @@
   text-align: center;
 }
 
-.content {
+/* .content {
   max-width: 56rem;
   margin: 0 auto;
-}
+} */
 
-.title {
+/* .title {
   font-size: 3.75rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   letter-spacing: -0.025em;
   line-height: 1.1;
+} */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: 2rem 1rem;
+  min-height: 100vh;
 }
 
-.subtitle {
+.title {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #1a202c;
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.title:nth-child(1) {
+  font-size: clamp(3rem, 10vw, 7rem);
+  animation: slideFromLeft 1s ease-out 0.2s both;
+}
+
+.title:nth-child(2) {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  animation: slideFromRight 1s ease-out 0.5s both;
+  color: #2d3748;
+}
+
+.title:nth-child(3) {
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  animation: slideFromLeft 1s ease-out 0.8s both;
+  color: #4a5568;
+}
+
+.title:hover {
+  transform: scale(1.02);
+  filter: brightness(1.2);
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* Tablet and below */
+@media (max-width: 768px) {
+  .content {
+    gap: clamp(0.75rem, 2.5vw, 1.5rem);
+    padding: 1.5rem 1rem;
+  }
+
+  .title {
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .content {
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+  }
+
+  .title:hover {
+    transform: scale(1.01);
+  }
+
+  @keyframes slideFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes slideFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+      filter: blur(0);
+    }
+  }
+}
+
+/* .subtitle {
   font-size: 1.5rem;
-  color: #d4d4d8; /* zinc-300 */
+  color: #d4d4d8; 
   margin-bottom: 1rem;
 }
 
 .description {
   font-size: 1.125rem;
-  color: #a1a1aa; /* zinc-400 */
+  color: #a1a1aa; 
   max-width: 42rem;
   margin: 0 auto;
 }
@@ -36,4 +156,4 @@
   .subtitle {
     font-size: 1.25rem;
   }
-}
+} */

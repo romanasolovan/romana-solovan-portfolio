@@ -45,8 +45,8 @@ export default function ContactSection({
         </svg>
       ),
       label: "GitHub",
-      value: "@yourusername",
-      link: "https://github.com/yourusername",
+      value: "@romanasolovan",
+      link: "https://github.com/romanasolovan",
     },
     {
       icon: (
@@ -65,8 +65,8 @@ export default function ContactSection({
         </svg>
       ),
       label: "Email",
-      value: "hello@romanasolovan.com",
-      link: "mailto:hello@romanasolovan.com",
+      value: "solo.rv95@gmail.com",
+      link: "mailto:solo.rv95@gmail.com",
     },
     {
       icon: (

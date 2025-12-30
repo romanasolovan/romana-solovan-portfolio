@@ -32,14 +32,17 @@ export default function HeroSection() {
     >
       <div className="section-container">
         <div className={css.content}>
-          <h1 className={css.title}>Hi, I&apos;m Romana Solovan</h1>
+          <h1 className={css.title}>Passion</h1>
+          <h2 className={css.title}>Dedication</h2>
+          <h2 className={css.title}>Impact</h2>
+          {/* <h1 className={css.title}>Hi, I&apos;m Romana Solovan</h1>
           <p className={css.subtitle}>
             Front-End Developer · React · Next.js · TypeScript
           </p>
           <p className={css.description}>
             Former early childhood educator turned developer, creating
             intuitive, accessible interfaces that feel good to use.
-          </p>
+          </p> */}
         </div>
       </div>
     </section>
