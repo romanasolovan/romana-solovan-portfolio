@@ -18,7 +18,6 @@ export default function AboutSection({
 
   const fullTitle = "About Me";
 
-  // Add your image paths from the public folder
   const images = [
     "/hero/heroRom1.jpg",
     "/hero/hero6.jpg",

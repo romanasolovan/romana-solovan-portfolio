@@ -9,7 +9,7 @@ const skillCategories = [
     skills: [
       { name: "React/Next.js", level: 90 },
       { name: "TypeScript", level: 85 },
-      { name: "Tailwind CSS", level: 90 },
+      { name: "Node.js", level: 80 },
       { name: "HTML/CSS", level: 95 },
     ],
   },
@@ -59,9 +59,9 @@ export default function SkillsSection({
     >
       <div className="section-container">
         <div className={css.header}>
-          <h2 className={css.title}>
+          {/* <h2 className={css.title}>
             {showViewMore ? "Skills Overview" : "Skills & Expertise"}
-          </h2>
+          </h2> */}
           <p className={css.subtitle}>Technologies and tools I work with</p>
         </div>
 

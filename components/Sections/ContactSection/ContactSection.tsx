@@ -84,9 +84,9 @@ export default function ContactSection({
           />
         </svg>
       ),
-      label: "Contact Form",
-      value: "Send me a message",
-      link: "/contact",
+      label: "Contact",
+      value: "LinkedIn",
+      link: "https://www.linkedin.com/in/romana-solovan-12b54a2a4/",
     },
   ];
 

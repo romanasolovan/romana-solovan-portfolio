@@ -1,46 +1,21 @@
-// src/data/projects.ts
-
-/**
- * PROJECT TYPE DEFINITION
- * This defines the shape of each project object.
- * TypeScript will yell at you if you forget a required field!
- */
 export type Project = {
-  id: number; // Unique identifier for React keys
-  title: string; // Project name
-  description: string; // Short overview (1-2 sentences)
-
-  // Technical details
+  id: number;
+  title: string;
+  description: string;
   techStack: string[]; // Technologies used ["React", "Node.js"]
-
-  // Links (optional because not all projects may have both)
   liveUrl?: string; // Live demo URL
   githubUrl?: string; // GitHub repository URL
-
-  // Project metadata
   type: "team" | "personal"; // Restricts to only these two values
-  role?: string; // Your role (optional for personal projects)
-
-  // Visual
-  image: string; // Path to project image in /public
-
-  // Additional context
+  role?: string;
+  image: string;
   highlights?: string[]; // Key achievements or features
   startDate?: string;
   endDate?: string;
   teamSize?: number;
   featured?: boolean;
-
-  // Future fields you might add:
-  // startDate?: string;
-  // endDate?: string;
-  // teamSize?: number;
-  // featured?: boolean;
 };
 
-/**
- * PROJECT DATA ARRAY
- * Add new projects here. TypeScript will validate the structure.
+/** PROJECT DATA ARRAY
  */
 export const projects: Project[] = [
   {
@@ -53,7 +28,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/romanasolovan/development-hell-02",
     type: "team",
     role: "Front-end Developer, Scrum Master",
-    image: "/projects/booksy.jpg", // Place image in public/projects/
+    image: "/projects/booksy.jpg",
     highlights: [
       "Implemented dynamic pagination and category filtering",
       "Built accessible modal windows and keyboard navigation",
@@ -61,7 +36,7 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: "NoteHub",
+    title: "NoteHub – Simple Note Saving App",
     description: "Simple note adding application for better productivity.",
     techStack: ["Next.js", "TypeScript", "CSS Modules"],
     liveUrl: "https://09-auth-pink.vercel.app/",
@@ -75,7 +50,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Tasteorama",
+    title: "Tasteorama – Recipe Browser",
     description: "Recipe webpage for saving and creating recipes.",
     techStack: ["Next.js", "TypeScript", "CSS Modules", "Node.js"],
     liveUrl: "https://taste-of-the-end-f.vercel.app/",
@@ -89,7 +64,7 @@ export const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Birdie - The Stroke",
+    title: "Birdie – The Stroke",
     description: "Woman's pregnancy tracker made for a Ukrainian market.",
     techStack: ["Next.js", "TypeScript", "CSS Modules", "Node.js"],
     liveUrl: "https://birdie-kohl.vercel.app/",
@@ -103,9 +78,9 @@ export const projects: Project[] = [
   },
   {
     id: 5,
-    title: "Car World",
+    title: "Car World – ",
     description: "Car Rental application.",
-    techStack: ["Next.js", "TypeScript", "CSS Modules", "Node.js"],
+    techStack: ["Next.js", "TypeScript", "CSS Modules"],
     liveUrl: "https://car-world-mu.vercel.app/",
     githubUrl: "https://github.com/romanasolovan/car-world",
     type: "personal",
@@ -117,9 +92,9 @@ export const projects: Project[] = [
   },
   {
     id: 6,
-    title: "WebStudio",
+    title: "WebStudio – ",
     description: "Effective solutions for businesses.",
-    techStack: ["Next.js", "TypeScript", "CSS Modules", "Node.js"],
+    techStack: ["HTML", "CSS"],
     liveUrl: "https://romanasolovan.github.io/goit-markup-hw-06/",
     githubUrl: "https://github.com/romanasolovan/goit-markup-hw-06",
     type: "personal",
@@ -131,9 +106,9 @@ export const projects: Project[] = [
   },
   {
     id: 7,
-    title: "Gallery",
+    title: "Gallery – ",
     description: "Simple gallery webpage",
-    techStack: ["Next.js", "TypeScript", "CSS Modules", "Node.js"],
+    techStack: ["HTML", "CSS", "JavaScript"],
     liveUrl: "https://romanasolovan.github.io/goit-js-hw-12/",
     githubUrl: "https://github.com/romanasolovan/goit-js-hw-12",
     type: "personal",
@@ -143,14 +118,8 @@ export const projects: Project[] = [
       "Built custom image carousel",
     ],
   },
-  // Add more projects here...
 ];
 
-/**
- * HELPER FUNCTIONS (optional but useful)
- */
-
-// Get a single project by ID
 export const getProjectById = (id: number): Project | undefined => {
   return projects.find((project) => project.id === id);
 };
@@ -160,7 +129,7 @@ export const getProjectsByType = (type: "team" | "personal"): Project[] => {
   return projects.filter((project) => project.type === type);
 };
 
-// Get featured projects (you can add a 'featured' boolean later)
+// Get featured projects
 export const getFeaturedProjects = (limit?: number): Project[] => {
   const featured = projects.slice(0, limit || projects.length);
   return featured;
