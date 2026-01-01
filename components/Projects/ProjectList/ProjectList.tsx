@@ -1,23 +1,13 @@
-// src/components/Projects/ProjectList/ProjectList.tsx
-
 import React from "react";
 import { Project } from "@/data/projects";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import css from "./ProjectList.module.css";
 
-/**
- * PROPS INTERFACE
- * This component receives an array of projects
- */
 interface ProjectListProps {
   projects: Project[];
-  columns?: 2 | 3; // Optional: control grid columns (default: 2)
+  columns?: 2 | 3;
 }
 
-/**
- * PROJECT LIST COMPONENT
- * Renders a grid of ProjectCard components
- */
 export default function ProjectList({
   projects,
   columns = 2,

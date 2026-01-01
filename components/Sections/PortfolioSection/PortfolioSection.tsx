@@ -1,5 +1,3 @@
-// src/components/Sections/PortfolioSection/PortfolioSection.tsx
-
 "use client";
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
@@ -18,7 +16,6 @@ export default function PortfolioSection({
 }: PortfolioSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Get limited or all projects
   const displayProjects = limitProjects
     ? getFeaturedProjects(limitProjects)
     : projects;
@@ -59,7 +56,6 @@ export default function PortfolioSection({
           </p>
         </div>
 
-        {/* Use the new ProjectList component */}
         <ProjectList
           projects={displayProjects}
           columns={showViewMore ? 2 : 3}
