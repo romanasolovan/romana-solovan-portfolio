@@ -2,8 +2,7 @@ import AboutSection from "@/components/Sections/AboutSection/AboutSection";
 
 export const metadata = {
   title: "About | Romana Solovan",
-  description:
-    "Learn more about Romana Solovan's journey as a front-end developer.",
+  description: "Learn more about my journey as a front-end developer.",
 };
 
 export default function AboutPage() {
@@ -222,12 +221,12 @@ export default function AboutPage() {
             <div className="flex gap-4 justify-center flex-wrap">
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-lg hover:bg-gray-200 transition-all font-semibold text-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-black rounded-lg hover:bg-gray-300 transition-all font-semibold text-lg"
               >
                 Get in Touch
               </a>
               <a
-                href="/resume.pdf"
+                href="/portfolioCV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-black transition-all font-semibold text-lg"
