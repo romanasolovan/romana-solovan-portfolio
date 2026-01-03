@@ -13,22 +13,34 @@ const navItems: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Skills", href: "/skills" },
-  { label: "Contacts", href: "/contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
-export default function Navigation() {
+interface NavigationProps {
+  onLinkClick?: () => void;
+  isMobile?: boolean;
+}
+
+export default function Navigation({
+  onLinkClick,
+  isMobile = false,
+}: NavigationProps) {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Primary" className={css.nav}>
-      <ul className={css.navList}>
+    <nav aria-label="Primary" className={isMobile ? css.mobileNav : css.nav}>
+      <ul className={isMobile ? css.mobileNavList : css.navList}>
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
-            <li key={item.href} className={css.navItem}>
+            <li
+              key={item.href}
+              className={isMobile ? css.mobileNavItem : css.navItem}
+            >
               <Link
-                className={`${css.navLink} ${isActive ? css.navLinkActive : ""}`}
+                className={`${isMobile ? css.mobileNavLink : css.navLink} ${isActive ? (isMobile ? css.mobileNavLinkActive : css.navLinkActive) : ""}`}
                 href={item.href}
+                onClick={onLinkClick}
               >
                 {item.label}
               </Link>
