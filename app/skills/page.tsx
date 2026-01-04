@@ -11,9 +11,9 @@ export default function SkillsPage() {
     <div className="page-container">
       <div className="page-header">
         <h1 className="page-title">Skills & Expertise</h1>
-        {/* <p className="page-subtitle">
-          Technologies and tools I work with professionally
-        </p> */}
+        <p className="page-subtitle">
+          What I bring to the table as a developer
+        </p>
       </div>
 
       <div className="page-content">
