@@ -1,6 +1,4 @@
-/* ========================================
-   HEADER STYLES
-   ======================================== */
+/* Header Styles*/
 
 .siteHeader {
   position: sticky;
@@ -38,9 +36,7 @@
   color: #d4d4d8; /* zinc-300 */
 }
 
-/* ========================================
-   DESKTOP NAVIGATION
-   ======================================== */
+/* Desktop Navigation */
 
 .desktopNav {
   display: flex;
@@ -91,9 +87,7 @@
   background: #3f3f46; /* zinc-700 */
 }
 
-/* ========================================
-   BURGER MENU BUTTON (Mobile Only)
-   ======================================== */
+/* Burger Menu Btn */
 
 .burgerButton {
   display: none; /* Hidden on desktop */
@@ -131,9 +125,7 @@
   transform: rotate(-45deg) translateY(-7px);
 }
 
-/* ========================================
-   MOBILE MENU OVERLAY
-   ======================================== */
+/* Mobile Menu Overlay */
 
 .mobileMenuOverlay {
   position: fixed;
@@ -153,9 +145,7 @@
   }
 }
 
-/* ========================================
-   MOBILE MENU (Slide-in from right)
-   ======================================== */
+/* MOBILE MENU (Slide-in from right) */
 
 .mobileMenu {
   position: fixed;
@@ -181,9 +171,7 @@
   }
 }
 
-/* ========================================
-   MOBILE NAVIGATION STYLES
-   ======================================== */
+/* Mobile Nav Styles */
 
 .mobileNav {
   padding: 2rem 0;
@@ -268,9 +256,7 @@
   font-size: 1.25rem;
 }
 
-/* ========================================
-   VIEW MORE BUTTON COMPONENT
-   ======================================== */
+/* View more btn component */
 
 .viewMoreButton {
   display: inline-flex;
@@ -301,9 +287,7 @@
   transform: translateX(4px);
 }
 
-/* ========================================
-   FOOTER STYLES
-   ======================================== */
+/* Footer Styles */
 
 .siteFooter {
   border-top: 1px solid #27272a; /* zinc-800 */
@@ -313,10 +297,9 @@
 
 .siteFooterInner {
   max-width: 1440px;
-  margin: 0 auto;
   padding: 0 24px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
 }
@@ -327,59 +310,6 @@
   font-size: 0.875rem;
   color: #a1a1aa; /* zinc-400 */
   justify-self: start;
-}
-
-/* Center: Contact Button */
-.footerContactButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: #27272a; /* zinc-800 */
-  color: #ffffff;
-  border: 1px solid #3f3f46; /* zinc-700 */
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 0.9375rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  justify-self: center;
-  white-space: nowrap;
-}
-
-.footerContactButton:hover {
-  background: #3f3f46; /* zinc-700 */
-  border-color: #52525b; /* zinc-600 */
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-}
-
-.footerContactIcon {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.2s ease;
-}
-
-.footerContactButton:hover .footerContactIcon {
-  transform: translateX(2px);
-}
-
-/* Right: Social Links */
-.footerLinks {
-  display: flex;
-  gap: 1.5rem;
-  justify-self: end;
-}
-
-.footerLink {
-  font-size: 0.875rem;
-  color: #a1a1aa; /* zinc-400 */
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footerLink:hover {
-  color: #ffffff;
 }
 
 /* ========================================
@@ -394,19 +324,12 @@
     gap: 1.5rem;
   }
 
-  .siteFooterCopy,
-  .footerLinks {
-    justify-self: center;
-  }
-
-  .footerContactButton {
+  .siteFooterCopy {
     justify-self: center;
   }
 }
 
-/* ========================================
-   RESPONSIVE - MOBILE
-   ======================================== */
+/* Mobile Styles */
 
 @media (max-width: 768px) {
   /* Show burger menu, hide desktop nav */
@@ -436,36 +359,14 @@
     padding: 0 16px;
     gap: 1rem;
   }
-
-  .footerContactButton {
-    padding: 8px 16px;
-    font-size: 0.875rem;
-  }
-
-  .footerContactIcon {
-    width: 16px;
-    height: 16px;
-  }
-
-  .footerLinks {
-    gap: 1rem;
-  }
-
-  .footerLink {
-    font-size: 0.8125rem;
-  }
 }
 
-/* ========================================
-   ACCESSIBILITY
-   ======================================== */
+/* Accessibility */
 
 /* Focus styles for keyboard navigation */
 .navLink:focus-visible,
 .mobileNavLink:focus-visible,
 .burgerButton:focus-visible,
-.footerContactButton:focus-visible,
-.footerLink:focus-visible,
 .siteHeaderBrand:focus-visible {
   outline: 2px solid #ffffff;
   outline-offset: 2px;
@@ -476,8 +377,6 @@
 .navLink:focus,
 .mobileNavLink:focus,
 .burgerButton:focus,
-.footerContactButton:focus,
-.footerLink:focus,
 .siteHeaderBrand:focus {
   outline: none;
 }
@@ -486,8 +385,6 @@
 .navLink:focus:not(:focus-visible),
 .mobileNavLink:focus:not(:focus-visible),
 .burgerButton:focus:not(:focus-visible),
-.footerContactButton:focus:not(:focus-visible),
-.footerLink:focus:not(:focus-visible),
 .siteHeaderBrand:focus:not(:focus-visible) {
   outline: none;
 }
@@ -561,30 +458,8 @@
   .mobileNavLinkActive {
     border-color: currentColor;
   }
-
-  .footerContactButton {
-    border-width: 2px;
-  }
 }
 
-/* ========================================
-   DARK MODE ENHANCEMENTS (for systems)
-   ======================================== */
-
-@media (prefers-color-scheme: dark) {
-  /* Already dark by default, but you can add overrides here if needed */
-}
-
-/* ========================================
-   UTILITY CLASSES
-   ======================================== */
-
-/* For debugging - remove in production */
-.debug-outline * {
-  outline: 1px solid red;
-}
-
-/* Screen reader only content */
 .sr-only {
   position: absolute;
   width: 1px;

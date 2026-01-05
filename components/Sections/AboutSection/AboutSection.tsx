@@ -18,10 +18,9 @@ export default function AboutSection({
   const fullTitle = "About Me";
 
   const images = [
-    "/hero/heroRom1.jpg",
-    "/hero/hero6.jpg",
-    "/hero/heroRom7.jpg",
     "/hero/hero3.jpg",
+    "/hero/heroRom1.jpg",
+    "/hero/heroRom7.jpg",
     "/hero/hero4.jpg",
   ];
 

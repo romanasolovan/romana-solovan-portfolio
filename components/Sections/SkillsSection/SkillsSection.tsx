@@ -5,21 +5,25 @@ import css from "./SkillsSection.module.css";
 
 const skillCategories = [
   {
-    category: "Frontend",
+    category: "💻  Hard Skills",
     skills: [
       { name: "React / Next.js (App Router)", level: 90 },
       { name: "TypeScript", level: 85 },
       { name: "JavaScript (ES6+)", level: 88 },
       { name: "HTML5 / CSS3", level: 95 },
+      { name: "REST APIs (Axios / Fetch)", level: 82 },
+      { name: "Git / GitHub", level: 85 },
     ],
   },
   {
-    category: "Tools & Others",
+    category: "🤝  Soft Skills",
     skills: [
-      { name: "Git / GitHub", level: 85 },
-      { name: "REST APIs (Axios / Fetch)", level: 82 },
-      { name: "Responsive / Mobile-first UI", level: 92 },
+      { name: "Communication & Team Work", level: 85 },
+      { name: "Creativity & Innovation", level: 95 },
+      { name: "Responsive & Mobile-first UI", level: 92 },
       { name: "Accessibility (a11y) basics", level: 78 },
+      { name: "Adaptability & Problem Solving", level: 88 },
+      { name: "Patience", level: 88 },
     ],
   },
 ];
