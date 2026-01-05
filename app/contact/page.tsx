@@ -1,4 +1,5 @@
 import ContactSection from "@/components/Sections/ContactSection/ContactSection";
+import css from "./ContactPage.module.css";
 
 export const metadata = {
   title: "Contact | Romana Solovan",
@@ -16,15 +17,15 @@ export default function ContactPage() {
         </p>
       </div>
 
-      {/* Contact Methods */}
       <div className="page-content">
+        {/* Contact Methods */}
         <ContactSection showViewMore={false} />
 
         {/* Resume Download Section */}
-        <section className="section section-darker">
-          <div className="section-container text-center">
-            <h2 className="text-3xl font-bold mb-6">Download My Resume</h2>
-            <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+        <section className={`section section-darker ${css.resumeSection}`}>
+          <div className={`section-container ${css.resumeContainer}`}>
+            <h2 className={css.resumeTitle}>Download My Resume</h2>
+            <p className={css.resumeDescription}>
               Interested in my experience and qualifications? Download my resume
               to learn more about my professional background.
             </p>
@@ -32,10 +33,10 @@ export default function ContactPage() {
               href="/portfolioCV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-lg hover:bg-gray-200 transition-all font-semibold text-lg group"
+              className={css.downloadButton}
             >
               <svg
-                className="w-6 h-6"
+                className={css.iconDownload}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -49,7 +50,7 @@ export default function ContactPage() {
               </svg>
               Download Resume
               <svg
-                className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                className={css.iconArrow}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
