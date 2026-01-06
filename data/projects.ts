@@ -50,7 +50,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Tasteorama – Recipe Browser",
+    title: "Tasteorama – Recipe Browsing App",
     description: "Recipe webpage for saving and creating recipes.",
     techStack: ["Next.js", "TypeScript", "CSS Modules", "Node.js"],
     liveUrl: "https://taste-of-the-end-f.vercel.app/",
@@ -64,8 +64,8 @@ export const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Birdie – The Stroke",
-    description: "Woman's pregnancy tracker made for a Ukrainian market.",
+    title: "Birdie – Pregnancy Tracking App",
+    description: "Woman's pregnancy tracker targeting Ukrainian market.",
     techStack: ["Next.js", "TypeScript", "CSS Modules", "Node.js"],
     liveUrl: "https://birdie-kohl.vercel.app/",
     githubUrl: "https://github.com/romanasolovan/birdie",
@@ -104,20 +104,20 @@ export const projects: Project[] = [
       "Built custom image carousel",
     ],
   },
-  {
-    id: 7,
-    title: "Gallery – ",
-    description: "Simple gallery webpage",
-    techStack: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://romanasolovan.github.io/goit-js-hw-12/",
-    githubUrl: "https://github.com/romanasolovan/goit-js-hw-12",
-    type: "personal",
-    image: "/projects/gallery.jpg",
-    highlights: [
-      "Implemented smooth scroll animations",
-      "Built custom image carousel",
-    ],
-  },
+  // {
+  //   id: 7,
+  //   title: "Gallery – ",
+  //   description: "Simple gallery webpage",
+  //   techStack: ["HTML", "CSS", "JavaScript"],
+  //   liveUrl: "https://romanasolovan.github.io/goit-js-hw-12/",
+  //   githubUrl: "https://github.com/romanasolovan/goit-js-hw-12",
+  //   type: "personal",
+  //   image: "/projects/gallery.jpg",
+  //   highlights: [
+  //     "Implemented smooth scroll animations",
+  //     "Built custom image carousel",
+  //   ],
+  // },
 ];
 
 export const getProjectById = (id: number): Project | undefined => {
