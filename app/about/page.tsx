@@ -1,4 +1,6 @@
 import AboutSection from "@/components/Sections/AboutSection/AboutSection";
+import AboutCtaSection from "@/components/Sections/AboutSection/AboutCtaSection";
+import css from "./AboutPage.module.css";
 
 export const metadata = {
   title: "About | Romana Solovan",
@@ -8,247 +10,107 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="page-container">
-      {/* <div className="page-header">
-        <h1 className="page-title">About Me</h1>
+      <div className="page-header">
         <p className="page-subtitle">
-          My journey, skills, and passion for front-end development
+          My journey, interests, and passion for front-end development
         </p>
-      </div> */}
+      </div>
 
       <div className="page-content">
-        {/* Main About Section */}
+        {/* Main About Section with carousel and intro */}
         <AboutSection showViewMore={false} />
 
-        {/* My Journey Section */}
-        <section className="section section-dark">
-          <div className="section-container">
-            <h2 className="section-heading">My Journey</h2>
-            <div className="content-grid">
-              <div className="timeline-item">
-                <div className="timeline-marker">
-                  <span className="timeline-icon">🎓</span>
-                </div>
-                <div className="timeline-content">
-                  <h3 className="timeline-title">Early Childhood Education</h3>
-                  <p className="timeline-description">
-                    Started my career working with children, developing
-                    patience, communication skills, and a deep understanding of
-                    how people learn and interact with new concepts. This
-                    foundation taught me to break down complex ideas into
-                    simple, understandable pieces.
-                  </p>
-                </div>
-              </div>
-
-              <div className="timeline-item">
-                <div className="timeline-marker">
-                  <span className="timeline-icon">💡</span>
-                </div>
-                <div className="timeline-content">
-                  <h3 className="timeline-title">
-                    Discovering Web Development
-                  </h3>
-                  <p className="timeline-description">
-                    Made the transition to web development, bringing my
-                    user-focused mindset to building digital products. I
-                    realized that creating intuitive interfaces requires the
-                    same empathy and attention to detail I used when working
-                    with children.
-                  </p>
-                </div>
-              </div>
-
-              <div className="timeline-item">
-                <div className="timeline-marker">
-                  <span className="timeline-icon">🚀</span>
-                </div>
-                <div className="timeline-content">
-                  <h3 className="timeline-title">Front-End Developer Today</h3>
-                  <p className="timeline-description">
-                    Now specializing in React, Next.js, and TypeScript, I build
-                    clean, accessible, and performant web applications. My
-                    background in education makes me especially passionate about
-                    creating user experiences that are intuitive and delightful.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* My Strengths Section */}
-        <section className="section section-darker">
-          <div className="section-container">
-            <h2 className="section-heading">My Strengths</h2>
-            <div className="strengths-grid">
-              <div className="strength-card">
-                <div className="strength-icon">👥</div>
-                <h3 className="strength-title">User-Focused Thinking</h3>
-                <p className="strength-description">
-                  Coming from education, I always put the user first. I think
-                  about accessibility, intuitive design, and how people actually
-                  interact with interfaces.
-                </p>
-              </div>
-
-              <div className="strength-card">
-                <div className="strength-icon">🎯</div>
-                <h3 className="strength-title">Attention to Detail</h3>
-                <p className="strength-description">
-                  I care deeply about the small things—proper spacing, smooth
-                  animations, semantic HTML, and clean, maintainable code that
-                  other developers enjoy working with.
-                </p>
-              </div>
-
-              <div className="strength-card">
-                <div className="strength-icon">🔄</div>
-                <h3 className="strength-title">Adaptability</h3>
-                <p className="strength-description">
-                  Transitioning careers taught me how to learn quickly and adapt
-                  to new challenges. I am comfortable picking up new
-                  technologies and methodologies.
-                </p>
-              </div>
-
-              <div className="strength-card">
-                <div className="strength-icon">🤝</div>
-                <h3 className="strength-title">Clear Communication</h3>
-                <p className="strength-description">
-                  I can explain technical concepts in plain language, making
-                  collaboration with designers, stakeholders, and other
-                  developers smooth and productive.
-                </p>
-              </div>
-
-              <div className="strength-card">
-                <div className="strength-icon">📚</div>
-                <h3 className="strength-title">Organized Approach</h3>
-                <p className="strength-description">
-                  My teaching background gave me strong organizational skills. I
-                  write well-structured code, document thoroughly, and keep
-                  projects organized from start to finish.
-                </p>
-              </div>
-
-              <div className="strength-card">
-                <div className="strength-icon">💪</div>
-                <h3 className="strength-title">Patience & Problem-Solving</h3>
-                <p className="strength-description">
-                  Debugging and problem-solving require patience—something I
-                  developed working with young learners. I approach challenges
-                  methodically and stay calm under pressure.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Get to Know Me Section */}
-        <section className="section section-dark">
-          <div className="section-container">
-            <h2 className="section-heading">Get to Know Me</h2>
-            <p className="section-intro">
-              Beyond code, here are a few things that make me who I am
+        {/* What Makes Me Different Section */}
+        <section className={css.differentSection}>
+          <div className={css.container}>
+            <h2 className={css.heading}>What Makes Me Different?</h2>
+            <p className={css.intro}>
+              My path into front-end development is shaped by curiosity,
+              creativity, and a strong focus on people. Everything I build is
+              influenced by how I learn, move through the world, and connect
+              with others.
             </p>
 
-            <div className="facts-grid">
-              <div className="fact-card">
-                <span className="fact-emoji">☕</span>
-                <p className="fact-text">
-                  <strong>Coffee enthusiast</strong> — I start every coding
-                  session with a fresh cup. Bonus points if it is a pour-over.
+            <div className={css.values}>
+              <div className={css.valueItem}>
+                <div className={css.valueIcon}>🧠</div>
+                <h3 className={css.valueTitle}>Human-first mindset</h3>
+                <p className={css.valueText}>
+                  My background in early childhood education taught me how
+                  people learn, explore, and feel safe with new ideas. I bring
+                  that same empathy into software — designing interfaces that
+                  are intuitive, accessible, and respectful of the user.
                 </p>
               </div>
 
-              <div className="fact-card">
-                <span className="fact-emoji">📖</span>
-                <p className="fact-text">
-                  <strong>Always learning</strong> — Currently exploring
-                  advanced TypeScript patterns and diving deeper into
-                  accessibility best practices.
+              <div className={css.valueItem}>
+                <div className={css.valueIcon}>🌱</div>
+                <h3 className={css.valueTitle}>Curiosity-driven growth</h3>
+                <p className={css.valueText}>
+                  I learn best through experience. Traveling, adapting to new
+                  cultures, and learning new languages have trained me to stay
+                  flexible, observant, and open — qualities that translate
+                  directly into how I approach new technologies and challenges.
                 </p>
               </div>
 
-              <div className="fact-card">
-                <span className="fact-emoji">🌍</span>
-                <p className="fact-text">
-                  <strong>From Ukraine</strong> — Based in Lviv, bringing a
-                  global perspective to every project I work on.
+              <div className={css.valueItem}>
+                <div className={css.valueIcon}>🎨</div>
+                <h3 className={css.valueTitle}>Creativity beyond code</h3>
+                <p className={css.valueText}>
+                  Outside of development, I express creativity through dancing,
+                  crocheting, photography, filming, and video editing. These
+                  practices sharpen my sense of rhythm, structure, and visual
+                  balance — all of which influence how I design and build
+                  interfaces.
                 </p>
               </div>
+            </div>
 
-              <div className="fact-card">
-                <span className="fact-emoji">🎨</span>
-                <p className="fact-text">
-                  <strong>Design-minded</strong> — I love the intersection of
-                  design and code. A pixel-perfect implementation brings me
-                  genuine joy.
-                </p>
-              </div>
+            <div className={css.personal}>
+              <h3 className={css.subheading}>A little more about me</h3>
+              <ul className={css.personalList}>
+                <li className={css.personalItem}>
+                  <span className={css.bullet}>→</span>I love exploring new
+                  places and cultures — travel keeps me curious and grounded.
+                </li>
+                <li className={css.personalItem}>
+                  <span className={css.bullet}>→</span>
+                  Dancing and playing the piano help me stay present and
+                  disciplined.
+                </li>
+                <li className={css.personalItem}>
+                  <span className={css.bullet}>→</span>I enjoy slow, focused
+                  hobbies like reading and crocheting, which reflect my patience
+                  and attention to detail.
+                </li>
+                <li className={css.personalItem}>
+                  <span className={css.bullet}>→</span>
+                  Learning new languages and skills is a constant part of my
+                  life, both professionally and personally.
+                </li>
+                <li className={css.personalItem}>
+                  <span className={css.bullet}>→</span>I care deeply about
+                  education and inspiring young minds — leading by example has
+                  always been important to me.
+                </li>
+              </ul>
+            </div>
 
-              <div className="fact-card">
-                <span className="fact-emoji">🌱</span>
-                <p className="fact-text">
-                  <strong>Growth mindset</strong> — My career transition taught
-                  me that it is never too late to pursue what you are passionate
-                  about.
-                </p>
-              </div>
-
-              <div className="fact-card">
-                <span className="fact-emoji">🎮</span>
-                <p className="fact-text">
-                  <strong>Problem solver at heart</strong> — Whether it is a
-                  coding challenge or a puzzle game, I love breaking down
-                  complex problems into manageable pieces.
-                </p>
-              </div>
+            <div className={css.closing}>
+              <p className={css.closingText}>
+                {/* All of this shapes how I work: calmly, thoughtfully, and with
+                intention. I do not just write code — I build experiences that
+                feel clear, human, and meaningful. */}
+                `You are only limited by weakness of attention and powerty of
+                imagination.`
+              </p>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="section section-darker">
-          <div className="section-container text-center">
-            <h2 className="text-3xl font-bold mb-6">
-              Let&apos;s Work Together
-            </h2>
-            <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-              Interested in collaborating or have a project in mind? I&apos;d
-              love to hear from you.
-            </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-black rounded-lg hover:bg-gray-300 transition-all font-semibold text-lg"
-              >
-                Get in Touch
-              </a>
-              <a
-                href="/portfolioCV.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-black transition-all font-semibold text-lg"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
-                Download Resume
-              </a>
-            </div>
-          </div>
-        </section>
+        {/* CTA Section with Contact Form Modal */}
+        <AboutCtaSection />
       </div>
     </div>
   );

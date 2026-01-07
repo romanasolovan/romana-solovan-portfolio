@@ -22,7 +22,6 @@ export default function AboutSection({
     "/hero/hero3.jpg",
     "/hero/holdWorld.JPG",
     "/hero/heroRom1.jpg",
-    // "/hero/heroRom7.jpg",
     "/hero/hero4.jpg",
   ];
 
@@ -144,14 +143,14 @@ export default function AboutSection({
                 personally and professionally.
               </p>
 
-              <div className={css.buttonGroup}>
+              {/* <div className={css.buttonGroup}>
                 <a href="#contact" className={css.primaryBtn}>
                   Get in Touch
                 </a>
                 <Link href="/portfolio" className={css.secondaryBtn}>
                   View Work
                 </Link>
-              </div>
+              </div> */}
             </div>
 
             {showViewMore && (
