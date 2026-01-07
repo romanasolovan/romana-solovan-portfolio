@@ -82,6 +82,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div className={css.header}>
           <h3 className={css.title}>{project.title}</h3>
           {project.role && <p className={css.role}>Role: {project.role}</p>}
+          {project.teamSize && (
+            <p className={css.role}>Team Size: {project.teamSize}</p>
+          )}
         </div>
 
         <p className={css.description}>{project.description}</p>

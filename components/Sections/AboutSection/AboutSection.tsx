@@ -18,9 +18,11 @@ export default function AboutSection({
   const fullTitle = "About Me";
 
   const images = [
+    "/hero/sanFran.JPG",
     "/hero/hero3.jpg",
+    "/hero/holdWorld.JPG",
     "/hero/heroRom1.jpg",
-    "/hero/heroRom7.jpg",
+    // "/hero/heroRom7.jpg",
     "/hero/hero4.jpg",
   ];
 
@@ -135,6 +137,11 @@ export default function AboutSection({
                 I come from early childhood education — a path that trained me
                 to be patient, organized, and deeply user-focused. Now I apply
                 that mindset to building real products with clean code.
+              </p>
+              <p className={css.paragraph}>
+                I enjoy learning through experience — exploring new places,
+                adapting to new environments, and continuously growing both
+                personally and professionally.
               </p>
 
               <div className={css.buttonGroup}>
