@@ -11,7 +11,7 @@ export default function PortfolioPage() {
   return (
     <div className="page-container">
       <div className="page-header">
-        <h1 className="page-title">All Projects</h1>
+        {/* <h1 className="page-title">All Projects</h1> */}
         <p className="page-subtitle">
           A comprehensive collection of my work ({projects.length} projects)
         </p>

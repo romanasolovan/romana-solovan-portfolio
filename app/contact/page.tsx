@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <div className="page-container">
       <div className="page-header">
-        <h1 className="page-title">Get In Touch</h1>
+        {/* <h1 className="page-title">Get In Touch</h1> */}
         <p className="page-subtitle">
           Let&apos;s discuss your next project or opportunity
         </p>

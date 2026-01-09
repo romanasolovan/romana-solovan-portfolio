@@ -1,4 +1,4 @@
-import AboutSection from "@/components/Sections/AboutSection/AboutSection";
+// import AboutSection from "@/components/Sections/AboutSection/AboutSection";
 import AboutCtaSection from "@/components/Sections/AboutSection/AboutCtaSection";
 import css from "./AboutPage.module.css";
 
@@ -18,7 +18,7 @@ export default function AboutPage() {
 
       <div className="page-content">
         {/* Main About Section with carousel and intro */}
-        <AboutSection showViewMore={false} />
+        {/* <AboutSection showViewMore={false} /> */}
 
         {/* What Makes Me Different Section */}
         <section className={css.differentSection}>
