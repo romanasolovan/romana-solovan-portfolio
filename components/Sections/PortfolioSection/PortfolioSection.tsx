@@ -16,20 +16,23 @@ export default function PortfolioSection({
 }: PortfolioSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
+  // NOTE: Determine which projects to display - featured or all
   const displayProjects = limitProjects
     ? getFeaturedProjects(limitProjects)
     : projects;
 
+  // NOTE: Intersection Observer - triggers animations when section enters viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // NOTE: Animation is now handled by CSS staggered animations
             entry.target.classList.add("animate-in");
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 } // NOTE: Trigger when 20% of section is visible
     );
 
     if (sectionRef.current) {
@@ -42,9 +45,12 @@ export default function PortfolioSection({
   return (
     <section
       ref={sectionRef}
-      className={`section section-dark ${css.portfolio}`}
+      className="section section--dark" // NOTE: Using global section class for consistent margins
     >
-      <div className="section-container-wide">
+      <div className="containerWide">
+        {" "}
+        {/* NOTE: Using global containerWide for portfolio grid */}
+        {/* ========== HEADER ========== */}
         <div className={css.header}>
           <h2 className={css.title}>
             {showViewMore ? "Featured Projects" : "All Projects"}
@@ -55,12 +61,14 @@ export default function PortfolioSection({
               : "A comprehensive collection of my work and side projects"}
           </p>
         </div>
-
+        {/* ========== PROJECT GRID ========== */}
+        {/* NOTE: ProjectList handles the grid layout and individual cards */}
         <ProjectList
           projects={displayProjects}
-          columns={showViewMore ? 2 : 3}
+          columns={showViewMore ? 2 : 3} // NOTE: 2 cols on homepage, 3 cols on portfolio page
         />
-
+        {/* ========== VIEW ALL BUTTON ========== */}
+        {/* NOTE: Only shown on homepage to link to full portfolio page */}
         {showViewMore && (
           <div className={css.viewMoreContainer}>
             <Link href="/portfolio" className={css.viewMoreButton}>
@@ -70,6 +78,7 @@ export default function PortfolioSection({
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true" // NOTE: Decorative icon
               >
                 <path
                   strokeLinecap="round"
