@@ -1,45 +1,50 @@
 /* ========================================
    SKILLS SECTION
-   Mobile-first approach
+   Mobile-first approach with global tokens
    ======================================== */
 
-/* MOBILE (Base styles - 320px+) */
+/* ========================================
+   SECTION LAYOUT
+   ======================================== */
+/* NOTE: No custom padding - using global .section class */
+
 .skills {
+  /* NOTE: All vertical padding handled by global .section class */
 }
 
 /* ========================================
    HEADER
    ======================================== */
-
 .header {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* NOTE: Mobile-first spacing */
   text-align: center;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2rem; /* NOTE: Mobile-first size */
   font-weight: 700;
   margin-bottom: 0.75rem;
-  color: #ffffff;
+  color: var(--color-text); /* NOTE: Using global token */
+  line-height: 1.2;
 }
 
 .subtitle {
-  font-size: 1rem;
-  color: #a1a1aa; /* zinc-400 */
+  font-size: 1rem; /* NOTE: Mobile-first size */
+  color: var(--color-muted); /* NOTE: Using global token */
+  line-height: 1.6;
 }
 
 /* ========================================
    TECHNICAL SKILLS (Progress Bars)
    ======================================== */
-
 .technicalSkills {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem; /* NOTE: Mobile-first spacing */
 }
 
 .sectionHeading {
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* NOTE: Mobile-first size */
   font-weight: 700;
-  color: #ffffff;
+  color: var(--color-text);
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -47,37 +52,42 @@
 }
 
 .headingIcon {
-  font-size: 1.75rem;
+  font-size: 1.75rem; /* NOTE: Mobile-first icon size */
   display: inline-block;
+  user-select: none; /* NOTE: Prevent emoji selection */
 }
 
+/* NOTE: Skills categories grid */
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* NOTE: Mobile-first - single column */
   gap: 2rem;
 }
 
 .category {
+  /* NOTE: Container for each skill category */
 }
 
 .categoryTitle {
-  font-size: 1.125rem;
+  font-size: 1.125rem; /* NOTE: Mobile-first size */
   font-weight: 700;
-  color: #e4e4e7; /* zinc-200 */
+  color: var(--color-soft); /* NOTE: Using global token */
   margin-bottom: 1.25rem;
   padding-bottom: 0.625rem;
-  border-bottom: 2px solid #27272a; /* zinc-800 */
+  border-bottom: 2px solid var(--color-border); /* NOTE: Using global token */
 }
 
 .skillsList {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.25rem; /* NOTE: Comfortable spacing between skills */
 }
 
 .skill {
+  /* NOTE: Individual skill container */
 }
 
+/* NOTE: Skill name and level indicator */
 .skillHeader {
   display: flex;
   justify-content: space-between;
@@ -87,48 +97,53 @@
 
 .skillName {
   font-weight: 500;
-  color: #e4e4e7; /* zinc-200 */
-  font-size: 0.875rem;
+  color: var(--color-soft); /* NOTE: Using global token */
+  font-size: 0.875rem; /* NOTE: Mobile-first size */
 }
 
 .skillLevel {
-  color: #71717a; /* zinc-500 */
-  font-size: 0.8125rem;
+  color: var(--color-muted); /* NOTE: Using global token */
+  font-size: 0.8125rem; /* NOTE: Slightly smaller than name */
   font-weight: 600;
 }
 
+/* NOTE: Progress bar container */
 .progressBar {
-  height: 0.625rem;
-  background: #18181b; /* zinc-900 */
-  border-radius: 9999px;
+  height: 0.625rem; /* NOTE: Mobile-first height */
+  background: var(--color-bg-2); /* NOTE: Using global token */
+  border-radius: 9999px; /* NOTE: Fully rounded */
   overflow: hidden;
-  border: 1px solid #27272a; /* zinc-800 */
+  border: 1px solid var(--color-border);
 }
 
+/* NOTE: Animated progress fill */
 .progressFill {
   height: 100%;
-  background: #ffffff;
+  background: var(--color-text); /* NOTE: High contrast fill */
   border-radius: 9999px;
-  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1); /* NOTE: Smooth easing */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* NOTE: Subtle glow effect */
 }
 
 /* ========================================
-   HARD SKILLS & SOFT SKILLS BLOCKS
+   ABOUT SKILLS BLOCK
    ======================================== */
-
 .aboutSkills {
-  margin-bottom: 2.5rem;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
-  border: 1px solid #27272a;
-  border-radius: 1rem;
+  margin-bottom: 3rem; /* NOTE: Mobile-first spacing */
+  padding: 1.5rem; /* NOTE: Mobile-first padding */
+  background: linear-gradient(
+    135deg,
+    var(--color-surface) 0%,
+    var(--color-bg-2) 100%
+  );
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius); /* NOTE: Using global radius */
 }
 
 .aboutText {
-  color: #d4d4d8; /* zinc-300 */
-  font-size: 0.9375rem;
-  line-height: 1.75;
+  color: var(--color-soft); /* NOTE: Using global token */
+  font-size: 0.9375rem; /* NOTE: Mobile-first size */
+  line-height: 1.7; /* NOTE: Comfortable reading */
   margin-bottom: 1rem;
 }
 
@@ -136,13 +151,16 @@
   margin-bottom: 0;
 }
 
+/* ========================================
+   HARD SKILLS & SOFT SKILLS BLOCKS
+   ======================================== */
 .skillsBlock {
-  margin-bottom: 2.5rem;
-  padding: 1.5rem;
-  background: #18181b; /* zinc-900 */
-  border: 1px solid #27272a; /* zinc-800 */
-  border-radius: 1rem;
-  transition: all 0.3s ease;
+  margin-bottom: 3rem; /* NOTE: Mobile-first spacing */
+  padding: 1.5rem; /* NOTE: Mobile-first padding */
+  background: var(--color-surface); /* NOTE: Using global token */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: all var(--transition-base); /* NOTE: Using global transition */
 }
 
 .skillsBlock:last-child {
@@ -162,35 +180,34 @@
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: #09090b; /* zinc-950 */
-  border-radius: 0.5rem;
-  border: 1px solid #27272a; /* zinc-800 */
-  transition: all 0.2s ease;
-  font-size: 0.9375rem;
+  padding: 0.75rem 1rem; /* NOTE: Mobile-first padding */
+  background: var(--color-bg-2); /* NOTE: Using global token */
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+  font-size: 0.9375rem; /* NOTE: Mobile-first size */
 }
 
 .bullet {
-  color: #71717a; /* zinc-500 */
+  color: var(--color-muted); /* NOTE: Using global token */
   font-weight: 700;
   font-size: 1rem;
-  flex-shrink: 0;
+  flex-shrink: 0; /* NOTE: Prevents bullet from shrinking */
   line-height: 1.5;
 }
 
 .skillText {
-  color: #d4d4d8; /* zinc-300 */
+  color: var(--color-soft); /* NOTE: Using global token */
   line-height: 1.6;
 }
 
 /* ========================================
    VIEW MORE BUTTON
    ======================================== */
-
 .viewMoreContainer {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 2.5rem; /* NOTE: Mobile-first spacing */
 }
 
 .viewMoreButton {
@@ -198,26 +215,28 @@
   align-items: center;
   gap: 8px;
   padding: 0.875rem 1.5rem;
-  background: #ffffff;
-  color: #000000;
-  border-radius: 0.5rem;
-  font-weight: 500;
+  background: var(--color-text); /* NOTE: High contrast button */
+  color: var(--color-bg);
+  border-radius: var(--radius-sm); /* NOTE: Using global radius */
+  font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm); /* NOTE: Subtle depth */
 }
 
 .viewMoreButton:hover {
-  background: #e5e5e5;
-  gap: 12px;
+  background: var(--color-soft); /* NOTE: Slightly dimmer on hover */
+  gap: 12px; /* NOTE: Icon slides right */
   transform: translateY(-2px);
-  text-decoration: none;
+  box-shadow: var(--shadow-md);
+  text-decoration: none; /* NOTE: Keep no underline */
 }
 
 .viewMoreIcon {
   width: 20px;
   height: 20px;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-base);
 }
 
 .viewMoreButton:hover .viewMoreIcon {
@@ -225,12 +244,11 @@
 }
 
 /* ========================================
-   TABLET (768px+)
+   RESPONSIVE - TABLET (768px+)
    ======================================== */
-
 @media (min-width: 768px) {
   .header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
 
   .title {
@@ -245,7 +263,7 @@
   .technicalSkills,
   .skillsBlock,
   .aboutSkills {
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
 
   .sectionHeading {
@@ -286,7 +304,7 @@
   }
 
   .progressBar {
-    height: 0.75rem;
+    height: 0.75rem; /* NOTE: Slightly taller on larger screens */
   }
 
   .viewMoreContainer {
@@ -300,12 +318,11 @@
 }
 
 /* ========================================
-   DESKTOP (1024px+)
+   RESPONSIVE - DESKTOP (1024px+)
    ======================================== */
-
 @media (min-width: 1024px) {
   .header {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
   }
 
   .title {
@@ -316,6 +333,7 @@
     font-size: 1.125rem;
   }
 
+  /* NOTE: Two-column grid for skill categories on desktop */
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
@@ -340,9 +358,11 @@
     padding: 2.5rem;
   }
 
+  /* NOTE: Hover effects only on desktop */
   .skillsBlock:hover {
-    border-color: #3f3f46; /* zinc-700 */
-    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
   }
 
   .skillItem {
@@ -350,8 +370,8 @@
   }
 
   .skillItem:hover {
-    background: #18181b; /* zinc-900 */
-    border-color: #3f3f46; /* zinc-700 */
+    background: var(--color-surface);
+    border-color: var(--color-border-hover);
     transform: translateX(4px);
   }
 
@@ -359,37 +379,92 @@
   .aboutText {
     font-size: 1.0625rem;
   }
+
+  .viewMoreContainer {
+    margin-top: 4rem;
+  }
 }
 
 /* ========================================
-   ANIMATIONS (Desktop only)
+   ANIMATIONS
    ======================================== */
-
+/* NOTE: Progress bars start at 0 width until section is visible */
 @media (min-width: 1024px) {
   .skills:not(.animate-in) .progressFill {
     width: 0 !important;
   }
 }
 
+/* NOTE: Stagger animations for skill items */
+.skillItem {
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: fadeInLeft 0.5s ease forwards;
+}
+
+.skillItem:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.skillItem:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.skillItem:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.skillItem:nth-child(4) {
+  animation-delay: 0.25s;
+}
+.skillItem:nth-child(5) {
+  animation-delay: 0.3s;
+}
+.skillItem:nth-child(6) {
+  animation-delay: 0.35s;
+}
+.skillItem:nth-child(7) {
+  animation-delay: 0.4s;
+}
+.skillItem:nth-child(8) {
+  animation-delay: 0.45s;
+}
+
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* ========================================
    ACCESSIBILITY
    ======================================== */
-
 @media (prefers-reduced-motion: reduce) {
   .progressFill,
   .skillItem,
   .viewMoreButton,
-  .skillsBlock {
+  .skillsBlock,
+  .viewMoreIcon {
     transition: none;
-    animation: none;
+    animation: none !important;
+  }
+
+  .skillItem {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .skillItem:hover,
-  .viewMoreButton:hover {
+  .viewMoreButton:hover,
+  .skillsBlock:hover {
     transform: none;
   }
 
   .viewMoreButton:hover .viewMoreIcon {
     transform: none;
   }
+}
+
+/* NOTE: Focus styles for keyboard navigation */
+.viewMoreButton:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
 }

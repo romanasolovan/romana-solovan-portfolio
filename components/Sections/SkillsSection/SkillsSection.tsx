@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import css from "./SkillsSection.module.css";
 
+// NOTE: Technical skills with proficiency percentages for progress bars
 const skillCategories = [
   {
     category: "💻  Hard Skills",
@@ -28,6 +29,7 @@ const skillCategories = [
   },
 ];
 
+// NOTE: Detailed hard skills list for full skills page
 const hardSkills = [
   "Build responsive, mobile-first UI from designs (semantic HTML, reusable components)",
   "Develop React/Next.js apps with clean component architecture and predictable state flow",
@@ -38,6 +40,7 @@ const hardSkills = [
   "Version control workflow: branches, PR-ready commits, collaboration in GitHub",
 ];
 
+// NOTE: Detailed soft skills list for full skills page
 const softSkills = [
   "Strong communication: explain decisions clearly, ask the right questions, align with team goals",
   "Highly organized and reliable: plan tasks, break down features, follow through to completion",
@@ -56,16 +59,17 @@ export default function SkillsSection({
 }: SkillsSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
+  // NOTE: Intersection Observer - triggers animations when section enters viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-in");
+            entry.target.classList.add("animate-in"); // NOTE: Triggers progress bar animations
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 } // NOTE: Trigger when 20% of section is visible
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -76,12 +80,17 @@ export default function SkillsSection({
   return (
     <section
       ref={sectionRef}
-      className={`section section-darker ${css.skills}`}
+      className="section section--darker" // NOTE: Using global section class for consistent margins
     >
-      <div className="section-container">
-        {/* HOME PAGE VERSION - Technical Skills Overview Only */}
+      <div className="container">
+        {" "}
+        {/* NOTE: Using global container for consistent padding */}
+        {/* ========================================
+            HOME PAGE VERSION - Technical Skills Overview
+            ======================================== */}
         {showViewMore && (
           <>
+            {/* NOTE: Header for skills overview */}
             <div className={css.header}>
               <h2 className={css.title}>Skills Overview</h2>
               <p className={css.subtitle}>
@@ -89,7 +98,7 @@ export default function SkillsSection({
               </p>
             </div>
 
-            {/* Technical Skills with Progress Bars */}
+            {/* NOTE: Technical skills with animated progress bars */}
             <div className={css.technicalSkills}>
               <div className={css.grid}>
                 {skillCategories.map((cat, idx) => (
@@ -104,6 +113,7 @@ export default function SkillsSection({
                               {skill.level}%
                             </span>
                           </div>
+                          {/* NOTE: Progress bar animates when section becomes visible */}
                           <div className={css.progressBar}>
                             <div
                               className={css.progressFill}
@@ -118,7 +128,7 @@ export default function SkillsSection({
               </div>
             </div>
 
-            {/* View All Skills Button */}
+            {/* NOTE: View All Skills button - links to full skills page */}
             <div className={css.viewMoreContainer}>
               <Link href="/skills" className={css.viewMoreButton}>
                 View All Skills
@@ -127,6 +137,7 @@ export default function SkillsSection({
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden="true" // NOTE: Decorative icon
                 >
                   <path
                     strokeLinecap="round"
@@ -139,11 +150,12 @@ export default function SkillsSection({
             </div>
           </>
         )}
-
-        {/* FULL SKILLS PAGE VERSION - About Me + Hard & Soft Skills */}
+        {/* ========================================
+            FULL SKILLS PAGE - Detailed Skills Breakdown
+            ======================================== */}
         {!showViewMore && (
           <>
-            {/* About My Skills */}
+            {/* NOTE: About My Skills - introduction section */}
             <div className={css.aboutSkills}>
               <h2 className={css.sectionHeading}>
                 <span className={css.headingIcon}>💡</span>
@@ -166,7 +178,7 @@ export default function SkillsSection({
               </p>
             </div>
 
-            {/* Hard Skills */}
+            {/* NOTE: Hard Skills - technical abilities in detail */}
             <div className={css.skillsBlock}>
               <h2 className={css.sectionHeading}>
                 <span className={css.headingIcon}>💻</span>
@@ -182,7 +194,7 @@ export default function SkillsSection({
               </ul>
             </div>
 
-            {/* Soft Skills */}
+            {/* NOTE: Soft Skills - interpersonal and professional abilities */}
             <div className={css.skillsBlock}>
               <h2 className={css.sectionHeading}>
                 <span className={css.headingIcon}>🤝</span>
