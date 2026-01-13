@@ -17,6 +17,7 @@ export default function AboutSection({
 
   const fullTitle = "About Me";
 
+  // NOTE: Image carousel array
   const images = [
     "/hero/sanFran.JPG",
     "/hero/hero3.jpg",
@@ -25,18 +26,17 @@ export default function AboutSection({
     "/hero/hero4.jpg",
   ];
 
-  // Intersection Observer - triggers animations when section is in view
+  // NOTE: Intersection Observer - triggers animations when section enters viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !isVisible) {
             setIsVisible(true);
-            entry.target.classList.add("animate-in");
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 } // NOTE: Trigger when 20% of section is visible
     );
 
     if (sectionRef.current) {
@@ -46,7 +46,7 @@ export default function AboutSection({
     return () => observer.disconnect();
   }, [isVisible]);
 
-  // Typing animation effect for title
+  // NOTE: Typing animation effect for title
   useEffect(() => {
     if (!isVisible) return;
 
@@ -58,12 +58,14 @@ export default function AboutSection({
       } else {
         clearInterval(typingInterval);
       }
-    }, 80);
+    }, 80); // NOTE: 80ms per character for smooth typing
 
     return () => clearInterval(typingInterval);
-  }, [isVisible, fullTitle]);
+    // NOTE: fullTitle is a constant, doesn't need to be in dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVisible]);
 
-  // Image carousel auto-rotate
+  // NOTE: Image carousel auto-rotate every 4 seconds
   useEffect(() => {
     if (!isVisible) return;
 
@@ -75,10 +77,15 @@ export default function AboutSection({
   }, [isVisible, images.length]);
 
   return (
-    <section ref={sectionRef} className={`section section-darker ${css.about}`}>
-      <div className="section-container">
+    <section
+      ref={sectionRef}
+      className="section section--darker" // NOTE: Using global section class for consistent margins
+    >
+      <div className="container">
+        {" "}
+        {/* NOTE: Using global container for consistent padding */}
         <div className={css.grid}>
-          {/* IMAGE CAROUSEL - LEFT SIDE */}
+          {/* ========== IMAGE CAROUSEL - LEFT SIDE ========== */}
           <div
             className={`${css.imageContainer} ${isVisible ? css.slideInLeft : ""}`}
           >
@@ -93,7 +100,7 @@ export default function AboutSection({
                   <div className={css.imageFrame}>
                     <img
                       src={image}
-                      alt={`About ${index + 1}`}
+                      alt={`About image ${index + 1}`} // NOTE: More descriptive alt text
                       style={{
                         width: "100%",
                         height: "100%",
@@ -106,7 +113,7 @@ export default function AboutSection({
               ))}
             </div>
 
-            {/* Image indicators */}
+            {/* NOTE: Carousel indicators - allow manual image selection */}
             <div className={css.indicators}>
               {images.map((_, index) => (
                 <button
@@ -121,14 +128,14 @@ export default function AboutSection({
             </div>
           </div>
 
-          {/* TEXT CONTENT - RIGHT SIDE */}
+          {/* ========== TEXT CONTENT - RIGHT SIDE ========== */}
           <div
             className={`${css.content} ${isVisible ? css.slideInRight : ""}`}
           >
-            {/* ANIMATED TYPING TITLE */}
+            {/* NOTE: Animated typing title */}
             <h2 className={`${css.title} ${css.typingCursor}`}>{typedText}</h2>
 
-            {/* CONTENT WITH FADE-IN */}
+            {/* NOTE: Content with fade-in animation */}
             <div
               className={`${css.textWrapper} ${isVisible ? css.fadeInUp : ""}`}
             >
@@ -142,17 +149,9 @@ export default function AboutSection({
                 adapting to new environments, and continuously growing both
                 personally and professionally.
               </p>
-
-              {/* <div className={css.buttonGroup}>
-                <a href="#contact" className={css.primaryBtn}>
-                  Get in Touch
-                </a>
-                <Link href="/portfolio" className={css.secondaryBtn}>
-                  View Work
-                </Link>
-              </div> */}
             </div>
 
+            {/* NOTE: Optional "Learn More" button - shown on homepage */}
             {showViewMore && (
               <div className={css.viewMoreContainer}>
                 <Link href="/about" className={css.viewMoreButton}>
@@ -162,6 +161,7 @@ export default function AboutSection({
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    aria-hidden="true" // NOTE: Decorative icon
                   >
                     <path
                       strokeLinecap="round"
