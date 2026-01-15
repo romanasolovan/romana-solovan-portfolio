@@ -1,374 +1,512 @@
 /* ========================================
-   WHAT MAKES ME DIFFERENT SECTION
-   Mobile-first approach
+   ABOUT PAGE - STUNNING TWO-COLUMN LAYOUT
+   Mobile-first approach with elegant design
    ======================================== */
 
-/* MOBILE (Base styles - 320px+) */
-.differentSection {
-  padding: 3rem 0;
-  background: #09090b; /* zinc-950 */
+/* ========================================
+   PAGE CONTAINER
+   ======================================== */
+.pageContainer {
+  min-height: 100vh;
+  background: var(--color-bg);
 }
 
-.container {
-  max-width: 100%;
+/* ========================================
+   QUOTE HEADER - TOP OF PAGE
+   ======================================== */
+.quoteHeader {
+  padding: 4rem 0 3rem; /* NOTE: Mobile-first padding */
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-2) 0%,
+    var(--color-bg) 100%
+  );
+}
+
+.blockquote {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.quoteText {
+  font-size: 1.25rem; /* NOTE: Mobile-first size */
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-soft);
+  font-style: italic;
+  margin: 0 0 1rem 0;
+  position: relative;
+}
+
+/* NOTE: Decorative quote marks */
+.quoteText::before {
+  content: "";
+  font-size: 3rem;
+  color: var(--color-border-hover);
+  position: absolute;
+  left: -1.5rem;
+  top: -0.5rem;
+  font-family: Georgia, serif;
+  opacity: 0.3;
+}
+
+.quoteFooter {
+  margin: 0;
+}
+
+.quoteCite {
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ========================================
+   MAIN SECTION - TWO COLUMN LAYOUT
+   ======================================== */
+.mainSection {
+  padding: 3rem 0; /* NOTE: Mobile-first padding */
+}
+
+.twoColumnGrid {
+  max-width: var(--container-wide); /* NOTE: Using global wide container */
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-/* Heading & Intro */
-.heading {
-  font-size: 1.75rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #ffffff;
-  line-height: 1.2;
-}
-
-.intro {
-  font-size: 0.9375rem;
-  color: #d4d4d8; /* zinc-300 */
-  text-align: center;
-  line-height: 1.75;
-  margin-bottom: 2.5rem;
-}
-
-/* Core Values */
-.values {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
+  grid-template-columns: 1fr; /* NOTE: Mobile-first - single column */
+  gap: 3rem;
 }
 
-.valueItem {
-  background: #18181b; /* zinc-900 */
-  border: 1px solid #27272a; /* zinc-800 */
-  border-radius: 1rem;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.valueIcon {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
-.valueTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 0.625rem;
-  line-height: 1.3;
-}
-
-.valueText {
-  font-size: 0.9375rem;
-  color: #a1a1aa; /* zinc-400 */
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* Personal Section */
-.personal {
-  background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
-  border: 1px solid #27272a;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  margin-bottom: 2.5rem;
-}
-
-.subheading {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 1.25rem;
-  text-align: center;
-}
-
-.personalList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.personalItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.625rem;
-  font-size: 0.9375rem;
-  color: #d4d4d8; /* zinc-300 */
-  line-height: 1.7;
-  padding: 0.625rem 0.875rem;
-  background: #09090b;
-  border-radius: 0.5rem;
-  border: 1px solid #27272a;
-  transition: all 0.2s ease;
-}
-
-.bullet {
-  color: #71717a; /* zinc-500 */
-  font-weight: 700;
-  font-size: 1rem;
-  flex-shrink: 0;
-  line-height: 1.5;
-}
-
-/* Closing Statement */
-.closing {
-  background: #18181b;
-  border: 1px solid #27272a;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  text-align: center;
+/* ========================================
+   COLUMN STRUCTURE
+   ======================================== */
+.column {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); /* NOTE: Larger radius for elegance */
+  padding: 2rem 1.5rem; /* NOTE: Mobile-first padding */
+  transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
 }
 
-.closing::before {
+/* NOTE: Subtle gradient overlay */
+.column::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #ffffff, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border-hover),
+    transparent
+  );
 }
 
-.closingText {
-  font-size: 1rem;
-  color: #e4e4e7; /* zinc-200 */
-  line-height: 1.75;
-  margin: 0;
-  font-style: italic;
+.columnContent {
+  position: relative;
+  z-index: 1;
 }
 
 /* ========================================
-   TABLET (768px+)
+   TYPOGRAPHY
    ======================================== */
+.columnTitle {
+  font-size: 1.75rem; /* NOTE: Mobile-first size */
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  position: relative;
+  padding-bottom: 1rem;
+}
 
+/* NOTE: Decorative underline */
+.columnTitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 3rem;
+  height: 3px;
+  background: var(--color-border-hover);
+  border-radius: 2px;
+}
+
+.subheading {
+  font-size: 1.25rem; /* NOTE: Mobile-first size */
+  font-weight: 600;
+  color: var(--color-soft);
+  margin: 2rem 0 1rem 0;
+  line-height: 1.3;
+}
+
+.paragraph {
+  font-size: 0.9375rem; /* NOTE: Mobile-first size */
+  color: var(--color-soft);
+  line-height: 1.7;
+  margin: 0 0 1.25rem 0;
+}
+
+.paragraph:last-of-type {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   PERSONAL FACTS LIST - STUNNING CARDS
+   ======================================== */
+.factsList {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.factItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-2) 0%,
+    var(--color-bg) 100%
+  );
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+/* NOTE: Hover effect - lift and highlight */
+.factItem:hover {
+  background: var(--color-bg-2);
+  border-color: var(--color-border-hover);
+  transform: translateX(8px);
+  box-shadow: var(--shadow-md);
+}
+
+/* NOTE: Decorative bullet - filled circle */
+.factItem .bullet {
+  color: var(--color-border-hover);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  line-height: 1.7;
+  margin-top: 0.25rem;
+}
+
+/* NOTE: Custom bullet symbol */
+.factItem .bullet::before {
+  content: "●";
+  font-size: 1rem;
+}
+
+.factText {
+  color: var(--color-soft);
+  line-height: 1.7;
+  font-size: 0.9375rem;
+}
+
+/* ========================================
+   PROFESSIONAL VALUES LIST
+   ======================================== */
+.valuesList {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.valueItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0;
+  transition: all var(--transition-fast);
+}
+
+/* NOTE: Decorative bullet - filled circle */
+.valueItem .bullet {
+  color: var(--color-border-hover);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  line-height: 1.7;
+  margin-top: 0.25rem;
+}
+
+/* NOTE: Custom bullet symbol */
+.valueItem .bullet::before {
+  content: "●";
+  font-size: 1rem;
+}
+
+.valueContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.valueLabel {
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  display: block;
+}
+
+.valueText {
+  color: var(--color-muted);
+  line-height: 1.7;
+  font-size: 0.9375rem;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET (768px+)
+   ======================================== */
 @media (min-width: 768px) {
-  .differentSection {
+  .quoteHeader {
+    padding: 5rem 0 4rem;
+  }
+
+  .quoteText {
+    font-size: 1.5rem;
+  }
+
+  .quoteCite {
+    font-size: 1rem;
+  }
+
+  .mainSection {
     padding: 4rem 0;
   }
 
-  .container {
-    padding: 0 1.5rem;
+  .twoColumnGrid {
+    padding: 0 2rem;
+    gap: 3rem;
   }
 
-  .heading {
+  .column {
+    padding: 2.5rem 2rem;
+  }
+
+  .columnTitle {
     font-size: 2rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
   }
 
-  .intro {
-    font-size: 1rem;
-    margin-bottom: 3rem;
-  }
-
-  .values {
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
-  .valueItem {
-    padding: 1.75rem;
-  }
-
-  .valueIcon {
-    font-size: 2.25rem;
-    margin-bottom: 1rem;
-  }
-
-  .valueTitle {
+  .subheading {
     font-size: 1.375rem;
   }
 
+  .paragraph {
+    font-size: 1rem;
+  }
+
+  .factText,
+  .valueLabel,
   .valueText {
     font-size: 1rem;
   }
 
-  .personal {
-    padding: 2rem;
-    margin-bottom: 3rem;
+  .factItem {
+    padding: 1.5rem;
+  }
+
+  .valuesList {
+    gap: 1.75rem;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - DESKTOP (1024px+)
+   ======================================== */
+@media (min-width: 1024px) {
+  .quoteHeader {
+    padding: 6rem 0 5rem;
+  }
+
+  .quoteText {
+    font-size: 1.75rem;
+  }
+
+  .mainSection {
+    padding: 5rem 0;
+  }
+
+  /* NOTE: Two columns side by side on desktop */
+  .twoColumnGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+
+  .column {
+    padding: 3rem 2.5rem;
+  }
+
+  /* NOTE: Subtle hover effect on desktop */
+  .column:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .columnTitle {
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .columnTitle::after {
+    width: 4rem;
   }
 
   .subheading {
-    font-size: 1.625rem;
+    font-size: 1.5rem;
+    margin: 2.5rem 0 1.25rem 0;
   }
 
-  .personalList {
-    gap: 0.875rem;
+  .paragraph {
+    font-size: 1.0625rem;
+    margin-bottom: 1.5rem;
   }
 
-  .personalItem {
-    font-size: 1rem;
-    padding: 0.75rem 1rem;
+  .factsList,
+  .valuesList {
+    margin-top: 2rem;
   }
 
-  .bullet {
-    font-size: 1.125rem;
+  .factItem {
+    padding: 1.75rem;
   }
 
-  .closing {
-    padding: 2rem;
-  }
-
-  .closingText {
+  .factText,
+  .valueLabel,
+  .valueText {
     font-size: 1.0625rem;
   }
-}
 
-/* ========================================
-   DESKTOP (1024px+)
-   ======================================== */
-
-@media (min-width: 1024px) {
-  .differentSection {
-    padding: 6rem 0;
-  }
-
-  .container {
-    max-width: 56rem;
-  }
-
-  .heading {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .intro {
-    font-size: 1.125rem;
-    margin-bottom: 4rem;
-    max-width: 48rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .values {
+  .valuesList {
     gap: 2rem;
-    margin-bottom: 4rem;
-  }
-
-  .valueItem {
-    padding: 2rem;
-  }
-
-  .valueItem:hover {
-    border-color: #3f3f46; /* zinc-700 */
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.4);
-  }
-
-  .valueIcon {
-    font-size: 2.5rem;
-  }
-
-  .valueTitle {
-    font-size: 1.5rem;
-  }
-
-  .personal {
-    padding: 2.5rem;
-  }
-
-  .subheading {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .personalList {
-    gap: 1rem;
-  }
-
-  .personalItem:hover {
-    background: #18181b;
-    border-color: #3f3f46;
-    transform: translateX(4px);
-  }
-
-  .closingText {
-    font-size: 1.125rem;
   }
 }
 
 /* ========================================
-   ANIMATIONS (Desktop only)
+   ANIMATIONS
    ======================================== */
+/* NOTE: Quote fades in on load */
+.quoteHeader {
+  opacity: 0;
+  animation: fadeIn 1s ease 0.2s forwards;
+}
 
-@media (min-width: 1024px) {
-  .valueItem {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
+}
 
-  .valueItem:nth-child(1) {
-    animation-delay: 0.1s;
-  }
-  .valueItem:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-  .valueItem:nth-child(3) {
-    animation-delay: 0.3s;
-  }
+/* NOTE: Columns fade in with stagger */
+.column {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
 
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.column:nth-child(1) {
+  animation-delay: 0.4s;
+}
 
-  .personalItem {
-    opacity: 0;
-    transform: translateX(-10px);
-    animation: fadeInLeft 0.4s ease forwards;
-  }
+.column:nth-child(2) {
+  animation-delay: 0.6s;
+}
 
-  .personalItem:nth-child(1) {
-    animation-delay: 0.1s;
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .personalItem:nth-child(2) {
-    animation-delay: 0.15s;
-  }
-  .personalItem:nth-child(3) {
-    animation-delay: 0.2s;
-  }
-  .personalItem:nth-child(4) {
-    animation-delay: 0.25s;
-  }
-  .personalItem:nth-child(5) {
-    animation-delay: 0.3s;
-  }
+}
 
-  @keyframes fadeInLeft {
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+/* NOTE: Stagger animations for fact items */
+.factItem {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: fadeInLeft 0.6s ease forwards;
+}
+
+.factItem:nth-child(1) {
+  animation-delay: 0.8s;
+}
+.factItem:nth-child(2) {
+  animation-delay: 0.9s;
+}
+.factItem:nth-child(3) {
+  animation-delay: 1s;
+}
+.factItem:nth-child(4) {
+  animation-delay: 1.1s;
+}
+
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
+}
+
+/* NOTE: Stagger animations for value items */
+.valueItem {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: fadeInLeft 0.6s ease forwards;
+}
+
+.valueItem:nth-child(1) {
+  animation-delay: 0.8s;
+}
+.valueItem:nth-child(2) {
+  animation-delay: 0.9s;
+}
+.valueItem:nth-child(3) {
+  animation-delay: 1s;
+}
+.valueItem:nth-child(4) {
+  animation-delay: 1.1s;
+}
+.valueItem:nth-child(5) {
+  animation-delay: 1.2s;
 }
 
 /* ========================================
    ACCESSIBILITY
    ======================================== */
-
 @media (prefers-reduced-motion: reduce) {
-  .valueItem,
-  .personalItem {
-    animation: none;
+  .quoteHeader,
+  .column,
+  .factItem,
+  .valueItem {
+    animation: none !important;
     transition: none;
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
-  .valueItem:hover,
-  .personalItem:hover {
+  .column:hover,
+  .factItem:hover {
     transform: none;
   }
+}
+
+/* NOTE: Focus styles for keyboard navigation */
+.column:focus-within {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
 }

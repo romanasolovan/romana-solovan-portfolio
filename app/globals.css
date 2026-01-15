@@ -38,7 +38,7 @@ a {
   transition: opacity 200ms ease; /* NOTE: Smooth hover transition */
 }
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
   opacity: 0.9;
 }
 

@@ -140,14 +140,17 @@ export default function AboutSection({
               className={`${css.textWrapper} ${isVisible ? css.fadeInUp : ""}`}
             >
               <p className={css.paragraph}>
-                I come from early childhood education — a path that trained me
-                to be patient, organized, and deeply user-focused. Now I apply
-                that mindset to building real products with clean code.
+                “My first ‘users’ were children — now I design for everyone.”
               </p>
               <p className={css.paragraph}>
-                I enjoy learning through experience — exploring new places,
-                adapting to new environments, and continuously growing both
-                personally and professionally.
+                I transitioned into front-end development from early childhood
+                education — a background that shaped my patience, empathy, and
+                strong user-first thinking.
+              </p>
+              <p className={css.paragraph}>
+                I learn through experience: building, exploring new
+                environments, and continuously growing both as a developer and
+                as a person.
               </p>
             </div>
 

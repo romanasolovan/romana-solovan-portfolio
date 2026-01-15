@@ -1,16 +1,22 @@
 /* ========================================
    CONTACT SECTION
+   Mobile-first approach with compact social links
    ======================================== */
 
+/* ========================================
+   SECTION LAYOUT
+   ======================================== */
+/* NOTE: No custom padding - using global .section class */
+
 .contact {
+  /* NOTE: All vertical padding handled by global .section class */
 }
 
 /* ========================================
    HEADER
    ======================================== */
-
 .header {
-  margin-bottom: 3rem;
+  margin-bottom: 3rem; /* NOTE: Mobile-first spacing */
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
@@ -28,50 +34,53 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2rem; /* NOTE: Mobile-first size */
   font-weight: 700;
   margin-bottom: 0.75rem;
-  color: #ffffff;
+  color: var(--color-text); /* NOTE: Using global token */
+  line-height: 1.2;
 }
 
 .subtitle {
-  font-size: 1.0625rem;
-  color: #a1a1aa; /* zinc-400 */
+  font-size: 1rem; /* NOTE: Mobile-first size */
+  color: var(--color-muted); /* NOTE: Using global token */
   max-width: 36rem;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
 /* ========================================
-   GRID OF CONTACT CARDS
+   GRID OF SOCIAL LINK CARDS
    ======================================== */
-
+/* NOTE: Compact icon cards layout */
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  max-width: 56rem;
+  grid-template-columns: repeat(2, 1fr); /* NOTE: Mobile-first - 2 columns */
+  gap: 1rem; /* NOTE: Mobile-first gap */
+  max-width: 32rem; /* NOTE: Narrower for compact cards */
   margin: 0 auto;
 }
 
 /* ========================================
-   CONTACT CARD
+   SOCIAL LINK CARD (Compact Design)
    ======================================== */
-
 .card {
-  background: #09090b; /* zinc-950 */
-  border: 1px solid #27272a; /* zinc-800 */
-  border-radius: 1rem;
-  padding: 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius); /* NOTE: Using global radius */
+  padding: 1.5rem 1rem; /* NOTE: Mobile-first padding - more vertical */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  gap: 0.75rem; /* NOTE: Gap between icon and label */
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
   opacity: 0;
   transform: translateY(30px);
-  text-align: center;
+  cursor: pointer;
+  position: relative; /* NOTE: For pseudo-element effects */
 }
 
 .fadeInUp {
@@ -85,93 +94,97 @@
   }
 }
 
+/* NOTE: Hover effect - lift and highlight */
 .card:hover {
-  background: #18181b; /* zinc-900 */
-  border-color: #3f3f46; /* zinc-700 */
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border-hover);
   transform: translateY(-4px);
+  box-shadow: var(--shadow-md); /* NOTE: Add depth on hover */
 }
 
+/* ========================================
+   ICON WRAPPER
+   ======================================== */
 .iconWrapper {
-  width: 3.5rem;
-  height: 3.5rem;
-  background: #18181b; /* zinc-900 */
-  border-radius: 0.75rem;
+  width: 3rem; /* NOTE: Mobile-first size */
+  height: 3rem;
+  background: var(--color-bg-2); /* NOTE: Using global token */
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #27272a;
-  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
 }
 
 .card:hover .iconWrapper {
-  background: #27272a;
-  border-color: #3f3f46;
+  background: var(--color-surface);
+  border-color: var(--color-border-hover);
+  transform: scale(1.1); /* NOTE: Icon grows slightly on hover */
 }
 
 .icon {
-  width: 1.75rem;
-  height: 1.75rem;
-  color: #ffffff;
+  width: 1.5rem; /* NOTE: Mobile-first icon size */
+  height: 1.5rem;
+  color: var(--color-text);
 }
 
-.cardContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+/* ========================================
+   CARD LABEL
+   ======================================== */
+.cardLabel {
+  font-size: 0.875rem; /* NOTE: Mobile-first size */
+  font-weight: 500;
+  color: var(--color-soft); /* NOTE: Using global token */
+  text-align: center;
+  transition: color var(--transition-fast);
 }
 
-.cardTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin: 0;
-  color: #ffffff;
-}
-
-.cardValue {
-  font-size: 0.875rem;
-  color: #a1a1aa; /* zinc-400 */
-  margin: 0;
+.card:hover .cardLabel {
+  color: var(--color-text); /* NOTE: Brighten on hover */
 }
 
 /* ========================================
    VIEW MORE BUTTON
    ======================================== */
-
 .viewMoreContainer {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 3rem; /* NOTE: Mobile-first spacing */
   opacity: 0;
 }
 
 .viewMoreContainer.fadeIn {
-  animation: fadeIn 0.8s ease 0.6s forwards;
+  animation: fadeIn 0.8s ease 0.6s forwards; /* NOTE: Delayed fade-in */
 }
 
 .viewMoreButton {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 24px;
-  background: #ffffff;
-  color: #000000;
-  border-radius: 8px;
-  font-weight: 500;
+  padding: 0.875rem 1.5rem;
+  background: var(--color-text); /* NOTE: High contrast button */
+  color: var(--color-bg);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .viewMoreButton:hover {
-  background: #e5e5e5;
-  gap: 12px;
+  background: var(--color-soft);
+  gap: 12px; /* NOTE: Icon slides right */
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none; /* NOTE: Keep no underline */
 }
 
 .viewMoreIcon {
   width: 20px;
   height: 20px;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-base);
 }
 
 .viewMoreButton:hover .viewMoreIcon {
@@ -179,54 +192,90 @@
 }
 
 /* ========================================
-   RESPONSIVE
+   RESPONSIVE - TABLET (768px+)
    ======================================== */
-
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
+@media (min-width: 768px) {
   .header {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
   }
 
   .title {
-    font-size: 1.75rem;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 1.0625rem;
+  }
+
+  /* NOTE: 3 columns on tablet for better spacing */
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 42rem;
   }
 
   .card {
-    padding: 1.5rem;
+    padding: 2rem 1.25rem;
+    gap: 1rem;
   }
 
   .iconWrapper {
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
   }
 
   .icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
   }
 
-  .cardTitle {
-    font-size: 1rem;
+  .cardLabel {
+    font-size: 0.9375rem;
+  }
+
+  .viewMoreContainer {
+    margin-top: 4rem;
+  }
+
+  .viewMoreButton {
+    padding: 1rem 2rem;
+    font-size: 1.0625rem;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - DESKTOP (1024px+)
+   ======================================== */
+@media (min-width: 1024px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+  }
+
+  /* NOTE: 5 columns on desktop - one for each social link */
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    max-width: 56rem;
+  }
+
+  .card {
+    padding: 2rem 1rem;
   }
 }
 
 /* ========================================
    ACCESSIBILITY
    ======================================== */
-
+/* NOTE: Focus styles for keyboard navigation */
 .card:focus-visible,
 .viewMoreButton:focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -234,19 +283,25 @@
   .header,
   .viewMoreContainer,
   .viewMoreButton,
-  .viewMoreIcon {
+  .viewMoreIcon,
+  .iconWrapper {
     transition: none;
-    animation: none;
+    animation: none !important;
   }
 
   .card,
   .header,
   .viewMoreContainer {
-    opacity: 1;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .card:hover,
+  .viewMoreButton:hover {
     transform: none;
   }
 
-  .card:hover {
+  .card:hover .iconWrapper {
     transform: none;
   }
 
