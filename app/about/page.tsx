@@ -1,12 +1,82 @@
+"use client";
+import { useState } from "react";
 import css from "./AboutPage.module.css";
 
-export const metadata = {
-  title: "About | Romana Solovan",
-  description:
-    "Learn more about Romana Solovan's journey as a front-end developer - her values, interests, and what makes her unique.",
-};
+// NOTE: Metadata must be in a separate server component
+// Create a layout.tsx file in the /about folder with the metadata instead
 
 export default function AboutPage() {
+  // NOTE: Track which toggles are open (by index)
+  const [openPersonal, setOpenPersonal] = useState<number | null>(null);
+  const [openProfessional, setOpenProfessional] = useState<number | null>(null);
+
+  // NOTE: Personal section data with titles and content
+  const personalItems = [
+    {
+      title: "Foundations",
+      content:
+        "Portuguese shaped how I learned to read and write. It trained my mind to absorb languages intuitively.",
+    },
+    {
+      title: "Rhythm",
+      content:
+        "Movement brings balance to my life. Dance, strength training, yoga, and boxing keep me aligned.",
+    },
+    {
+      title: "Wonder",
+      content:
+        "Travel keeps my sense of curiosity alive. New places remind me to see with fresh eyes.",
+    },
+    {
+      title: "Hands",
+      content:
+        "I love working with my hands. Creating music, textiles, food, or gardens helps me slow down.",
+    },
+    {
+      title: "Attention",
+      content:
+        "I value focus and intention. Being present changes how deeply I learn and create.",
+    },
+  ];
+
+  // NOTE: Professional section data with titles and content
+  const professionalItems = [
+    {
+      title: "Thinking",
+      content:
+        "I enjoy exploring ideas deeply. Good solutions come from asking better questions.",
+    },
+    {
+      title: "Structure",
+      content:
+        "Clear organization improves both code and experience. I value simplicity with purpose.",
+    },
+    {
+      title: "Respect",
+      content:
+        "Communication should be thoughtful and open. Collaboration works best when people feel safe.",
+    },
+    {
+      title: "Care",
+      content:
+        "I build with real users in mind. Understanding people leads to better products.",
+    },
+    {
+      title: "Resilience",
+      content:
+        "Challenges don't discourage me. They refine how I work and grow.",
+    },
+  ];
+
+  // NOTE: Toggle handlers
+  const togglePersonal = (index: number) => {
+    setOpenPersonal(openPersonal === index ? null : index);
+  };
+
+  const toggleProfessional = (index: number) => {
+    setOpenProfessional(openProfessional === index ? null : index);
+  };
+
   return (
     <div className={css.pageContainer}>
       {/* ========================================
@@ -34,66 +104,52 @@ export default function AboutPage() {
             <div className={css.columnContent}>
               <h2 className={css.columnTitle}>What Makes Me Different</h2>
 
-              <p className={css.paragraph}>
-                I am deeply curious by nature and motivated by growth. I learn
-                best through experience — by exploring, experimenting, and
-                stepping into unfamiliar environments.
-              </p>
+              <h3 className={css.subheading}>
+                I learn by living, not just by reading about it.
+              </h3>
 
               <p className={css.paragraph}>
-                My journey has been shaped by change, self-reflection, and a
-                willingness to challenge myself. This mindset led me to change
-                my career path and discover what I could build by combining
-                creativity, discipline, and curiosity.
+                Curiosity shapes how I move through life. I am drawn to new
+                experiences, cultures, and challenges, and I am comfortable
+                stepping outside familiar paths. This openness has shaped how I
+                think, adapt, and grow — both personally and professionally.
               </p>
 
-              <h3 className={css.subheading}>A Few Things About Me</h3>
-
-              <ul className={css.factsList}>
-                <li className={css.factItem}>
-                  <span className={css.bullet}>→</span>
-                  <span className={css.factText}>
-                    My first language for reading and writing was Portuguese,
-                    which later made learning new languages easier. My current
-                    goal is to speak Spanish fluently.
-                  </span>
-                </li>
-
-                <li className={css.factItem}>
-                  <span className={css.bullet}>→</span>
-                  <span className={css.factText}>
-                    Movement plays a big role in my life — I enjoy dancing,
-                    weight training, yoga, and boxing.
-                  </span>
-                </li>
-
-                <li className={css.factItem}>
-                  <span className={css.bullet}>→</span>
-                  <span className={css.factText}>
-                    Traveling fuels my curiosity. I love discovering new
-                    cultures, meeting people, and seeing the world from
-                    different perspectives.
-                  </span>
-                </li>
-
-                <li className={css.factItem}>
-                  <span className={css.bullet}>→</span>
-                  <span className={css.factText}>
-                    Creative hobbies like crocheting, playing the keyboard and
-                    singing bowl, cooking, and gardening help me slow down and
-                    stay balanced.
-                  </span>
-                </li>
-
-                <li className={css.factItem}>
-                  <span className={css.bullet}>→</span>
-                  <span className={css.factText}>
-                    I value presence and intention — whether I am learning
-                    something new, creating, or simply observing the world
-                    around me.
-                  </span>
-                </li>
-              </ul>
+              {/* NOTE: Personal toggles/accordions */}
+              <div className={css.toggleList}>
+                {personalItems.map((item, index) => (
+                  <div key={index} className={css.toggleItem}>
+                    <button
+                      className={`${css.toggleButton} ${openPersonal === index ? css.toggleButtonActive : ""}`}
+                      onClick={() => togglePersonal(index)}
+                      aria-expanded={openPersonal === index}
+                    >
+                      <span className={css.toggleTitle}>{item.title}</span>
+                      <svg
+                        className={`${css.toggleIcon} ${openPersonal === index ? css.toggleIconActive : ""}`}
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    <div
+                      className={`${css.toggleContent} ${openPersonal === index ? css.toggleContentOpen : ""}`}
+                    >
+                      <p className={css.toggleText}>{item.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </article>
 
@@ -102,81 +158,53 @@ export default function AboutPage() {
             <div className={css.columnContent}>
               <h2 className={css.columnTitle}>My Professional Values</h2>
 
+              <h3 className={css.subheading}>
+                I build software with intention and empathy.
+              </h3>
+
               <p className={css.paragraph}>
                 My professional approach is shaped by empathy, structure, and a
-                strong understanding of how people learn and interact with new
-                ideas.
+                deep respect for how people learn and interact with technology.
+                With a background in education, I naturally focus on clarity,
+                accessibility, and thoughtful communication. I care about
+                building products that feel intuitive.
               </p>
 
-              <p className={css.paragraph}>
-                My background in education taught me patience, clarity, and the
-                importance of meeting users where they are. Today, I apply these
-                principles to building thoughtful, user-centered digital
-                experiences.
-              </p>
-
-              <ul className={css.valuesList}>
-                <li className={css.valueItem}>
-                  <span className={css.bullet}>→</span>
-                  <div className={css.valueContent}>
-                    <strong className={css.valueLabel}>Open mindset:</strong>
-                    <span className={css.valueText}>
-                      I approach problems with curiosity and stay open to new
-                      ideas and perspectives.
-                    </span>
+              {/* NOTE: Professional toggles/accordions */}
+              <div className={css.toggleList}>
+                {professionalItems.map((item, index) => (
+                  <div key={index} className={css.toggleItem}>
+                    <button
+                      className={`${css.toggleButton} ${openProfessional === index ? css.toggleButtonActive : ""}`}
+                      onClick={() => toggleProfessional(index)}
+                      aria-expanded={openProfessional === index}
+                    >
+                      <span className={css.toggleTitle}>{item.title}</span>
+                      <svg
+                        className={`${css.toggleIcon} ${openProfessional === index ? css.toggleIconActive : ""}`}
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    <div
+                      className={`${css.toggleContent} ${openProfessional === index ? css.toggleContentOpen : ""}`}
+                    >
+                      <p className={css.toggleText}>{item.content}</p>
+                    </div>
                   </div>
-                </li>
-
-                <li className={css.valueItem}>
-                  <span className={css.bullet}>→</span>
-                  <div className={css.valueContent}>
-                    <strong className={css.valueLabel}>
-                      Creative problem-solving:
-                    </strong>
-                    <span className={css.valueText}>
-                      I use creativity to simplify complex ideas and design
-                      clear, effective solutions.
-                    </span>
-                  </div>
-                </li>
-
-                <li className={css.valueItem}>
-                  <span className={css.bullet}>→</span>
-                  <div className={css.valueContent}>
-                    <strong className={css.valueLabel}>
-                      Clear communication:
-                    </strong>
-                    <span className={css.valueText}>
-                      I value honest, respectful communication and collaboration
-                      within a team.
-                    </span>
-                  </div>
-                </li>
-
-                <li className={css.valueItem}>
-                  <span className={css.bullet}>→</span>
-                  <div className={css.valueContent}>
-                    <strong className={css.valueLabel}>
-                      User-centered thinking:
-                    </strong>
-                    <span className={css.valueText}>
-                      I constantly ask what the user truly needs and how my work
-                      can support them better.
-                    </span>
-                  </div>
-                </li>
-
-                <li className={css.valueItem}>
-                  <span className={css.bullet}>→</span>
-                  <div className={css.valueContent}>
-                    <strong className={css.valueLabel}>Growth mindset:</strong>
-                    <span className={css.valueText}>
-                      I see mistakes and challenges as essential steps toward
-                      learning and improvement.
-                    </span>
-                  </div>
-                </li>
-              </ul>
+                ))}
+              </div>
             </div>
           </article>
         </div>
