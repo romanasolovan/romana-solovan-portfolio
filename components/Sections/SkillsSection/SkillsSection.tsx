@@ -6,25 +6,25 @@ import css from "./SkillsSection.module.css";
 // NOTE: Technical skills with proficiency percentages - only for homepage
 const skillCategories = [
   {
-    category: "💻  Hard Skills",
+    category: "🎨 Front-End Development",
     skills: [
-      { name: "React / Next.js (App Router)", level: 90 },
-      { name: "TypeScript", level: 85 },
-      { name: "JavaScript (ES6+)", level: 88 },
-      { name: "HTML5 / CSS3", level: 95 },
-      { name: "REST APIs (Axios / Fetch)", level: 82 },
-      { name: "Git / GitHub", level: 85 },
+      { name: "HTML (Semantic Markup)", level: 90 },
+      { name: "CSS (Responsive Layouts, CSS Modules)", level: 90 },
+      { name: "JavaScript (ES6+)", level: 85 },
+      { name: "TypeScript", level: 90 },
+      { name: "React", level: 75 },
+      { name: "Next.js (App Router)", level: 90 },
     ],
   },
   {
-    category: "🤝  Soft Skills",
+    category: "🛠 Back-End & Tools",
     skills: [
-      { name: "Communication & Team Work", level: 85 },
-      { name: "Creativity & Innovation", level: 95 },
-      { name: "Responsive & Mobile-first UI", level: 92 },
-      { name: "Accessibility (a11y) basics", level: 78 },
-      { name: "Adaptability & Problem Solving", level: 88 },
-      { name: "Patience", level: 88 },
+      { name: "Node.js (Basic Understanding)", level: 65 },
+      { name: "REST APIs", level: 75 },
+      { name: "Authentication Flows (Basics)", level: 70 },
+      { name: "Axios / Fetch", level: 80 },
+      { name: "Postman", level: 70 },
+      { name: "Swagger (API Documentation)", level: 65 },
     ],
   },
 ];

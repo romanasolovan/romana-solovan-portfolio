@@ -1,6 +1,6 @@
 /* ========================================
    SKILLS PAGE
-   Mobile-first approach - three stacked containers
+   Mobile-first approach - About section + 3 toggle cards
    ======================================== */
 
 /* ========================================
@@ -15,14 +15,14 @@
    PAGE HEADER - COMPACT & CONSISTENT
    ======================================== */
 .pageHeader {
-  padding: 2rem 0 1.5rem; /* NOTE: Compact padding - matching About/Portfolio */
+  padding: 2rem 0 1.5rem;
   text-align: center;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-bg-2);
 }
 
 .pageTitle {
-  font-size: 2.25rem; /* NOTE: Big title on mobile */
+  font-size: 2.25rem;
   font-weight: 700;
   color: var(--color-text);
   margin: 0 0 0.5rem 0;
@@ -30,7 +30,7 @@
 }
 
 .pageSubtitle {
-  font-size: 0.9375rem; /* NOTE: Compact subtitle on mobile */
+  font-size: 0.9375rem;
   color: var(--color-muted);
   margin: 0;
   line-height: 1.5;
@@ -40,26 +40,24 @@
    PAGE CONTENT
    ======================================== */
 .pageContent {
-  padding: 3rem 0; /* NOTE: Mobile-first padding */
+  padding: 3rem 0;
 }
 
 /* ========================================
-   SKILLS CONTAINERS - MATCHING ABOUT PAGE STYLE
+   ABOUT SKILLS CONTAINER (keep as-is)
    ======================================== */
-/* NOTE: About Skills, Hard Skills, and Soft Skills blocks */
 .aboutSkills,
 .skillsBlock {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg); /* NOTE: Large radius for elegance */
-  padding: 1.5rem 1.25rem; /* NOTE: Mobile-first padding */
-  margin-bottom: 2rem; /* NOTE: Space between containers */
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.25rem;
+  margin-bottom: 2rem;
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
 }
 
-/* NOTE: Subtle gradient overlay on top */
 .aboutSkills::before,
 .skillsBlock::before {
   content: "";
@@ -77,10 +75,9 @@
 }
 
 .skillsBlock:last-child {
-  margin-bottom: 0; /* NOTE: No margin on last container */
+  margin-bottom: 0;
 }
 
-/* NOTE: Hover effect on desktop */
 .aboutSkills:hover,
 .skillsBlock:hover {
   border-color: var(--color-border-hover);
@@ -91,7 +88,7 @@
    SECTION HEADING
    ======================================== */
 .sectionHeading {
-  font-size: 1.5rem; /* NOTE: Mobile-first size */
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-text);
   margin: 0 0 1.5rem 0;
@@ -100,13 +97,13 @@
   gap: 0.625rem;
   line-height: 1.3;
   position: relative;
-  z-index: 1; /* NOTE: Above gradient overlay */
+  z-index: 1;
 }
 
 .headingIcon {
-  font-size: 1.75rem; /* NOTE: Mobile-first icon size */
+  font-size: 1.75rem;
   display: inline-block;
-  user-select: none; /* NOTE: Prevent emoji selection */
+  user-select: none;
 }
 
 /* ========================================
@@ -114,7 +111,7 @@
    ======================================== */
 .aboutText {
   color: var(--color-soft);
-  font-size: 0.875rem; /* NOTE: Mobile-first size */
+  font-size: 0.875rem;
   line-height: 1.7;
   margin: 0 0 1rem 0;
   position: relative;
@@ -126,7 +123,133 @@
 }
 
 /* ========================================
-   SKILLS LIST
+   NEW: TOGGLES ROW (Hard / Soft / Currently Learning)
+   ======================================== */
+.togglesRow {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile-first */
+  gap: 1.5rem;
+}
+
+/* Toggle Card - glassmorphism, slightly more standout */
+.toggleCard {
+  align-self: start; /* prevents stretching to match tallest column */
+  background: rgba(24, 24, 27, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+  position: relative;
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.toggleCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border-hover),
+    transparent
+  );
+  opacity: 0.85;
+}
+
+.toggleCard:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* Toggle header button */
+.toggleHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1.25rem 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+
+  position: relative;
+  z-index: 1;
+}
+
+.toggleTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.toggleIcon {
+  flex-shrink: 0;
+  color: var(--color-muted);
+  transform: rotate(-90deg);
+  transition:
+    transform var(--transition-base),
+    color var(--transition-fast);
+}
+
+.toggleIconActive {
+  transform: rotate(0deg);
+  color: var(--color-soft);
+}
+
+/* Toggle panel transition */
+.togglePanel {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease;
+}
+
+.togglePanelOpen {
+  max-height: 520px;
+  opacity: 1;
+}
+
+.toggleBody {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   NEW: MINIMAL LIST (dot bullets only)
+   ======================================== */
+.minList {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.minListItem {
+  color: var(--color-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ========================================
+   OLD LIST STYLES (kept for safety; not used by new toggles)
    ======================================== */
 .skillsListBlock {
   list-style: none;
@@ -143,7 +266,7 @@
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  padding: 1rem 1.25rem; /* NOTE: Mobile-first padding */
+  padding: 1rem 1.25rem;
   background: linear-gradient(
     135deg,
     var(--color-bg-2) 0%,
@@ -152,10 +275,9 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   transition: all var(--transition-base);
-  font-size: 0.875rem; /* NOTE: Mobile-first size */
+  font-size: 0.875rem;
 }
 
-/* NOTE: Hover effect - lift and highlight */
 .skillItem:hover {
   background: var(--color-bg-2);
   border-color: var(--color-border-hover);
@@ -168,10 +290,9 @@
   font-size: 0.75rem;
   flex-shrink: 0;
   line-height: 1.7;
-  margin-top: 0.25rem; /* NOTE: Align with first line */
+  margin-top: 0.25rem;
 }
 
-/* NOTE: Custom bullet symbol */
 .bullet::before {
   content: "●";
   font-size: 1rem;
@@ -224,6 +345,28 @@
     font-size: 0.9375rem;
   }
 
+  /* Toggles */
+  .togglesRow {
+    gap: 1.75rem;
+  }
+
+  .toggleHeader {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .toggleBody {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+
+  .toggleTitle {
+    font-size: 1.1875rem;
+  }
+
+  .minListItem {
+    font-size: 1rem;
+  }
+
+  /* old cards */
   .skillItem {
     padding: 1.25rem 1.5rem;
     font-size: 0.9375rem;
@@ -270,6 +413,30 @@
     font-size: 1rem;
   }
 
+  /* Toggles row: 3 columns */
+  .togglesRow {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: start; /* prevents stretching */
+  }
+
+  .toggleHeader {
+    padding: 1.75rem 1.75rem;
+  }
+
+  .toggleBody {
+    padding: 0 1.75rem 1.75rem 1.75rem;
+  }
+
+  .toggleTitle {
+    font-size: 1.25rem;
+  }
+
+  .minListItem {
+    font-size: 1rem;
+  }
+
+  /* old cards */
   .skillItem {
     padding: 1.5rem 1.75rem;
     font-size: 1rem;
@@ -279,23 +446,17 @@
 /* ========================================
    ANIMATIONS
    ======================================== */
-/* NOTE: Containers fade in with stagger */
 .aboutSkills {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.8s ease 0.2s forwards;
 }
 
-.skillsBlock:nth-of-type(2) {
+/* NEW: toggles row animation */
+.togglesRow {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.8s ease 0.4s forwards;
-}
-
-.skillsBlock:nth-of-type(3) {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease 0.6s forwards;
 }
 
 @keyframes fadeInUp {
@@ -305,59 +466,33 @@
   }
 }
 
-/* NOTE: Skill items stagger in */
-.skillItem {
-  opacity: 0;
-  transform: translateX(-20px);
-  animation: fadeInLeft 0.6s ease forwards;
-}
-
-.skillItem:nth-child(1) {
-  animation-delay: 0.8s;
-}
-.skillItem:nth-child(2) {
-  animation-delay: 0.9s;
-}
-.skillItem:nth-child(3) {
-  animation-delay: 1s;
-}
-.skillItem:nth-child(4) {
-  animation-delay: 1.1s;
-}
-.skillItem:nth-child(5) {
-  animation-delay: 1.2s;
-}
-.skillItem:nth-child(6) {
-  animation-delay: 1.3s;
-}
-.skillItem:nth-child(7) {
-  animation-delay: 1.4s;
-}
-
-@keyframes fadeInLeft {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 /* ========================================
    ACCESSIBILITY
    ======================================== */
+.toggleHeader:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pageHeader,
   .aboutSkills,
   .skillsBlock,
-  .skillItem {
+  .skillItem,
+  .togglesRow,
+  .toggleCard,
+  .togglePanel,
+  .toggleIcon {
     animation: none !important;
-    transition: none;
+    transition: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
 
   .aboutSkills:hover,
   .skillsBlock:hover,
-  .skillItem:hover {
+  .skillItem:hover,
+  .toggleCard:hover {
     transform: none;
   }
 }
