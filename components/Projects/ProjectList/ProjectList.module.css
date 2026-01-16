@@ -1,51 +1,93 @@
-/* src/components/Projects/ProjectList/ProjectList.module.css */
+/* ========================================
+   PROJECT LIST GRID
+   Mobile-first approach
+   ======================================== */
 
-/**
- * GRID LAYOUT
- * Responsive grid that adapts to screen size
- */
+/* ========================================
+   GRID LAYOUT
+   ======================================== */
 .grid {
   display: grid;
-  gap: 2rem;
-  width: 100%;
+  grid-template-columns: 1fr; /* NOTE: Mobile-first - single column */
+  gap: 1.5rem; /* NOTE: Mobile-first gap */
 }
 
-/* Two-column grid (default) */
+/* NOTE: Two-column variant for homepage */
 .gridTwoCol {
-  grid-template-columns: repeat(2, 1fr);
+  /* NOTE: Inherits mobile single column */
 }
 
-/* Three-column grid (for full portfolio page) */
+/* NOTE: Three-column variant for portfolio page */
 .gridThreeCol {
-  grid-template-columns: repeat(3, 1fr);
+  /* NOTE: Inherits mobile single column */
 }
 
-/**
- * EMPTY STATE
- * Shown when no projects exist
- */
-.empty {
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 3rem 1.5rem;
   text-align: center;
-  padding: 4rem 2rem;
-  color: #a1a1aa; /* zinc-400 */
-  font-size: 1.125rem;
 }
 
-/**
- * RESPONSIVE BREAKPOINTS
- */
+.emptyText {
+  font-size: 1.0625rem;
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.6;
+}
 
-/* Tablet: always 2 columns */
-@media (max-width: 1024px) {
+/* ========================================
+   RESPONSIVE - TABLET (768px+)
+   ======================================== */
+@media (min-width: 768px) {
+  .grid {
+    gap: 2rem;
+  }
+
+  /* NOTE: Two columns on tablet */
+  .gridTwoCol,
   .gridThreeCol {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .emptyState {
+    min-height: 400px;
+  }
+
+  .emptyText {
+    font-size: 1.125rem;
+  }
 }
 
-/* Mobile: single column */
-@media (max-width: 768px) {
+/* ========================================
+   RESPONSIVE - DESKTOP (1024px+)
+   ======================================== */
+@media (min-width: 1024px) {
   .grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2.5rem;
+  }
+
+  /* NOTE: Two columns stays at 2 */
+  .gridTwoCol {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* NOTE: Three columns on desktop */
+  .gridThreeCol {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .grid {
+    /* NOTE: Grid animations handled by child ProjectCard components */
   }
 }

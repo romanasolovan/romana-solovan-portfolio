@@ -12,11 +12,13 @@ export default function ProjectList({
   projects,
   columns = 2,
 }: ProjectListProps) {
-  // Handle empty state
+  // NOTE: Handle empty state gracefully
   if (projects.length === 0) {
     return (
-      <div className={css.empty}>
-        <p>No projects to display yet. Check back soon!</p>
+      <div className={css.emptyState}>
+        <p className={css.emptyText}>
+          No projects to display yet. Check back soon!
+        </p>
       </div>
     );
   }

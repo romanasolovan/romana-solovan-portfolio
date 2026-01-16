@@ -1,5 +1,6 @@
 import { projects } from "@/data/projects";
 import ProjectList from "@/components/Projects/ProjectList/ProjectList";
+import css from "./PortfolioPage.module.css";
 
 export const metadata = {
   title: "Portfolio | Romana Solovan",
@@ -9,19 +10,28 @@ export const metadata = {
 
 export default function PortfolioPage() {
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h1 className="page-title">All Projects</h1>
-        <p className="page-subtitle">
-          A comprehensive collection of my work ({projects.length} projects)
+    <div className={css.pageContainer}>
+      {/* ========================================
+          PAGE HEADER
+          ======================================== */}
+      <header className={css.pageHeader}>
+        <h1 className={css.pageTitle}>All Projects</h1>
+        <p className={css.pageSubtitle}>
+          A comprehensive collection of my work — {projects.length} projects
         </p>
-      </div>
+      </header>
 
-      <div className="page-content">
-        <div className="section-container-wide">
-          <ProjectList projects={projects} columns={3} />
+      {/* ========================================
+          PROJECTS GRID - 2 COLUMNS
+          ======================================== */}
+      <section className={css.pageContent}>
+        <div className="containerWide">
+          {" "}
+          {/* NOTE: Using global containerWide */}
+          <ProjectList projects={projects} columns={2} />{" "}
+          {/* NOTE: 2 columns instead of 3 */}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

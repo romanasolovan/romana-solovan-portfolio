@@ -2,13 +2,12 @@
 import { useState } from "react";
 import css from "./AboutPage.module.css";
 
-// NOTE: Metadata must be in a separate server component
-// Create a layout.tsx file in the /about folder with the metadata instead
-
 export default function AboutPage() {
-  // NOTE: Track which toggles are open (by index)
-  const [openPersonal, setOpenPersonal] = useState<number | null>(null);
-  const [openProfessional, setOpenProfessional] = useState<number | null>(null);
+  // NOTE: Track which toggles are open - using Set to allow multiple open at once
+  const [openPersonal, setOpenPersonal] = useState<Set<number>>(new Set());
+  const [openProfessional, setOpenProfessional] = useState<Set<number>>(
+    new Set()
+  );
 
   // NOTE: Personal section data with titles and content
   const personalItems = [
@@ -68,13 +67,25 @@ export default function AboutPage() {
     },
   ];
 
-  // NOTE: Toggle handlers
+  // NOTE: Toggle handlers - allow multiple toggles to be open
   const togglePersonal = (index: number) => {
-    setOpenPersonal(openPersonal === index ? null : index);
+    const newSet = new Set(openPersonal);
+    if (newSet.has(index)) {
+      newSet.delete(index);
+    } else {
+      newSet.add(index);
+    }
+    setOpenPersonal(newSet);
   };
 
   const toggleProfessional = (index: number) => {
-    setOpenProfessional(openProfessional === index ? null : index);
+    const newSet = new Set(openProfessional);
+    if (newSet.has(index)) {
+      newSet.delete(index);
+    } else {
+      newSet.add(index);
+    }
+    setOpenProfessional(newSet);
   };
 
   return (
@@ -110,9 +121,9 @@ export default function AboutPage() {
 
               <p className={css.paragraph}>
                 Curiosity shapes how I move through life. I am drawn to new
-                experiences, cultures, and challenges, and I am comfortable
-                stepping outside familiar paths. This openness has shaped how I
-                think, adapt, and grow — both personally and professionally.
+                experiences, cultures, and challenges, and I feel comfortable
+                stepping outside familiar paths. This openness influences how I
+                think, adapt, and grow as a person.
               </p>
 
               {/* NOTE: Personal toggles/accordions */}
@@ -120,13 +131,13 @@ export default function AboutPage() {
                 {personalItems.map((item, index) => (
                   <div key={index} className={css.toggleItem}>
                     <button
-                      className={`${css.toggleButton} ${openPersonal === index ? css.toggleButtonActive : ""}`}
+                      className={`${css.toggleButton} ${openPersonal.has(index) ? css.toggleButtonActive : ""}`}
                       onClick={() => togglePersonal(index)}
-                      aria-expanded={openPersonal === index}
+                      aria-expanded={openPersonal.has(index)}
                     >
                       <span className={css.toggleTitle}>{item.title}</span>
                       <svg
-                        className={`${css.toggleIcon} ${openPersonal === index ? css.toggleIconActive : ""}`}
+                        className={`${css.toggleIcon} ${openPersonal.has(index) ? css.toggleIconActive : ""}`}
                         width="20"
                         height="20"
                         viewBox="0 0 20 20"
@@ -143,7 +154,7 @@ export default function AboutPage() {
                       </svg>
                     </button>
                     <div
-                      className={`${css.toggleContent} ${openPersonal === index ? css.toggleContentOpen : ""}`}
+                      className={`${css.toggleContent} ${openPersonal.has(index) ? css.toggleContentOpen : ""}`}
                     >
                       <p className={css.toggleText}>{item.content}</p>
                     </div>
@@ -163,11 +174,10 @@ export default function AboutPage() {
               </h3>
 
               <p className={css.paragraph}>
-                My professional approach is shaped by empathy, structure, and a
-                deep respect for how people learn and interact with technology.
-                With a background in education, I naturally focus on clarity,
-                accessibility, and thoughtful communication. I care about
-                building products that feel intuitive.
+                Empathy shapes how I approach my work. I focus on how people
+                learn, interact, and navigate technology, drawing from my
+                background in education. This mindset guides how I design,
+                communicate, and build thoughtful products.
               </p>
 
               {/* NOTE: Professional toggles/accordions */}
@@ -175,13 +185,13 @@ export default function AboutPage() {
                 {professionalItems.map((item, index) => (
                   <div key={index} className={css.toggleItem}>
                     <button
-                      className={`${css.toggleButton} ${openProfessional === index ? css.toggleButtonActive : ""}`}
+                      className={`${css.toggleButton} ${openProfessional.has(index) ? css.toggleButtonActive : ""}`}
                       onClick={() => toggleProfessional(index)}
-                      aria-expanded={openProfessional === index}
+                      aria-expanded={openProfessional.has(index)}
                     >
                       <span className={css.toggleTitle}>{item.title}</span>
                       <svg
-                        className={`${css.toggleIcon} ${openProfessional === index ? css.toggleIconActive : ""}`}
+                        className={`${css.toggleIcon} ${openProfessional.has(index) ? css.toggleIconActive : ""}`}
                         width="20"
                         height="20"
                         viewBox="0 0 20 20"
@@ -198,7 +208,7 @@ export default function AboutPage() {
                       </svg>
                     </button>
                     <div
-                      className={`${css.toggleContent} ${openProfessional === index ? css.toggleContentOpen : ""}`}
+                      className={`${css.toggleContent} ${openProfessional.has(index) ? css.toggleContentOpen : ""}`}
                     >
                       <p className={css.toggleText}>{item.content}</p>
                     </div>

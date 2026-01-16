@@ -1,0 +1,112 @@
+/* ========================================
+   PORTFOLIO PAGE
+   Mobile-first approach
+   ======================================== */
+
+/* ========================================
+   PAGE CONTAINER
+   ======================================== */
+.pageContainer {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+/* ========================================
+   PAGE HEADER - COMPACT LIKE ABOUT QUOTE
+   ======================================== */
+.pageHeader {
+  padding: 2rem 0 1.5rem; /* NOTE: Compact padding - smaller container */
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-2);
+}
+
+.pageTitle {
+  font-size: 2.25rem; /* NOTE: Big title on mobile */
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.pageSubtitle {
+  font-size: 0.9375rem; /* NOTE: Compact subtitle on mobile */
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ========================================
+   PAGE CONTENT
+   ======================================== */
+.pageContent {
+  padding: 3rem 0; /* NOTE: Mobile-first padding */
+}
+
+/* ========================================
+   RESPONSIVE - TABLET (768px+)
+   ======================================== */
+@media (min-width: 768px) {
+  .pageHeader {
+    padding: 2.5rem 0 2rem; /* NOTE: Still compact on tablet */
+  }
+
+  .pageTitle {
+    font-size: 2.75rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .pageSubtitle {
+    font-size: 1rem;
+  }
+
+  .pageContent {
+    padding: 4rem 0;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - DESKTOP (1024px+)
+   ======================================== */
+@media (min-width: 1024px) {
+  .pageHeader {
+    padding: 3rem 0 2.5rem; /* NOTE: Compact - similar to About quote section */
+  }
+
+  .pageTitle {
+    font-size: 3.5rem; /* NOTE: Big title on desktop */
+    margin-bottom: 0.75rem;
+  }
+
+  .pageSubtitle {
+    font-size: 1.0625rem;
+  }
+
+  .pageContent {
+    padding: 5rem 0;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+.pageHeader {
+  opacity: 0;
+  animation: fadeIn 0.8s ease 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .pageHeader {
+    animation: none;
+    opacity: 1;
+  }
+}

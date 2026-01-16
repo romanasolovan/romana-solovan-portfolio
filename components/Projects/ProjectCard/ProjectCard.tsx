@@ -12,6 +12,9 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article className={css.card}>
+      {/* ========================================
+          IMAGE SECTION WITH OVERLAY
+          ======================================== */}
       <div className={css.imageContainer}>
         <Image
           src={project.image}
@@ -21,6 +24,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
 
+        {/* NOTE: Hover overlay with action buttons */}
         <div className={css.overlay}>
           <div className={css.overlayContent}>
             {project.liveUrl && (
@@ -36,6 +40,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -60,6 +65,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   className={css.icon}
                   fill="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     fillRule="evenodd"
@@ -73,12 +79,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
 
+        {/* NOTE: Project type badge */}
         <div className={css.badge}>
           {project.type === "team" ? "👥 Team" : "👤 Personal"}
         </div>
       </div>
 
+      {/* ========================================
+          CONTENT SECTION
+          ======================================== */}
       <div className={css.content}>
+        {/* NOTE: Title and role/team info */}
         <div className={css.header}>
           <h3 className={css.title}>{project.title}</h3>
           {project.role && <p className={css.role}>Role: {project.role}</p>}
@@ -87,19 +98,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
 
+        {/* NOTE: Project description */}
         <p className={css.description}>{project.description}</p>
 
+        {/* NOTE: Project highlights (optional) */}
         {project.highlights && project.highlights.length > 0 && (
           <ul className={css.highlights}>
             {project.highlights.map((highlight, index) => (
               <li key={index} className={css.highlightItem}>
                 <span className={css.bullet}>→</span>
-                {highlight}
+                <span className={css.highlightText}>{highlight}</span>
               </li>
             ))}
           </ul>
         )}
 
+        {/* NOTE: Tech stack badges */}
         <div className={css.techStack}>
           {project.techStack.map((tech, index) => (
             <span key={index} className={css.techBadge}>
