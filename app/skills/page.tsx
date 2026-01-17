@@ -30,8 +30,6 @@ const currentlyLearning = [
   "Next.js best practices: routing, data fetching, and structuring larger applications",
 ];
 
-// type ToggleKey = "hard" | "soft" | "learning";
-
 export default function SkillsPage() {
   const [openHard, setOpenHard] = React.useState(false);
   const [openSoft, setOpenSoft] = React.useState(false);
