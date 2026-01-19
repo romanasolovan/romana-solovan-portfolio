@@ -1,19 +1,8 @@
-/* ========================================
-   PORTFOLIO PAGE
-   Mobile-first approach
-   ======================================== */
-
-/* ========================================
-   PAGE CONTAINER
-   ======================================== */
 .pageContainer {
   min-height: 100vh;
   background: var(--color-bg);
 }
 
-/* ========================================
-   PAGE HEADER - COMPACT LIKE ABOUT QUOTE
-   ======================================== */
 .pageHeader {
   padding: 2rem 0 1.5rem; /* NOTE: Compact padding - smaller container */
   text-align: center;
