@@ -16,10 +16,10 @@ export default function Home() {
         <PortfolioSection showViewMore={true} limitProjects={2} />
       </div>
       <div id="skills">
-        <SkillsSection showViewMore={true} />
+        <SkillsSection />
       </div>
       <div id="contact">
-        <ContactSection showViewMore={true} />
+        <ContactSection />
       </div>
     </>
   );
