@@ -38,9 +38,14 @@ export default function Navigation({
               className={isMobile ? css.mobileNavItem : css.navItem}
             >
               <Link
-                className={`${isMobile ? css.mobileNavLink : css.navLink} ${isActive ? (isMobile ? css.mobileNavLinkActive : css.navLinkActive) : ""}`}
+                className={
+                  isMobile
+                    ? `nav-link-mobile ${isActive ? "nav-link-mobile--active" : ""}`
+                    : `nav-tab ${isActive ? "nav-tab--active" : ""}`
+                }
                 href={item.href}
                 onClick={onLinkClick}
+                aria-current={isActive ? "page" : undefined}
               >
                 {item.label}
               </Link>

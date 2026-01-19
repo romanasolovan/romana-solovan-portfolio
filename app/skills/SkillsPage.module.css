@@ -1,51 +1,31 @@
 .pageContainer {
   min-height: 100vh;
   background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
 }
 
-.pageHeader {
-  padding: 2rem 0 1.5rem; /* NOTE: Compact padding - matching other pages */
-  text-align: center;
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg-2);
-}
-
-.pageTitle {
-  font-size: 2.25rem; /* NOTE: Big title on mobile */
-  font-weight: 700;
-  color: var(--color-text);
-  margin: 0 0 0.5rem 0;
-  line-height: 1.2;
-}
-
-.pageSubtitle {
-  font-size: 0.9375rem; /* NOTE: Compact subtitle on mobile */
-  color: var(--color-muted);
-  margin: 0;
-  line-height: 1.5;
-}
-
-/* Page Content */
 .pageContent {
-  padding: 3rem 0; /* NOTE: Mobile-first padding */
+  flex: 1;
+  padding: 3rem 0;
 }
 
 .pageInner {
-  max-width: var(--container-wide); /* NOTE: Using global container width */
+  max-width: var(--container-wide);
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* Toggles */
+/* TOGGLES */
+
 .togglesRow {
   display: grid;
-  grid-template-columns: 1fr; /* NOTE: Mobile-first - single column */
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
-/* Toggle Cards */
 .toggleCard {
-  align-self: start; /* NOTE: Prevents stretching to match tallest column */
+  align-self: start;
   background: rgba(24, 24, 27, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
@@ -56,7 +36,6 @@
   transition: all var(--transition-base);
 }
 
-/* NOTE: Subtle gradient overlay on top */
 .toggleCard::before {
   content: "";
   position: absolute;
@@ -78,14 +57,13 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Toggle Header - Button */
 .toggleHeader {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 1.25rem 1.25rem; /* NOTE: Mobile-first padding */
+  padding: 1.25rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -103,28 +81,26 @@
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  font-size: 1.125rem; /* NOTE: Mobile-first size */
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--color-text);
   line-height: 1.3;
 }
 
-/* Toggle Arrow */
 .toggleIcon {
   flex-shrink: 0;
   color: var(--color-muted);
-  transform: rotate(-90deg); /* NOTE: Points right when closed */
+  transform: rotate(-90deg);
   transition:
     transform var(--transition-base),
     color var(--transition-fast);
 }
 
 .toggleIconActive {
-  transform: rotate(0deg); /* NOTE: Points down when open */
+  transform: rotate(0deg);
   color: var(--color-soft);
 }
 
-/* Toggle Panel (EXPANDABLE CONTENT) */
 .togglePanel {
   max-height: 0;
   opacity: 0;
@@ -135,21 +111,20 @@
 }
 
 .togglePanelOpen {
-  max-height: 520px; /* NOTE: Large enough for all content */
+  max-height: 520px;
   opacity: 1;
 }
 
 .toggleBody {
-  padding: 0 1.25rem 1.25rem 1.25rem; /* NOTE: Mobile-first padding */
+  padding: 0 1.25rem 1.25rem;
   position: relative;
   z-index: 1;
 }
 
-/* Skills List - MINIMAL DOT BULLETS  */
 .minList {
   margin: 0;
   padding-left: 1.25rem;
-  list-style: disc; /* NOTE: Simple disc bullets */
+  list-style: disc;
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
@@ -157,29 +132,92 @@
 
 .minListItem {
   color: var(--color-soft);
-  font-size: 0.875rem; /* NOTE: Mobile-first size */
+  font-size: 0.875rem;
   line-height: 1.6;
 }
 
 .minListItem::marker {
-  color: var(--color-border-hover); /* NOTE: Colored bullet */
+  color: var(--color-border-hover);
+}
+
+/* RESUME Section */
+
+.resumeSection {
+  background: var(--color-bg-2);
+  border-top: 1px solid var(--color-border);
+  padding: 4rem 1.5rem;
+  margin-top: 3rem;
+}
+
+.resumeContainer {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.resumeTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.resumeDescription {
+  font-size: 1rem;
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  max-width: 280px;
+  width: 100%;
+}
+
+.downloadButton:hover {
+  background: var(--color-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  opacity: 1;
+}
+
+.downloadButton:active {
+  transform: translateY(0);
+}
+
+.iconDownload {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.iconArrow {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.downloadButton:hover .iconArrow {
+  transform: translateX(4px);
 }
 
 /* TABLET */
+
 @media (min-width: 768px) {
-  .pageHeader {
-    padding: 2.5rem 0 2rem;
-  }
-
-  .pageTitle {
-    font-size: 2.75rem;
-    margin-bottom: 0.625rem;
-  }
-
-  .pageSubtitle {
-    font-size: 1rem;
-  }
-
   .pageContent {
     padding: 4rem 0;
   }
@@ -189,15 +227,15 @@
   }
 
   .togglesRow {
-    gap: 2rem; /* NOTE: More space on tablet */
+    gap: 2rem;
   }
 
   .toggleHeader {
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem;
   }
 
   .toggleBody {
-    padding: 0 1.5rem 1.5rem 1.5rem;
+    padding: 0 1.5rem 1.5rem;
   }
 
   .toggleTitle {
@@ -212,40 +250,56 @@
   .minListItem {
     font-size: 0.9375rem;
   }
-}
 
-/* Desktop */
-@media (min-width: 1024px) {
-  .pageHeader {
-    padding: 3rem 0 2.5rem; /* NOTE: Matching other pages */
+  .resumeSection {
+    padding: 5rem 2rem;
+    margin-top: 4rem;
   }
 
-  .pageTitle {
-    font-size: 3.5rem; /* NOTE: Big title on desktop */
-    margin-bottom: 0.75rem;
+  .resumeTitle {
+    font-size: 2rem;
   }
 
-  .pageSubtitle {
+  .resumeDescription {
     font-size: 1.0625rem;
   }
 
+  .downloadButton {
+    max-width: 300px;
+    font-size: 1.0625rem;
+    padding: 1.125rem 2rem;
+  }
+
+  .iconDownload {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .iconArrow {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+}
+
+/* DESKTOP */
+
+@media (min-width: 1024px) {
   .pageContent {
     padding: 5rem 0;
   }
 
-  /* NOTE: THREE COLUMNS ON DESKTOP - TOGGLES IN A ROW */
   .togglesRow {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    align-items: start; /* NOTE: Prevents stretching to match heights */
+    align-items: start;
   }
 
   .toggleHeader {
-    padding: 1.75rem 1.75rem;
+    padding: 1.75rem;
   }
 
   .toggleBody {
-    padding: 0 1.75rem 1.75rem 1.75rem;
+    padding: 0 1.75rem 1.75rem;
   }
 
   .toggleTitle {
@@ -259,180 +313,39 @@
   .minListItem {
     font-size: 1rem;
   }
-}
 
-/* Animations */
-/* NOTE: Page header fades in */
-.pageHeader {
-  opacity: 0;
-  animation: fadeIn 0.8s ease 0.2s forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* NOTE: Toggles row fades in */
-.togglesRow {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease 0.4s forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Accesibilty */
-.toggleHeader:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: -2px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pageHeader,
-  .togglesRow,
-  .toggleCard,
-  .togglePanel,
-  .toggleIcon {
-    animation: none !important;
-    transition: none;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .toggleCard:hover {
-    transform: none;
-  }
-
-  .toggleIconActive {
-    transform: none !important;
-  }
-}
-
-/* RESUME SECTION */
-
-.resumeSection {
-  margin-top: 4rem;
-}
-
-.resumeContainer {
-  text-align: center;
-  max-width: 48rem;
-  margin: 0 auto;
-}
-
-.resumeTitle {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #ffffff;
-}
-
-.resumeDescription {
-  font-size: 1.0625rem;
-  color: #a1a1aa; /* zinc-400 */
-  margin-bottom: 2rem;
-  line-height: 1.75;
-}
-
-.downloadButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2rem;
-  background: #ffffff;
-  color: #000000;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  font-size: 1.0625rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-.downloadButton:hover {
-  background: #e5e5e5;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-}
-
-.downloadButton:active {
-  transform: translateY(0);
-}
-
-/* ICONS */
-
-.iconDownload {
-  width: 1.5rem;
-  height: 1.5rem;
-  flex-shrink: 0;
-}
-
-.iconArrow {
-  width: 1.25rem;
-  height: 1.25rem;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-
-.downloadButton:hover .iconArrow {
-  transform: translateX(4px);
-}
-/* Responsive */
-
-@media (max-width: 768px) {
   .resumeSection {
-    margin-top: 3rem;
+    padding: 6rem 2rem;
+    margin-top: 5rem;
   }
 
   .resumeTitle {
-    font-size: 1.75rem;
+    font-size: 2.25rem;
   }
 
   .resumeDescription {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .downloadButton {
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .iconDownload {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .iconArrow {
-    width: 1rem;
-    height: 1rem;
+    font-size: 1.125rem;
   }
 }
 
-/* Accesibility */
+/* ACCESSIBILITY */
 
+.toggleHeader:focus-visible,
 .downloadButton:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .toggleCard,
+  .togglePanel,
+  .toggleIcon,
   .downloadButton,
   .iconArrow {
     transition: none;
   }
 
+  .toggleCard:hover,
   .downloadButton:hover {
     transform: none;
   }

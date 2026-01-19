@@ -1,5 +1,6 @@
 import { projects } from "@/data/projects";
 import ProjectList from "@/components/Projects/ProjectList/ProjectList";
+import PageReveal from "@/components/Site/PageReveal";
 import css from "./PortfolioPage.module.css";
 
 export const metadata = {
@@ -10,28 +11,17 @@ export const metadata = {
 
 export default function PortfolioPage() {
   return (
-    <div className={css.pageContainer}>
-      {/* ========================================
-          PAGE HEADER
-          ======================================== */}
-      <header className={css.pageHeader}>
-        <h1 className={css.pageTitle}>All Projects</h1>
-        <p className={css.pageSubtitle}>
-          A comprehensive collection of my work — {projects.length} projects
-        </p>
-      </header>
-
-      {/* ========================================
-          PROJECTS GRID - 2 COLUMNS
-          ======================================== */}
-      <section className={css.pageContent}>
-        <div className="containerWide">
-          {" "}
-          {/* NOTE: Using global containerWide */}
-          <ProjectList projects={projects} columns={2} />{" "}
-          {/* NOTE: 2 columns instead of 3 */}
-        </div>
-      </section>
-    </div>
+    <PageReveal
+      title="All Projects"
+      subtitle={`A comprehensive collection of my work — ${projects.length} projects`}
+    >
+      <div className={css.pageContainer}>
+        <section className={css.pageContent}>
+          <div className="containerWide">
+            <ProjectList projects={projects} columns={2} />
+          </div>
+        </section>
+      </div>
+    </PageReveal>
   );
 }

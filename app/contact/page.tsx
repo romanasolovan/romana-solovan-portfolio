@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import PageReveal from "@/components/Site/PageReveal";
 import CustomDropdown from "@/components/Site/CustomDropdown";
 import css from "./ContactPage.module.css";
 
@@ -26,16 +27,12 @@ export default function ContactPage() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    const key = name as keyof FormData;
-
     setFormData((prev) => ({
       ...prev,
-      [key]: value,
+      [name]: value,
     }));
   };
 
@@ -127,7 +124,7 @@ ${formData.message}
       value: "Romana Solovan",
       link: "https://www.linkedin.com/in/romana-solovan-12b54a2a4/",
     },
-  ] as const;
+  ];
 
   const topicOptions = [
     { value: "", label: "Select a topic" },
@@ -149,172 +146,170 @@ ${formData.message}
   ];
 
   return (
-    <div className={css.pageContainer}>
-      <header className={css.pageHeader}>
-        <h1 className={css.pageTitle}>Get In Touch</h1>
-        <p className={css.pageSubtitle}>
-          Let&apos;s discuss your next project or opportunity
-        </p>
-      </header>
+    <PageReveal
+      title="Get In Touch"
+      subtitle="Let's discuss your next project or opportunity"
+    >
+      <div className={css.pageContainer}>
+        <section className={css.pageContent}>
+          <div className={css.pageInner}>
+            <div className={css.methodsSection}>
+              <h2 className={css.sectionTitle}>Ways to Connect</h2>
 
-      <section className={css.pageContent}>
-        <div className={css.pageInner}>
-          <div className={css.methodsSection}>
-            <h2 className={css.sectionTitle}>Ways to Connect</h2>
+              <div className={css.methodsGrid}>
+                {contactMethods.map((method, index) => (
+                  <a
+                    key={index}
+                    href={method.link}
+                    target={
+                      method.link.startsWith("http") ? "_blank" : undefined
+                    }
+                    rel={
+                      method.link.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    className={css.methodCard}
+                  >
+                    <div className={css.methodIconWrapper}>{method.icon}</div>
+                    <div className={css.methodContent}>
+                      <span className={css.methodLabel}>{method.label}</span>
+                      <span className={css.methodValue}>{method.value}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
 
-            <div className={css.methodsGrid}>
-              {contactMethods.map((method, index) => (
-                <a
-                  key={index}
-                  href={method.link}
-                  target={method.link.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    method.link.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className={css.methodCard}
-                >
-                  <div className={css.methodIconWrapper}>{method.icon}</div>
-                  <div className={css.methodContent}>
-                    <span className={css.methodLabel}>{method.label}</span>
-                    <span className={css.methodValue}>{method.value}</span>
+            <div className={css.formSection}>
+              <h2 className={css.sectionTitle}>Send Me a Message</h2>
+
+              <form onSubmit={handleSubmit} className={css.form}>
+                <div className={css.formRow}>
+                  <div className={css.formGroup}>
+                    <label htmlFor="name" className={css.label}>
+                      Name <span className={css.required}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className={css.input}
+                      placeholder="Your Name"
+                    />
                   </div>
-                </a>
-              ))}
+
+                  <div className={css.formGroup}>
+                    <label htmlFor="email" className={css.label}>
+                      Email <span className={css.required}>*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className={css.input}
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div className={css.formRow}>
+                  <div className={css.formGroup}>
+                    <label htmlFor="topic" className={css.label}>
+                      What are you looking for?
+                    </label>
+
+                    <CustomDropdown
+                      id="topic"
+                      value={formData.topic}
+                      onChange={(value) => handleDropdownChange("topic", value)}
+                      options={topicOptions}
+                      placeholder="Select a topic"
+                    />
+
+                    {formData.topic === "Other" && (
+                      <input
+                        type="text"
+                        name="topicOther"
+                        value={formData.topicOther}
+                        onChange={handleChange}
+                        className={css.input}
+                        placeholder="Please specify..."
+                      />
+                    )}
+                  </div>
+
+                  <div className={css.formGroup}>
+                    <label htmlFor="howDidYouFind" className={css.label}>
+                      How did you find me?
+                    </label>
+
+                    <CustomDropdown
+                      id="howDidYouFind"
+                      value={formData.howDidYouFind}
+                      onChange={(value) =>
+                        handleDropdownChange("howDidYouFind", value)
+                      }
+                      options={sourceOptions}
+                      placeholder="Select an option"
+                    />
+
+                    {formData.howDidYouFind === "Other" && (
+                      <input
+                        type="text"
+                        name="howDidYouFindOther"
+                        value={formData.howDidYouFindOther}
+                        onChange={handleChange}
+                        className={css.input}
+                        placeholder="Please specify..."
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className={css.formGroup}>
+                  <label htmlFor="message" className={css.label}>
+                    Message <span className={css.required}>*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={6}
+                    className={css.textarea}
+                    placeholder="Tell me about your project or inquiry..."
+                  />
+                </div>
+
+                <button type="submit" className={css.submitButton}>
+                  <svg
+                    className={css.submitIcon}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                    />
+                  </svg>
+                  Send Message
+                </button>
+              </form>
             </div>
           </div>
-
-          <div className={css.formSection}>
-            <h2 className={css.sectionTitle}>Send Me a Message</h2>
-
-            <form onSubmit={handleSubmit} className={css.form}>
-              <div className={css.formRow}>
-                <div className={css.formGroup}>
-                  <label htmlFor="name" className={css.label}>
-                    Name <span className={css.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className={css.input}
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div className={css.formGroup}>
-                  <label htmlFor="email" className={css.label}>
-                    Email <span className={css.required}>*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className={css.input}
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-              </div>
-
-              <div className={css.formRow}>
-                <div className={css.formGroup}>
-                  <label htmlFor="topic" className={css.label}>
-                    What are you looking for?
-                  </label>
-
-                  {/* Custom dropdown version */}
-                  <CustomDropdown
-                    id="topic"
-                    value={formData.topic}
-                    onChange={(value) => handleDropdownChange("topic", value)}
-                    options={topicOptions}
-                    placeholder="Select a topic"
-                  />
-
-                  {formData.topic === "Other" && (
-                    <input
-                      type="text"
-                      name="topicOther"
-                      value={formData.topicOther}
-                      onChange={handleChange}
-                      className={css.input}
-                      placeholder="Please specify..."
-                    />
-                  )}
-                </div>
-
-                <div className={css.formGroup}>
-                  <label htmlFor="howDidYouFind" className={css.label}>
-                    How did you find me?
-                  </label>
-
-                  {/* Custom dropdown version */}
-                  <CustomDropdown
-                    id="howDidYouFind"
-                    value={formData.howDidYouFind}
-                    onChange={(value) =>
-                      handleDropdownChange("howDidYouFind", value)
-                    }
-                    options={sourceOptions}
-                    placeholder="Select an option"
-                  />
-
-                  {formData.howDidYouFind === "Other" && (
-                    <input
-                      type="text"
-                      name="howDidYouFindOther"
-                      value={formData.howDidYouFindOther}
-                      onChange={handleChange}
-                      className={css.input}
-                      placeholder="Please specify..."
-                    />
-                  )}
-                </div>
-              </div>
-
-              <div className={css.formGroup}>
-                <label htmlFor="message" className={css.label}>
-                  Message <span className={css.required}>*</span>
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={6}
-                  className={css.textarea}
-                  placeholder="Tell me about your project or inquiry..."
-                />
-              </div>
-
-              <button type="submit" className={css.submitButton}>
-                <svg
-                  className={css.submitIcon}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                  />
-                </svg>
-                Send Message
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </PageReveal>
   );
 }

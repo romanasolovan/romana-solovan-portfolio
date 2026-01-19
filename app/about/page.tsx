@@ -1,15 +1,15 @@
 "use client";
+
 import { useState } from "react";
+import PageReveal from "@/components/Site/PageReveal";
 import css from "./AboutPage.module.css";
 
 export default function AboutPage() {
-  // NOTE: Track which toggles are open - using Set to allow multiple open at once
   const [openPersonal, setOpenPersonal] = useState<Set<number>>(new Set());
   const [openProfessional, setOpenProfessional] = useState<Set<number>>(
     new Set()
   );
 
-  // NOTE: Personal section data with titles and content
   const personalItems = [
     {
       title: "Foundations",
@@ -38,7 +38,6 @@ export default function AboutPage() {
     },
   ];
 
-  // NOTE: Professional section data with titles and content
   const professionalItems = [
     {
       title: "Thinking",
@@ -67,7 +66,6 @@ export default function AboutPage() {
     },
   ];
 
-  // NOTE: Toggle handlers - allow multiple toggles to be open
   const togglePersonal = (index: number) => {
     const newSet = new Set(openPersonal);
     if (newSet.has(index)) {
@@ -89,136 +87,121 @@ export default function AboutPage() {
   };
 
   return (
-    <div className={css.pageContainer}>
-      {/* ========================================
-          HEADER - QUOTE SECTION
-          ======================================== */}
-      <header className={css.quoteHeader}>
-        <blockquote className={css.blockquote}>
-          <p className={css.quoteText}>
-            You are only limited by weakness of attention and poverty of
-            imagination.
-          </p>
-          <footer className={css.quoteFooter}>
-            <cite className={css.quoteCite}>— William James</cite>
-          </footer>
-        </blockquote>
-      </header>
+    <PageReveal
+      title="You are only limited by weakness of attention and poverty of imagination."
+      subtitle="— William James"
+    >
+      <div className={css.pageContainer}>
+        <section className={css.mainSection}>
+          <div className={css.twoColumnGrid}>
+            {/* Left Column - Personal */}
+            <article className={css.column}>
+              <div className={css.columnContent}>
+                <h2 className={css.columnTitle}>What Makes Me Different</h2>
 
-      {/* ========================================
-          MAIN CONTENT - TWO COLUMN LAYOUT
-          ======================================== */}
-      <section className={css.mainSection}>
-        <div className={css.twoColumnGrid}>
-          {/* ========== LEFT COLUMN - PERSONAL ========== */}
-          <article className={css.column}>
-            <div className={css.columnContent}>
-              <h2 className={css.columnTitle}>What Makes Me Different</h2>
+                <h3 className={css.subheading}>
+                  I learn by living, not just by reading about it.
+                </h3>
 
-              <h3 className={css.subheading}>
-                I learn by living, not just by reading about it.
-              </h3>
+                <p className={css.paragraph}>
+                  Curiosity shapes how I move through life. I am drawn to new
+                  experiences, cultures, and challenges, and I feel comfortable
+                  stepping outside familiar paths. This openness influences how
+                  I think, adapt, and grow as a person.
+                </p>
 
-              <p className={css.paragraph}>
-                Curiosity shapes how I move through life. I am drawn to new
-                experiences, cultures, and challenges, and I feel comfortable
-                stepping outside familiar paths. This openness influences how I
-                think, adapt, and grow as a person.
-              </p>
-
-              {/* NOTE: Personal toggles/accordions */}
-              <div className={css.toggleList}>
-                {personalItems.map((item, index) => (
-                  <div key={index} className={css.toggleItem}>
-                    <button
-                      className={`${css.toggleButton} ${openPersonal.has(index) ? css.toggleButtonActive : ""}`}
-                      onClick={() => togglePersonal(index)}
-                      aria-expanded={openPersonal.has(index)}
-                    >
-                      <span className={css.toggleTitle}>{item.title}</span>
-                      <svg
-                        className={`${css.toggleIcon} ${openPersonal.has(index) ? css.toggleIconActive : ""}`}
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        stroke="currentColor"
-                        aria-hidden="true"
+                <div className={css.toggleList}>
+                  {personalItems.map((item, index) => (
+                    <div key={index} className={css.toggleItem}>
+                      <button
+                        className={`${css.toggleButton} ${openPersonal.has(index) ? css.toggleButtonActive : ""}`}
+                        onClick={() => togglePersonal(index)}
+                        aria-expanded={openPersonal.has(index)}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                    <div
-                      className={`${css.toggleContent} ${openPersonal.has(index) ? css.toggleContentOpen : ""}`}
-                    >
-                      <p className={css.toggleText}>{item.content}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </article>
-
-          {/* ========== RIGHT COLUMN - PROFESSIONAL ========== */}
-          <article className={css.column}>
-            <div className={css.columnContent}>
-              <h2 className={css.columnTitle}>My Professional Values</h2>
-
-              <h3 className={css.subheading}>
-                I build software with intention and empathy.
-              </h3>
-
-              <p className={css.paragraph}>
-                Empathy shapes how I approach my work. I focus on how people
-                learn, interact, and navigate technology, drawing from my
-                background in education. This mindset guides how I design,
-                communicate, and build thoughtful products.
-              </p>
-
-              {/* NOTE: Professional toggles/accordions */}
-              <div className={css.toggleList}>
-                {professionalItems.map((item, index) => (
-                  <div key={index} className={css.toggleItem}>
-                    <button
-                      className={`${css.toggleButton} ${openProfessional.has(index) ? css.toggleButtonActive : ""}`}
-                      onClick={() => toggleProfessional(index)}
-                      aria-expanded={openProfessional.has(index)}
-                    >
-                      <span className={css.toggleTitle}>{item.title}</span>
-                      <svg
-                        className={`${css.toggleIcon} ${openProfessional.has(index) ? css.toggleIconActive : ""}`}
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        stroke="currentColor"
-                        aria-hidden="true"
+                        <span className={css.toggleTitle}>{item.title}</span>
+                        <svg
+                          className={`${css.toggleIcon} ${openPersonal.has(index) ? css.toggleIconActive : ""}`}
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      <div
+                        className={`${css.toggleContent} ${openPersonal.has(index) ? css.toggleContentOpen : ""}`}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                    <div
-                      className={`${css.toggleContent} ${openProfessional.has(index) ? css.toggleContentOpen : ""}`}
-                    >
-                      <p className={css.toggleText}>{item.content}</p>
+                        <p className={css.toggleText}>{item.content}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    </div>
+            </article>
+
+            {/* Right Column - Professional */}
+            <article className={css.column}>
+              <div className={css.columnContent}>
+                <h2 className={css.columnTitle}>My Professional Values</h2>
+
+                <h3 className={css.subheading}>
+                  I build software with intention and empathy.
+                </h3>
+
+                <p className={css.paragraph}>
+                  Empathy shapes how I approach my work. I focus on how people
+                  learn, interact, and navigate technology, drawing from my
+                  background in education. This mindset guides how I design,
+                  communicate, and build thoughtful products.
+                </p>
+
+                <div className={css.toggleList}>
+                  {professionalItems.map((item, index) => (
+                    <div key={index} className={css.toggleItem}>
+                      <button
+                        className={`${css.toggleButton} ${openProfessional.has(index) ? css.toggleButtonActive : ""}`}
+                        onClick={() => toggleProfessional(index)}
+                        aria-expanded={openProfessional.has(index)}
+                      >
+                        <span className={css.toggleTitle}>{item.title}</span>
+                        <svg
+                          className={`${css.toggleIcon} ${openProfessional.has(index) ? css.toggleIconActive : ""}`}
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      <div
+                        className={`${css.toggleContent} ${openProfessional.has(index) ? css.toggleContentOpen : ""}`}
+                      >
+                        <p className={css.toggleText}>{item.content}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </PageReveal>
   );
 }

@@ -1,15 +1,14 @@
-/* Header Styles*/
-
+/* HEADER Layout */
 .siteHeader {
   position: sticky;
   top: 0;
   z-index: 50;
-  height: 56px;
+  height: var(--header-height);
   display: flex;
   align-items: center;
-  background: rgba(24, 24, 27, 0.95); /* zinc-900 with transparency */
+  background: var(--color-header-bg);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid #27272a; /* zinc-800 */
+  border-bottom: 1px solid var(--color-nav-tab);
 }
 
 .siteHeaderInner {
@@ -26,17 +25,17 @@
   font-weight: 600;
   font-size: 1.125rem;
   text-decoration: none;
-  color: #ffffff;
-  transition: color 0.2s ease;
-  z-index: 52; /* Above mobile menu */
+  color: var(--color-text);
+  transition: color var(--transition-base);
+  z-index: 52;
   position: relative;
 }
 
 .siteHeaderBrand:hover {
-  color: #d4d4d8; /* zinc-300 */
+  color: var(--color-soft);
 }
 
-/* Desktop Navigation */
+/* Desktop Nav Layout */
 
 .desktopNav {
   display: flex;
@@ -60,83 +59,64 @@
   margin: 0;
 }
 
-.navLink {
-  display: block;
-  padding: 8px 16px;
-  text-decoration: none;
-  color: #d4d4d8; /* zinc-300 */
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.navLink:hover {
-  color: #ffffff;
-  background: #27272a; /* zinc-800 */
-}
-
-.navLink:active {
-  transform: scale(0.98);
-}
-
-/* Active state for current page */
-.navLinkActive {
-  color: #ffffff;
-  background: #3f3f46; /* zinc-700 */
-}
-
 /* Burger Menu Btn */
 
 .burgerButton {
-  display: none; /* Hidden on desktop */
+  display: none;
   flex-direction: column;
-  justify-content: space-around;
-  width: 32px;
-  height: 32px;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 6px;
-  z-index: 52; /* Above mobile menu */
+  padding: 8px;
+  z-index: 52;
   position: relative;
+  border-radius: 8px;
+  transition: background var(--transition-base);
+}
+
+.burgerButton:hover {
+  background: var(--color-nav-tab);
 }
 
 .burgerLine {
-  width: 100%;
+  width: 24px;
   height: 2px;
-  background: #ffffff;
+  background: var(--color-text);
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform-origin: center;
 }
 
-/* Burger animation when menu is open - transforms into X */
 .burgerButtonOpen .burgerLine:nth-child(1) {
   transform: rotate(45deg) translateY(7px);
 }
 
 .burgerButtonOpen .burgerLine:nth-child(2) {
   opacity: 0;
+  transform: scale(0);
 }
 
 .burgerButtonOpen .burgerLine:nth-child(3) {
   transform: rotate(-45deg) translateY(-7px);
 }
 
-/* Mobile Menu Overlay */
+/* Mob Menu Overlay */
 
 .mobileMenuOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.75);
   z-index: 49;
-  animation: fadeIn 0.3s ease;
-  backdrop-filter: blur(2px);
+  animation: overlayFadeIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
-@keyframes fadeIn {
+@keyframes overlayFadeIn {
   from {
     opacity: 0;
   }
@@ -145,36 +125,38 @@
   }
 }
 
-/* MOBILE MENU (Slide-in from right) */
+/* Mob Menu Panel */
 
 .mobileMenu {
   position: fixed;
-  top: 56px; /* Below header */
+  top: var(--header-height);
   right: 0;
   bottom: 0;
-  width: 280px;
-  max-width: 85vw;
-  background: #18181b; /* zinc-900 */
-  border-left: 1px solid #27272a; /* zinc-800 */
+  width: 320px;
+  max-width: 90vw;
+  background: #1a1a1d;
+  border-left: 1px solid var(--color-border);
   z-index: 51;
   overflow-y: auto;
-  box-shadow: -8px 0 24px -12px rgba(0, 0, 0, 0.8);
-  animation: slideInFromRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -12px 0 32px -8px rgba(0, 0, 0, 0.6);
+  animation: slideInFromRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @keyframes slideInFromRight {
   from {
     transform: translateX(100%);
+    opacity: 0;
   }
   to {
     transform: translateX(0);
+    opacity: 1;
   }
 }
 
-/* Mobile Nav Styles */
+/* Mob Nav Layout */
 
 .mobileNav {
-  padding: 2rem 0;
+  padding: 1.5rem 0;
   height: 100%;
 }
 
@@ -184,16 +166,16 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .mobileNavItem {
   margin: 0;
-  animation: slideInItem 0.4s ease forwards;
+  animation: slideInItem 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateX(30px);
 }
 
-/* Staggered animation for each menu item */
 .mobileNavItem:nth-child(1) {
   animation-delay: 0.1s;
 }
@@ -217,122 +199,33 @@
   }
 }
 
-.mobileNavLink {
-  display: flex;
-  align-items: center;
-  padding: 1.125rem 1.75rem;
-  text-decoration: none;
-  color: #d4d4d8; /* zinc-300 */
-  font-size: 1.125rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
-  position: relative;
-}
-
-.mobileNavLink:hover {
-  color: #ffffff;
-  background: #27272a; /* zinc-800 */
-  border-left-color: #ffffff;
-}
-
-.mobileNavLink:active {
-  background: #3f3f46; /* zinc-700 */
-}
-
-/* Active state for current page in mobile menu */
-.mobileNavLinkActive {
-  color: #ffffff;
-  background: #27272a;
-  border-left-color: #ffffff;
-  font-weight: 600;
-}
-
-/* Add arrow indicator to active link */
-.mobileNavLinkActive::after {
-  content: "→";
-  position: absolute;
-  right: 1.5rem;
-  font-size: 1.25rem;
-}
-
-/* View more btn component */
-
-.viewMoreButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: #ffffff;
-  color: #000000;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 1rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.viewMoreButton:hover {
-  background: #e5e5e5;
-  gap: 12px;
-}
-
-.viewMoreIcon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.2s ease;
-}
-
-.viewMoreButton:hover .viewMoreIcon {
-  transform: translateX(4px);
-}
-
-/* Footer Styles */
+/* FOOTER Layout */
 
 .siteFooter {
-  border-top: 1px solid #27272a; /* zinc-800 */
+  border-top: 1px solid var(--color-nav-tab);
   padding: 2rem 0;
-  background: #09090b; /* zinc-950 */
+  background: #09090b;
 }
 
 .siteFooterInner {
   max-width: 1440px;
   padding: 0 24px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
 }
 
-/* Left: Copyright */
 .siteFooterCopy {
   margin: 0;
   font-size: 0.875rem;
-  color: #a1a1aa; /* zinc-400 */
-  justify-self: start;
+  color: var(--color-muted);
 }
 
-/* ========================================
-   RESPONSIVE - TABLET
-   ======================================== */
-
-@media (max-width: 1024px) {
-  /* Footer stacks vertically on tablet */
-  .siteFooterInner {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 1.5rem;
-  }
-
-  .siteFooterCopy {
-    justify-self: center;
-  }
-}
-
-/* Mobile Styles */
+/* MOBILE */
 
 @media (max-width: 768px) {
-  /* Show burger menu, hide desktop nav */
   .desktopNav {
     display: none;
   }
@@ -341,7 +234,6 @@
     display: flex;
   }
 
-  /* Header adjustments */
   .siteHeaderInner {
     padding: 0 16px;
   }
@@ -350,7 +242,6 @@
     font-size: 1rem;
   }
 
-  /* Footer adjustments */
   .siteFooter {
     padding: 1.5rem 0;
   }
@@ -361,74 +252,44 @@
   }
 }
 
-/* Accessibility */
+/*  TABLET */
 
-/* Focus styles for keyboard navigation */
-.navLink:focus-visible,
-.mobileNavLink:focus-visible,
-.burgerButton:focus-visible,
-.siteHeaderBrand:focus-visible {
-  outline: 2px solid #ffffff;
+@media (max-width: 1024px) {
+  .siteFooterInner {
+    text-align: center;
+    gap: 1.5rem;
+  }
+}
+
+/* ACCESSIBILITY */
+
+.siteHeaderBrand:focus-visible,
+.burgerButton:focus-visible {
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Remove default focus outline */
-.navLink:focus,
-.mobileNavLink:focus,
-.burgerButton:focus,
-.siteHeaderBrand:focus {
-  outline: none;
-}
+/* Reduced Motion Support */
 
-/* Ensure focus is visible for keyboard users only */
-.navLink:focus:not(:focus-visible),
-.mobileNavLink:focus:not(:focus-visible),
-.burgerButton:focus:not(:focus-visible),
-.siteHeaderBrand:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* ========================================
-   REDUCED MOTION SUPPORT
-   ======================================== */
-
-/* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  /* Disable all transitions and animations */
   .burgerLine,
   .mobileMenu,
-  .mobileNavLink,
-  .footerContactButton,
-  .mobileMenuOverlay,
-  .navLink,
-  .footerLink,
-  .viewMoreButton {
+  .mobileMenuOverlay {
     transition: none;
     animation: none;
   }
 
-  /* Make mobile menu items immediately visible */
   .mobileNavItem {
     animation: none !important;
     opacity: 1;
     transform: none;
   }
-
-  /* Disable hover transforms */
-  .footerContactButton:hover,
-  .navLink:hover,
-  .navLink:active {
-    transform: none;
-  }
 }
 
-/* ========================================
-   PRINT STYLES
-   ======================================== */
+/* Print Styles */
 
 @media print {
-  /* Hide navigation and footer when printing */
   .siteHeader,
   .siteFooter,
   .burgerButton,
@@ -436,38 +297,4 @@
   .mobileMenuOverlay {
     display: none;
   }
-}
-
-/* ========================================
-   HIGH CONTRAST MODE SUPPORT
-   ======================================== */
-
-@media (prefers-contrast: high) {
-  .siteHeader {
-    border-bottom-width: 2px;
-  }
-
-  .navLink,
-  .mobileNavLink {
-    border: 1px solid transparent;
-  }
-
-  .navLink:hover,
-  .mobileNavLink:hover,
-  .navLinkActive,
-  .mobileNavLinkActive {
-    border-color: currentColor;
-  }
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }
