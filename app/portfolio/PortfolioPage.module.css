@@ -4,21 +4,19 @@
 }
 
 .pageContent {
-  padding: 3rem 0;
+  padding: 2rem 0 3.5rem;
 }
 
 /* TABLET */
-
 @media (min-width: 768px) {
   .pageContent {
-    padding: 4rem 0;
+    padding: 2.5rem 0 4rem;
   }
 }
 
-/* RESPONSIVE - DESKTOP */
-
+/* DESKTOP */
 @media (min-width: 1024px) {
   .pageContent {
-    padding: 5rem 0;
+    padding: 3rem 0 5rem;
   }
 }

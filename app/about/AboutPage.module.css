@@ -5,14 +5,10 @@
 
 /* Two Columns Layout */
 
-.mainSection {
-  padding: 2.5rem 0;
-}
-
 .twoColumnGrid {
   max-width: var(--container-wide);
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 var(--container-pad);
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.5rem;
@@ -174,7 +170,6 @@
   }
 
   .twoColumnGrid {
-    padding: 0 2rem;
     gap: 3rem;
     align-items: start;
   }

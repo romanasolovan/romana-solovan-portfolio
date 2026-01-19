@@ -1,0 +1,251 @@
+/* MOBILE (Base styles - 320px+) */
+.section {
+  padding: 3rem 0;
+  background: #000000;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.text {
+  margin: 0 auto 1.5rem;
+  max-width: 100%;
+  color: #d4d4d8; /* zinc-300 */
+  opacity: 0.9;
+  line-height: 1.7;
+  font-size: 0.9375rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.primaryBtn {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.primaryBtn:hover {
+  background: #e5e5e5;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -4px rgba(255, 255, 255, 0.2);
+}
+
+/* Modal Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal */
+.modal {
+  width: 100%;
+  max-width: 720px;
+  border-radius: 1rem;
+  background: #18181b; /* zinc-900 */
+  border: 1px solid #27272a; /* zinc-800 */
+  padding: 1.25rem;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.closeBtn {
+  background: transparent;
+  border: 0;
+  color: #a1a1aa; /* zinc-400 */
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.25rem;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.closeBtn:hover {
+  color: #ffffff;
+}
+
+.modalText {
+  margin: 0 0 1.25rem;
+  color: #a1a1aa; /* zinc-400 */
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.modalBody {
+  /* Contact form will be placed here */
+}
+
+/* ========================================
+   TABLET (768px+)
+   ======================================== */
+
+@media (min-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .heading {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .text {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    max-width: 36rem;
+  }
+
+  .primaryBtn {
+    width: auto;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+  }
+
+  .overlay {
+    padding: 1.5rem;
+  }
+
+  .modal {
+    padding: 1.5rem;
+  }
+
+  .modalTitle {
+    font-size: 1.375rem;
+  }
+
+  .modalText {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ========================================
+   DESKTOP (1024px+)
+   ======================================== */
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 5rem 0;
+  }
+
+  .container {
+    max-width: 48rem;
+  }
+
+  .heading {
+    font-size: 2.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .text {
+    font-size: 1.0625rem;
+    max-width: 42rem;
+  }
+
+  .overlay {
+    padding: 2rem;
+  }
+
+  .modal {
+    padding: 2rem;
+  }
+
+  .modalTitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+.primaryBtn:focus-visible,
+.closeBtn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .modal,
+  .primaryBtn {
+    animation: none;
+    transition: none;
+  }
+
+  .primaryBtn:hover {
+    transform: none;
+  }
+}

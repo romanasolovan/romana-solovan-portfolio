@@ -3,6 +3,7 @@ import { Inter, Geist_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Site/Header";
 import Footer from "@/components/Site/Footer";
+import { StageManager } from "@/components/Site/StageManager";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,11 +56,14 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${fraunces.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="appShell">
-          <Header />
-          <main className="appMain">{children}</main>
-          <Footer />
-        </div>
+        <StageManager>
+          <div className="appShell">
+            <Header />
+
+            <main className="appMain">{children}</main>
+            <Footer />
+          </div>
+        </StageManager>
       </body>
     </html>
   );

@@ -1,0 +1,160 @@
+/* ========================================
+   STAGE (Persistent header panel)
+   - Container reveals once
+   - Text animates on content change
+   - Mobile-first
+   ======================================== */
+
+.stage {
+  background: var(--color-stage-bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+
+  /* one-time reveal */
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+
+  transition:
+    opacity 360ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stageRevealed {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.stageInner {
+  max-width: var(--stage-max-width);
+  margin: 0 auto;
+  padding: var(--stage-pad-y) var(--container-pad);
+  text-align: center;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+.stageTitle {
+  margin: 0 0 10px 0;
+  font-style: normal;
+
+  color: var(--color-text);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  /* keep long quotes elegant */
+  max-width: 58ch;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* mobile/tablet: allow wrapping */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+
+  /* smooth text-change animation */
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    filter 220ms ease;
+
+  font-size: var(--stage-title-size);
+}
+
+.stageSubtitle {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+  line-height: 1.55;
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    filter 220ms ease;
+
+  font-size: var(--stage-subtitle-size);
+}
+
+/* ========================================
+   TEXT SWAP ANIMATION (used on title + subtitle)
+   ======================================== */
+
+.textFadeOut {
+  opacity: 0;
+  transform: translateY(-2px);
+  filter: blur(1.5px);
+}
+
+.textFadeIn {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* ========================================
+   TABLET+
+   ======================================== */
+
+@media (min-width: 768px) {
+  .stageInner {
+    padding: var(--stage-pad-y-md) var(--container-pad);
+  }
+
+  .stageTitle {
+    font-size: var(--stage-title-size-md);
+    margin-bottom: 12px;
+  }
+
+  .stageSubtitle {
+    font-size: var(--stage-subtitle-size-md);
+  }
+}
+
+/* ========================================
+   DESKTOP: Force title to one line
+   ======================================== */
+
+@media (min-width: 1024px) {
+  .stageInner {
+    padding: var(--stage-pad-y-lg) var(--container-pad);
+  }
+
+  .stageTitle {
+    font-size: var(--stage-title-size-lg);
+
+    /* desktop-only single line */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* ensure ellipsis is predictable */
+    max-width: min(58ch, 100%);
+  }
+
+  .stageSubtitle {
+    font-size: var(--stage-subtitle-size-lg);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .stage,
+  .stageTitle,
+  .stageSubtitle {
+    transition: none !important;
+  }
+
+  .textFadeOut,
+  .textFadeIn {
+    transform: none !important;
+    filter: none !important;
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import PageReveal from "@/components/Site/PageReveal";
+
 import CustomDropdown from "@/components/Site/CustomDropdown";
 import css from "./ContactPage.module.css";
 
@@ -146,10 +146,7 @@ ${formData.message}
   ];
 
   return (
-    <PageReveal
-      title="Get In Touch"
-      subtitle="Let's discuss your next project or opportunity"
-    >
+    
       <div className={css.pageContainer}>
         <section className={css.pageContent}>
           <div className={css.pageInner}>
@@ -310,6 +307,6 @@ ${formData.message}
           </div>
         </section>
       </div>
-    </PageReveal>
+    
   );
 }
