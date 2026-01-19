@@ -1,14 +1,27 @@
 "use client";
 
 import React, { useState } from "react";
+import CustomDropdown from "@/components/Site/CustomDropdown";
 import css from "./ContactPage.module.css";
 
+type FormData = {
+  name: string;
+  email: string;
+  topic: string;
+  topicOther: string;
+  howDidYouFind: string;
+  howDidYouFindOther: string;
+  message: string;
+};
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     topic: "",
+    topicOther: "",
     howDidYouFind: "",
+    howDidYouFindOther: "",
     message: "",
   });
 
@@ -17,35 +30,58 @@ export default function ContactPage() {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    const key = name as keyof FormData;
+
+    setFormData((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleDropdownChange = (name: keyof FormData, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+      ...(name === "topic" && value !== "Other" ? { topicOther: "" } : {}),
+      ...(name === "howDidYouFind" && value !== "Other"
+        ? { howDidYouFindOther: "" }
+        : {}),
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Build mailto link with form data
-    const subject = formData.topic
-      ? `${formData.topic} - Message from ${formData.name}`
+    const finalTopic =
+      formData.topic === "Other" ? formData.topicOther : formData.topic;
+
+    const finalSource =
+      formData.howDidYouFind === "Other"
+        ? formData.howDidYouFindOther
+        : formData.howDidYouFind;
+
+    const subject = finalTopic
+      ? `${finalTopic} - Message from ${formData.name}`
       : `Message from ${formData.name}`;
 
     const body = `
 Name: ${formData.name}
 Email: ${formData.email}
-${formData.topic ? `Topic: ${formData.topic}` : ""}
-${formData.howDidYouFind ? `How they found me: ${formData.howDidYouFind}` : ""}
+${finalTopic ? `Topic: ${finalTopic}` : ""}
+${finalSource ? `How they found me: ${finalSource}` : ""}
 
 Message:
 ${formData.message}
     `.trim();
 
-    const mailtoLink = `mailto:solo.rv95@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:solo.rv95@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
     window.location.href = mailtoLink;
   };
 
-  // Contact methods - minimalistic with 3 options
   const contactMethods = [
     {
       icon: (
@@ -91,24 +127,41 @@ ${formData.message}
       value: "Romana Solovan",
       link: "https://www.linkedin.com/in/romana-solovan-12b54a2a4/",
     },
+  ] as const;
+
+  const topicOptions = [
+    { value: "", label: "Select a topic" },
+    { value: "Job Opportunity", label: "Job Opportunity" },
+    { value: "Freelance Project", label: "Freelance Project" },
+    { value: "Collaboration", label: "Collaboration" },
+    { value: "Question", label: "Question" },
+    { value: "Other", label: "Other" },
+  ];
+
+  const sourceOptions = [
+    { value: "", label: "Select an option" },
+    { value: "LinkedIn", label: "LinkedIn" },
+    { value: "GitHub", label: "GitHub" },
+    { value: "Job Board", label: "Job Board" },
+    { value: "Referral", label: "Referral" },
+    { value: "Search Engine", label: "Search Engine" },
+    { value: "Other", label: "Other" },
   ];
 
   return (
     <div className={css.pageContainer}>
-      {/* Page Header - Matching Skills Page */}
       <header className={css.pageHeader}>
         <h1 className={css.pageTitle}>Get In Touch</h1>
         <p className={css.pageSubtitle}>
-          Lets discuss your next project or opportunity
+          Let&apos;s discuss your next project or opportunity
         </p>
       </header>
 
-      {/* Page Content */}
       <section className={css.pageContent}>
         <div className={css.pageInner}>
-          {/* Contact Methods */}
           <div className={css.methodsSection}>
             <h2 className={css.sectionTitle}>Ways to Connect</h2>
+
             <div className={css.methodsGrid}>
               {contactMethods.map((method, index) => (
                 <a
@@ -132,11 +185,10 @@ ${formData.message}
             </div>
           </div>
 
-          {/* Contact Form */}
           <div className={css.formSection}>
             <h2 className={css.sectionTitle}>Send Me a Message</h2>
+
             <form onSubmit={handleSubmit} className={css.form}>
-              {/* Required Fields Row */}
               <div className={css.formRow}>
                 <div className={css.formGroup}>
                   <label htmlFor="name" className={css.label}>
@@ -171,51 +223,62 @@ ${formData.message}
                 </div>
               </div>
 
-              {/* Optional Fields Row */}
               <div className={css.formRow}>
                 <div className={css.formGroup}>
                   <label htmlFor="topic" className={css.label}>
                     What are you looking for?
                   </label>
-                  <select
+
+                  {/* Custom dropdown version */}
+                  <CustomDropdown
                     id="topic"
-                    name="topic"
                     value={formData.topic}
-                    onChange={handleChange}
-                    className={css.select}
-                  >
-                    <option value="">Select a topic</option>
-                    <option value="Job Opportunity">Job Opportunity</option>
-                    <option value="Freelance Project">Freelance Project</option>
-                    <option value="Collaboration">Collaboration</option>
-                    <option value="Question">Question</option>
-                    <option value="Other">Other</option>
-                  </select>
+                    onChange={(value) => handleDropdownChange("topic", value)}
+                    options={topicOptions}
+                    placeholder="Select a topic"
+                  />
+
+                  {formData.topic === "Other" && (
+                    <input
+                      type="text"
+                      name="topicOther"
+                      value={formData.topicOther}
+                      onChange={handleChange}
+                      className={css.input}
+                      placeholder="Please specify..."
+                    />
+                  )}
                 </div>
 
                 <div className={css.formGroup}>
                   <label htmlFor="howDidYouFind" className={css.label}>
                     How did you find me?
                   </label>
-                  <select
+
+                  {/* Custom dropdown version */}
+                  <CustomDropdown
                     id="howDidYouFind"
-                    name="howDidYouFind"
                     value={formData.howDidYouFind}
-                    onChange={handleChange}
-                    className={css.select}
-                  >
-                    <option value="">Select an option</option>
-                    <option value="LinkedIn">LinkedIn</option>
-                    <option value="GitHub">GitHub</option>
-                    <option value="Job Board">Job Board</option>
-                    <option value="Referral">Referral</option>
-                    <option value="Search Engine">Search Engine</option>
-                    <option value="Other">Other</option>
-                  </select>
+                    onChange={(value) =>
+                      handleDropdownChange("howDidYouFind", value)
+                    }
+                    options={sourceOptions}
+                    placeholder="Select an option"
+                  />
+
+                  {formData.howDidYouFind === "Other" && (
+                    <input
+                      type="text"
+                      name="howDidYouFindOther"
+                      value={formData.howDidYouFindOther}
+                      onChange={handleChange}
+                      className={css.input}
+                      placeholder="Please specify..."
+                    />
+                  )}
                 </div>
               </div>
 
-              {/* Message Field */}
               <div className={css.formGroup}>
                 <label htmlFor="message" className={css.label}>
                   Message <span className={css.required}>*</span>
@@ -232,7 +295,6 @@ ${formData.message}
                 />
               </div>
 
-              {/* Submit Button */}
               <button type="submit" className={css.submitButton}>
                 <svg
                   className={css.submitIcon}
