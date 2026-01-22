@@ -1,24 +1,24 @@
 /* ========================================
    STAGE
-   - Persistent panel below header
    - Reveals once
-   - Collapses on scroll down
-   - Text animates on content change
+   - Collapses as a whole panel near top-only
+   - Title/subtitle animate on swap
    - Mobile-first
    ======================================== */
 
 .stage {
+  position: relative;
   background: var(--color-stage-bg);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
 
-  /* Height system (so the whole panel can collapse) */
+  /* whole-panel collapse */
   max-height: 0;
-
-  /* Reveal system */
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;
+
+  /* local variable so module owns it */
+  --stage-open-max: 240px;
 
   transition:
     max-height 520ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -26,7 +26,25 @@
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* when stage is allowed to exist */
+/* subtle hairline gradient edge */
+.stage::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(96, 165, 250, 0.22),
+    rgba(255, 255, 255, 0.06),
+    rgba(96, 165, 250, 0.18),
+    transparent
+  );
+  pointer-events: none;
+}
+
 .stageRevealed {
   max-height: var(--stage-open-max);
   opacity: 1;
@@ -34,11 +52,10 @@
   pointer-events: auto;
 }
 
-/* when user scrolls down, collapse the whole panel */
 .stageCollapsed {
   max-height: 0;
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-12px);
   pointer-events: none;
 }
 
@@ -61,8 +78,6 @@
   line-height: 1.25;
   letter-spacing: -0.01em;
 
-  font-style: normal;
-
   max-width: 58ch;
   margin-left: auto;
   margin-right: auto;
@@ -78,6 +93,15 @@
     filter 220ms ease;
 
   font-size: var(--stage-title-size);
+}
+
+/* Better typography for quotes (About) */
+.stageTitleQuote {
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .stageSubtitle {
@@ -116,6 +140,10 @@
    ======================================== */
 
 @media (min-width: 768px) {
+  .stage {
+    --stage-open-max: 260px;
+  }
+
   .stageInner {
     padding: var(--stage-pad-y-md) var(--container-pad);
   }
@@ -131,10 +159,14 @@
 }
 
 /* ========================================
-   DESKTOP: force title to one line
+   DESKTOP: title single line
    ======================================== */
 
 @media (min-width: 1024px) {
+  .stage {
+    --stage-open-max: 240px; /* desktop title is one line */
+  }
+
   .stageInner {
     padding: var(--stage-pad-y-lg) var(--container-pad);
   }
@@ -142,11 +174,10 @@
   .stageTitle {
     font-size: var(--stage-title-size-lg);
 
-    /* desktop-only single line */
+    /* desktop-only one line */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
     max-width: min(58ch, 100%);
   }
 
@@ -170,19 +201,5 @@
   .textFadeIn {
     transform: none !important;
     filter: none !important;
-  }
-}
-
-.stage {
-  --stage-open-max: 220px;
-}
-@media (min-width: 768px) {
-  .stage {
-    --stage-open-max: 240px;
-  }
-}
-@media (min-width: 1024px) {
-  .stage {
-    --stage-open-max: 260px;
   }
 }
