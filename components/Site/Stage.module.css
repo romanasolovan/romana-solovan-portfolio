@@ -1,6 +1,8 @@
 /* ========================================
-   STAGE (Persistent header panel)
-   - Container reveals once
+   STAGE
+   - Persistent panel below header
+   - Reveals once
+   - Collapses on scroll down
    - Text animates on content change
    - Mobile-first
    ======================================== */
@@ -10,20 +12,34 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
 
-  /* one-time reveal */
+  /* Height system (so the whole panel can collapse) */
+  max-height: 0;
+
+  /* Reveal system */
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateY(-10px);
   pointer-events: none;
 
   transition:
+    max-height 520ms cubic-bezier(0.22, 1, 0.36, 1),
     opacity 360ms ease,
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* when stage is allowed to exist */
 .stageRevealed {
+  max-height: var(--stage-open-max);
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+/* when user scrolls down, collapse the whole panel */
+.stageCollapsed {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
 }
 
 .stageInner {
@@ -39,14 +55,14 @@
 
 .stageTitle {
   margin: 0 0 10px 0;
-  font-style: normal;
 
   color: var(--color-text);
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.01em;
 
-  /* keep long quotes elegant */
+  font-style: normal;
+
   max-width: 58ch;
   margin-left: auto;
   margin-right: auto;
@@ -56,7 +72,6 @@
   overflow: visible;
   text-overflow: clip;
 
-  /* smooth text-change animation */
   transition:
     opacity 220ms ease,
     transform 220ms ease,
@@ -81,7 +96,7 @@
 }
 
 /* ========================================
-   TEXT SWAP ANIMATION (used on title + subtitle)
+   TEXT SWAP ANIMATION
    ======================================== */
 
 .textFadeOut {
@@ -116,7 +131,7 @@
 }
 
 /* ========================================
-   DESKTOP: Force title to one line
+   DESKTOP: force title to one line
    ======================================== */
 
 @media (min-width: 1024px) {
@@ -132,7 +147,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    /* ensure ellipsis is predictable */
     max-width: min(58ch, 100%);
   }
 
@@ -156,5 +170,19 @@
   .textFadeIn {
     transform: none !important;
     filter: none !important;
+  }
+}
+
+.stage {
+  --stage-open-max: 220px;
+}
+@media (min-width: 768px) {
+  .stage {
+    --stage-open-max: 240px;
+  }
+}
+@media (min-width: 1024px) {
+  .stage {
+    --stage-open-max: 260px;
   }
 }
