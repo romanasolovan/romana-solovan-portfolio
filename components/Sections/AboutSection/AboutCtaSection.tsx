@@ -78,9 +78,7 @@ export default function AboutCtaSection() {
                 as soon as I can.
               </p>
 
-              <div className={css.modalBody}>
-                <ContactForm onSuccess={closeModal} />
-              </div>
+              <div className={css.modalBody}></div>
             </div>
           </div>
         )}

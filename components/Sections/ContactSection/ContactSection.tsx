@@ -8,7 +8,7 @@ export default function ContactSection() {
     <section className={css.contactSection}>
       <div className={css.container}>
         <div className={css.content}>
-          <h2 className={css.title}>Lets Work Together</h2>
+          <h2 className={css.title}>Let&apos;s Work Together</h2>
           <p className={css.description}>
             Whether you have a project in mind, want to collaborate, or just
             want to say hi — I would love to hear from you. Feel free to reach
