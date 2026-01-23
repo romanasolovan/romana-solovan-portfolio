@@ -3,24 +3,27 @@ import AboutSection from "@/components/Sections/AboutSection/AboutSection";
 import PortfolioSection from "@/components/Sections/PortfolioSection/PortfolioSection";
 import SkillsSection from "@/components/Sections/SkillsSection/SkillsSection";
 import ContactSection from "@/components/Sections/ContactSection/ContactSection";
-import "./globals.css";
 
 export default function Home() {
   return (
     <>
       <HeroSection />
-      <div id="about">
-        <AboutSection showViewMore={true} />
-      </div>
-      <div id="portfolio">
-        <PortfolioSection showViewMore={true} limitProjects={2} />
-      </div>
-      <div id="skills">
+
+      <section id="about">
+        <AboutSection showViewMore />
+      </section>
+
+      <section id="portfolio">
+        <PortfolioSection showViewMore limitProjects={2} />
+      </section>
+
+      <section id="skills">
         <SkillsSection />
-      </div>
-      <div id="contact">
+      </section>
+
+      <section id="contact">
         <ContactSection />
-      </div>
+      </section>
     </>
   );
 }

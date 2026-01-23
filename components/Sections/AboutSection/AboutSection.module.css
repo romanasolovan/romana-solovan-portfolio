@@ -1,46 +1,18 @@
-/* ========================================
-   ABOUT SECTION - LAYOUT
-   ======================================== */
-/* NOTE: Remove custom padding - let global .section handle it */
-
-.aboutSection {
-  /* NOTE: No padding here - using global .section class for consistency */
-}
-
-/* ========================================
-   GRID LAYOUT
-   ======================================== */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem; /* NOTE: Mobile-first - single column with vertical gap */
+  gap: 2.5rem;
   align-items: center;
 }
 
-/* ========================================
-   IMAGE CAROUSEL - LEFT SIDE
-   ======================================== */
+/* image carousel */
+
 .imageContainer {
   position: relative;
-  height: 400px; /* NOTE: Mobile-first height */
+  height: 380px;
+  width: 100%;
   opacity: 0;
-  transform: translateX(-100%);
-  width: 100%; /* NOTE: Full width on mobile */
-}
-
-.slideInLeft {
-  animation: slideInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  transform: translateX(-28px);
 }
 
 .imageWrapper {
@@ -53,7 +25,7 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 1s ease;
+  transition: opacity 900ms ease;
 }
 
 .imageSlideActive {
@@ -64,117 +36,87 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: var(--radius); /* NOTE: Using global radius token */
+  border-radius: var(--radius);
   overflow: hidden;
-  border: 3px solid var(--color-border); /* NOTE: Using global border color */
-  box-shadow: var(--shadow-lg); /* NOTE: Using global shadow token */
-  background: var(
-    --color-surface
-  ); /* NOTE: Prevent flash of unstyled content */
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .imageOverlay {
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.6) 0%,
-    transparent 40%,
-    transparent 100%
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0) 42%,
+    rgba(0, 0, 0, 0) 100%
   );
-  pointer-events: none; /* NOTE: Allow clicking through overlay */
 }
 
-/* NOTE: Carousel indicators */
 .indicators {
   position: absolute;
-  bottom: 1.5rem;
   left: 50%;
+  bottom: 14px;
   transform: translateX(-50%);
   display: flex;
   gap: 0.5rem;
-  z-index: 10;
+  z-index: 2;
 }
 
 .indicator {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.4);
-  border: none;
-  cursor: pointer;
-  transition: all var(--transition-base); /* NOTE: Using global transition */
-  padding: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  transition:
+    transform var(--transition-base),
+    background var(--transition-base),
+    width var(--transition-base);
 }
 
 .indicator:hover {
-  background: rgba(255, 255, 255, 0.7);
-  transform: scale(1.2); /* NOTE: Added subtle scale on hover */
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
 }
 
 .indicatorActive {
-  width: 2rem;
-  background: rgba(255, 255, 255, 0.95);
+  width: 28px;
+  background: rgba(255, 255, 255, 0.92);
 }
 
-/* ========================================
-   CONTENT - RIGHT SIDE
-   ======================================== */
+/*  content  */
+
 .content {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(28px);
 }
 
-.slideInRight {
-  animation: slideInRight 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* ========================================
-   TITLE - TYPING ANIMATION
-   ======================================== */
 .title {
-  font-size: 2.5rem; /* NOTE: Mobile-first size */
+  font-size: 2.1rem;
   font-weight: 700;
-  margin-bottom: 0;
-  min-height: 3.5rem; /* NOTE: Prevent layout shift during typing */
-  opacity: 0;
-  transform: translateY(20px);
-  color: var(--color-text); /* NOTE: Using global text color */
-}
-
-.slideInRight .title {
-  animation: fadeInUp 0.8s ease 0.5s forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  color: var(--color-text);
+  line-height: 1.1;
+  min-height: 2.75rem; /* prevents jump while typing */
+  margin: 0;
 }
 
 .typingCursor::after {
   content: "|";
-  animation: blink 1s step-end infinite;
   margin-left: 2px;
+  opacity: 0.9;
+  animation: blink 1s step-end infinite;
 }
 
 @keyframes blink {
@@ -187,482 +129,117 @@
   }
 }
 
-/* ========================================
-   TEXT WRAPPER
-   ======================================== */
 .textWrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* NOTE: Comfortable reading spacing */
+  gap: 1rem;
   opacity: 0;
-  transform: translateY(20px);
-}
-
-.fadeInUp {
-  animation: fadeInUp 0.8s ease 0.8s forwards;
+  transform: translateY(14px);
 }
 
 .paragraph {
-  font-size: 1rem; /* NOTE: Mobile-first size */
-  color: var(--color-soft); /* NOTE: Using global soft text color */
-  line-height: 1.7; /* NOTE: Optimal reading line-height */
   margin: 0;
-}
-
-/* ========================================
-   BUTTONS
-   ======================================== */
-.buttonGroup {
-  display: flex;
-  flex-direction: column; /* NOTE: Mobile-first - stack buttons vertically */
-  gap: 1rem;
-  padding-top: 1rem;
-}
-
-.primaryBtn,
-.secondaryBtn {
-  padding: 0.875rem 1.75rem;
-  border-radius: var(--radius-sm); /* NOTE: Using global radius token */
-  font-weight: 600;
+  color: var(--color-soft);
   font-size: 1rem;
-  transition: all var(--transition-base);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
+  line-height: 1.75;
 }
 
-/* NOTE: Primary button - high contrast */
-.primaryBtn {
-  background: var(--color-text);
-  color: var(--color-bg);
-  border: 2px solid transparent;
-}
-
-.primaryBtn:hover {
-  background: var(--color-soft);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  text-decoration: none; /* NOTE: Prevent underline on hover */
-}
-
-/* NOTE: Secondary button - outline style */
-.secondaryBtn {
-  border: 2px solid var(--color-border);
-  color: var(--color-text);
-  background: transparent;
-}
-
-.secondaryBtn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--color-border-hover);
-  transform: translateY(-2px);
-  text-decoration: none; /* NOTE: Prevent underline on hover */
-}
-
-/* ========================================
-   VIEW MORE BUTTON
-   ======================================== */
 .viewMoreContainer {
   display: flex;
   justify-content: flex-start;
-  margin-top: 1rem;
-}
-
-.viewMoreButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: transparent;
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-weight: 500;
-  font-size: 0.9375rem;
-  text-decoration: none;
-  transition: all var(--transition-base);
-  cursor: pointer;
-}
-
-.viewMoreButton:hover {
-  background: var(--color-surface);
-  border-color: var(--color-border-hover);
-  gap: 12px; /* NOTE: Arrow slides right on hover */
-  transform: translateY(-2px);
-  text-decoration: none; /* NOTE: Prevent underline on hover */
 }
 
 .viewMoreIcon {
   width: 18px;
   height: 18px;
-  transition: transform var(--transition-base);
+  margin-left: 10px;
 }
 
-.viewMoreButton:hover .viewMoreIcon {
-  transform: translateX(4px);
+/* motion  */
+
+.slideInLeft {
+  animation: slideInLeft 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ========================================
-   WHAT MAKES ME DIFFERENT SECTION
-   ======================================== */
-/* NOTE: Remove custom padding - using global .section */
-
-.differentSection {
-  /* NOTE: No padding here - handled by global .section class */
+.slideInRight {
+  animation: slideInRight 700ms cubic-bezier(0.16, 1, 0.3, 1) 120ms forwards;
 }
 
-.container {
-  max-width: var(--container-max); /* NOTE: Using global container width */
-  margin: 0 auto;
-  padding: 0 var(--container-pad); /* NOTE: Using global padding */
+.fadeInUp {
+  animation: fadeInUp 700ms cubic-bezier(0.16, 1, 0.3, 1) 240ms forwards;
 }
 
-/* ========================================
-   HEADING & INTRO
-   ======================================== */
-.heading {
-  font-size: 2rem; /* NOTE: Mobile-first heading size */
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: var(--color-text);
-  line-height: 1.2;
-}
-
-.intro {
-  font-size: 1rem; /* NOTE: Mobile-first intro size */
-  color: var(--color-soft);
-  text-align: center;
-  line-height: 1.7;
-  margin-bottom: 3rem; /* NOTE: Mobile-first spacing */
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ========================================
-   CORE VALUES GRID
-   ======================================== */
-.values {
-  display: grid;
-  grid-template-columns: 1fr; /* NOTE: Mobile-first - single column */
-  gap: 1.5rem; /* NOTE: Mobile-first gap */
-  margin-bottom: 3rem;
-}
-
-.valueItem {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.5rem; /* NOTE: Mobile-first padding */
-  transition: all var(--transition-base);
-  position: relative;
-}
-
-.valueItem:hover {
-  border-color: var(--color-border-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.valueIcon {
-  font-size: 2rem; /* NOTE: Mobile-first icon size */
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.valueTitle {
-  font-size: 1.25rem; /* NOTE: Mobile-first title size */
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 0.75rem;
-  line-height: 1.3;
-}
-
-.valueText {
-  font-size: 0.9375rem; /* NOTE: Mobile-first text size */
-  color: var(--color-muted);
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* ========================================
-   PERSONAL SECTION
-   ======================================== */
-.personal {
-  background: linear-gradient(
-    135deg,
-    var(--color-surface) 0%,
-    var(--color-bg-2) 100%
-  );
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 2rem 1.5rem; /* NOTE: Mobile-first padding */
-  margin-bottom: 2.5rem;
-}
-
-.subheading {
-  font-size: 1.5rem; /* NOTE: Mobile-first subheading size */
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 1.25rem;
-  text-align: center;
-}
-
-.personalList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.personalItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  font-size: 0.9375rem; /* NOTE: Mobile-first font size */
-  color: var(--color-soft);
-  line-height: 1.7;
-  padding: 0.75rem 1rem;
-  background: var(--color-bg-2);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  transition: all var(--transition-base);
-}
-
-.personalItem:hover {
-  background: var(--color-surface);
-  border-color: var(--color-border-hover);
-  transform: translateX(4px);
-}
-
-.bullet {
-  color: var(--color-muted);
-  font-weight: 700;
-  font-size: 1.125rem;
-  flex-shrink: 0;
-  line-height: 1.5;
-}
-
-/* ========================================
-   CLOSING STATEMENT
-   ======================================== */
-.closing {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.5rem; /* NOTE: Mobile-first padding */
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.closing::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-}
-
-.closingText {
-  font-size: 1rem; /* NOTE: Mobile-first size */
-  color: var(--color-soft);
-  line-height: 1.7;
-  margin: 0;
-  font-style: italic;
-}
-
-/* ========================================
-   RESPONSIVE - TABLET (768px+)
-   ======================================== */
-@media (min-width: 768px) {
-  /* Grid becomes two columns */
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-  }
-
-  .imageContainer {
-    height: 500px;
-  }
-
-  /* Button group becomes horizontal */
-  .buttonGroup {
-    flex-direction: row;
-  }
-
-  .primaryBtn,
-  .secondaryBtn {
-    width: auto; /* NOTE: Auto width on larger screens */
-  }
-
-  /* Typography scales up */
-  .title {
-    font-size: 3rem;
-    min-height: 4rem;
-  }
-
-  .paragraph {
-    font-size: 1.125rem;
-  }
-
-  .heading {
-    font-size: 2.5rem;
-  }
-
-  .intro {
-    font-size: 1.125rem;
-    margin-bottom: 4rem;
-  }
-
-  /* Values grid - 2 columns if you have 2-4 items */
-  .values {
-    gap: 2rem;
-  }
-
-  .valueItem {
-    padding: 2rem;
-  }
-
-  .valueIcon {
-    font-size: 2.5rem;
-  }
-
-  .valueTitle {
-    font-size: 1.5rem;
-  }
-
-  .valueText {
-    font-size: 1rem;
-  }
-
-  .personal {
-    padding: 2.5rem;
-  }
-
-  .subheading {
-    font-size: 1.75rem;
-  }
-
-  .personalItem {
-    font-size: 1rem;
-  }
-
-  .closing {
-    padding: 2rem;
-  }
-
-  .closingText {
-    font-size: 1.125rem;
-  }
-}
-
-/* ========================================
-   RESPONSIVE - DESKTOP (1024px+)
-   ======================================== */
-@media (min-width: 1024px) {
-  .heading {
-    font-size: 2.75rem;
-  }
-
-  /* Values can become 2 columns if needed */
-  .values {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ========================================
-   ANIMATIONS
-   ======================================== */
-/* NOTE: Stagger animations for value items */
-.valueItem {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.valueItem:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.valueItem:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.valueItem:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.valueItem:nth-child(4) {
-  animation-delay: 0.4s;
-}
-
-/* NOTE: Stagger animations for personal items */
-.personalItem {
-  opacity: 0;
-  transform: translateX(-10px);
-  animation: fadeInLeft 0.4s ease forwards;
-}
-
-.personalItem:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.personalItem:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.personalItem:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.personalItem:nth-child(4) {
-  animation-delay: 0.25s;
-}
-.personalItem:nth-child(5) {
-  animation-delay: 0.3s;
-}
-
-@keyframes fadeInLeft {
+@keyframes slideInLeft {
   to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-/* ========================================
-   ACCESSIBILITY
-   ======================================== */
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* tablet  */
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+  }
+
+  .imageContainer {
+    height: 480px;
+  }
+
+  .title {
+    font-size: 2.6rem;
+    min-height: 3.25rem;
+  }
+
+  .paragraph {
+    font-size: 1.0625rem;
+  }
+}
+
+/* desktop */
+
+@media (min-width: 1024px) {
+  .imageContainer {
+    height: 520px;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+}
+
+/*  accessibility  */
+
 @media (prefers-reduced-motion: reduce) {
-  .valueItem,
-  .personalItem,
   .imageContainer,
-  .content {
+  .content,
+  .textWrapper {
+    opacity: 1 !important;
+    transform: none !important;
     animation: none !important;
+  }
+
+  .imageSlide {
     transition: none;
   }
 
-  .valueItem,
-  .personalItem,
-  .imageContainer,
-  .content {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .valueItem:hover,
-  .personalItem:hover {
-    transform: none;
-  }
-
-  .viewMoreButton:hover .viewMoreIcon {
-    transform: none;
+  .typingCursor::after {
+    animation: none;
   }
 }

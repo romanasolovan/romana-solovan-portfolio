@@ -1,70 +1,103 @@
-/* ========== LAYOUT ========== */
 .hero {
   text-align: center;
-  min-height: calc(
-    100vh - var(--header-height)
-  ); /* NOTE: Full viewport minus header */
+  min-height: calc(100vh - var(--header-height));
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 0; /* NOTE: Vertical breathing room */
+  padding: 60px 0;
 }
 
+/* keeps the stack readable on small screens */
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.5rem, 3vw, 2.5rem); /* NOTE: Generous spacing between titles */
-  max-width: 90%; /* NOTE: Prevent text from touching browser edges */
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  max-width: 92%;
   margin: 0 auto;
 }
 
-/* ========== TYPOGRAPHY ========== */
-/* NOTE: Base styles for all titles */
+/* base title styling */
 .title {
   margin: 0;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1.1;
-  transition: opacity 0.3s ease; /* NOTE: Simple opacity change on hover */
+  cursor: default;
+  user-select: none;
+  position: relative;
+
+  /* spotlight tuning */
+  --spot-size: 120px;
+
+  transition: opacity 0.3s ease;
   will-change: opacity;
-  cursor: default; /* NOTE: Shows it's not a link */
-  user-select: none; /* NOTE: Prevents accidental text selection */
 }
 
-/* NOTE: Size and color hierarchy - original color scheme */
+/* spotlight layer (clipped to the letters) */
+.title::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+
+  background: radial-gradient(
+    circle var(--spot-size) at var(--mx, 50%) var(--my, 50%),
+    rgba(216, 180, 254, 0.42),
+    rgba(167, 139, 250, 0.18) 40%,
+    rgba(88, 28, 135, 0.1) 62%,
+    transparent 72%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  filter: drop-shadow(0 0 10px rgba(167, 139, 250, 0.18))
+    drop-shadow(0 0 18px rgba(216, 180, 254, 0.12));
+
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+/* show the spotlight when the user is interacting:
+   - desktop: hover
+   - mobile/tablet: finger press + drag */
+.title:hover::after,
+.title[data-pressed="true"]::after {
+  opacity: 1;
+}
+
+/* original color hierarchy + original animations */
 .title:nth-child(1) {
   font-size: clamp(3rem, 10vw, 7rem);
-  color: #1a202c; /* NOTE: Original darkest color */
+  color: #1a202c;
   animation: slideFromLeft 1s ease-out 0.2s both;
 }
 
 .title:nth-child(2) {
   font-size: clamp(2.5rem, 8vw, 5.5rem);
-  color: #2d3748; /* NOTE: Original medium color */
+  color: #2d3748;
   animation: slideFromRight 1s ease-out 0.5s both;
 }
 
 .title:nth-child(3) {
   font-size: clamp(2rem, 7vw, 4.5rem);
-  color: #4a5568; /* NOTE: Original lightest color */
+  color: #4a5568;
   animation: slideFromLeft 1s ease-out 0.8s both;
 }
 
-/* ========== HOVER EFFECTS ========== */
-/* NOTE: Subtle opacity change - no underline, no scale */
-.title:hover {
-  opacity: 0.7; /* NOTE: Slightly transparent on hover */
-}
-
-/* ========== ANIMATIONS ========== */
-/* NOTE: Original slide animations with blur effect */
+/* slide in with blur (original) */
 @keyframes slideFromLeft {
   from {
     opacity: 0;
-    transform: translateX(-100px);
-    filter: blur(10px);
+    transform: translateX(-50px);
+    filter: blur(5px);
   }
   to {
     opacity: 1;
@@ -76,8 +109,8 @@
 @keyframes slideFromRight {
   from {
     opacity: 0;
-    transform: translateX(100px);
-    filter: blur(10px);
+    transform: translateX(50px);
+    filter: blur(5px);
   }
   to {
     opacity: 1;
@@ -86,51 +119,43 @@
   }
 }
 
-/* ========== RESPONSIVE - TABLET (768px+) ========== */
+/* tablet */
 @media (min-width: 768px) {
   .hero {
-    padding: 100px 0; /* NOTE: More vertical space on larger screens */
+    padding: 100px 0;
   }
 
   .content {
     gap: clamp(2rem, 4vw, 3rem);
-    max-width: 85%; /* NOTE: Slightly tighter on larger screens */
+    max-width: 85%;
+  }
+
+  .title {
+    letter-spacing: -0.02em;
+    --spot-size: 150px;
   }
 }
 
-/* ========== RESPONSIVE - DESKTOP (1024px+) ========== */
+/* desktop */
 @media (min-width: 1024px) {
   .hero {
-    padding: 120px 0; /* NOTE: Maximum breathing room */
+    padding: 120px 0;
   }
 
   .content {
     max-width: 80%;
   }
-}
-
-/* ========== RESPONSIVE - MOBILE (max 767px) ========== */
-@media (max-width: 767px) {
-  .hero {
-    min-height: calc(100vh - var(--header-height));
-    padding: 60px 0; /* NOTE: Reduced padding for mobile */
-  }
-
-  .content {
-    gap: clamp(1rem, 2.5vw, 1.5rem);
-    max-width: 92%; /* NOTE: More space from edges on small screens */
-  }
 
   .title {
-    letter-spacing: -0.01em; /* NOTE: Slightly tighter tracking on mobile */
+    --spot-size: 170px;
   }
 
-  /* NOTE: Gentler animations on mobile for better performance */
+  /* restore stronger desktop animation feel */
   @keyframes slideFromLeft {
     from {
       opacity: 0;
-      transform: translateX(-50px);
-      filter: blur(5px);
+      transform: translateX(-100px);
+      filter: blur(10px);
     }
     to {
       opacity: 1;
@@ -142,8 +167,8 @@
   @keyframes slideFromRight {
     from {
       opacity: 0;
-      transform: translateX(50px);
-      filter: blur(5px);
+      transform: translateX(100px);
+      filter: blur(10px);
     }
     to {
       opacity: 1;
@@ -153,17 +178,15 @@
   }
 }
 
-/* ========== ACCESSIBILITY ========== */
-/* NOTE: Respect user's motion preferences */
+/* accessibility: respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .title {
     animation: none !important;
-    opacity: 1 !important;
     transform: none !important;
     filter: none !important;
   }
 
-  .title:hover {
-    opacity: 0.8; /* NOTE: Still show hover feedback */
+  .title::after {
+    display: none;
   }
 }

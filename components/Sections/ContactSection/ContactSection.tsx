@@ -12,7 +12,7 @@ export default function ContactSection() {
           <p className={css.description}>
             Whether you have a project in mind, want to collaborate, or just
             want to say hi — I would love to hear from you. Feel free to reach
-            out and lets create something amazing together.
+            out and let&apos;s create something amazing together.
           </p>
           <Link href="/contact" className={css.ctaButton}>
             Get In Touch
