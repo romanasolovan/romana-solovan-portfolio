@@ -153,7 +153,7 @@ export default function AboutSection({
 
             {showViewMore && (
               <div className={css.viewMoreContainer}>
-                <Link href="/about" className="btn btn--secondary">
+                <Link href="/about" className="view-more-btn">
                   Learn more
                   <svg
                     className={css.viewMoreIcon}

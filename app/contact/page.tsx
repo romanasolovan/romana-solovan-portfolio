@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 import CustomDropdown from "@/components/Site/CustomDropdown";
 import css from "./ContactPage.module.css";
 
-type FormData = {
+type FormValues = {
   name: string;
   email: string;
   topic: string;
@@ -13,71 +15,87 @@ type FormData = {
   howDidYouFind: string;
   howDidYouFindOther: string;
   message: string;
+
+  // honeypot (spam)
+  website: string;
 };
 
+type Status =
+  | { type: "success"; message: string }
+  | { type: "error"; message: string }
+  | null;
+
+type ApiErrorResponse = {
+  error?: string;
+  details?: string;
+};
+
+const initialValues: FormValues = {
+  name: "",
+  email: "",
+  topic: "",
+  topicOther: "",
+  howDidYouFind: "",
+  howDidYouFindOther: "",
+  message: "",
+  website: "",
+};
+
+function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  if (typeof err === "string") return err;
+  return "Something went wrong.";
+}
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    topic: "",
-    topicOther: "",
-    howDidYouFind: "",
-    howDidYouFindOther: "",
-    message: "",
-  });
+  const [status, setStatus] = useState<Status>(null);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const validationSchema = useMemo(
+    () =>
+      Yup.object({
+        name: Yup.string()
+          .trim()
+          .min(2, "Name is too short")
+          .max(80, "Name is too long")
+          .required("Name is required"),
+        email: Yup.string()
+          .trim()
+          .email("Enter a valid email")
+          .max(120, "Email is too long")
+          .required("Email is required"),
+        topic: Yup.string().max(60, "Topic is too long"),
+        topicOther: Yup.string().when("topic", {
+          is: "Other",
+          then: (s) =>
+            s
+              .trim()
+              .min(2, "Please specify")
+              .max(80, "Too long")
+              .required("Please specify"),
+          otherwise: (s) => s.trim().max(80, "Too long"),
+        }),
+        howDidYouFind: Yup.string().max(60, "Too long"),
+        howDidYouFindOther: Yup.string().when("howDidYouFind", {
+          is: "Other",
+          then: (s) =>
+            s
+              .trim()
+              .min(2, "Please specify")
+              .max(80, "Too long")
+              .required("Please specify"),
+          otherwise: (s) => s.trim().max(80, "Too long"),
+        }),
+        message: Yup.string()
+          .trim()
+          .min(10, "Message is too short")
+          .max(2000, "Message is too long")
+          .required("Message is required"),
 
-  const handleDropdownChange = (name: keyof FormData, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-      ...(name === "topic" && value !== "Other" ? { topicOther: "" } : {}),
-      ...(name === "howDidYouFind" && value !== "Other"
-        ? { howDidYouFindOther: "" }
-        : {}),
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const finalTopic =
-      formData.topic === "Other" ? formData.topicOther : formData.topic;
-
-    const finalSource =
-      formData.howDidYouFind === "Other"
-        ? formData.howDidYouFindOther
-        : formData.howDidYouFind;
-
-    const subject = finalTopic
-      ? `${finalTopic} - Message from ${formData.name}`
-      : `Message from ${formData.name}`;
-
-    const body = `
-Name: ${formData.name}
-Email: ${formData.email}
-${finalTopic ? `Topic: ${finalTopic}` : ""}
-${finalSource ? `How they found me: ${finalSource}` : ""}
-
-Message:
-${formData.message}
-    `.trim();
-
-    const mailtoLink = `mailto:solo.rv95@gmail.com?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailtoLink;
-  };
+        // honeypot should stay empty
+        website: Yup.string().max(0, "Bots are not welcome"),
+      }),
+    [],
+  );
 
   const contactMethods = [
     {
@@ -146,167 +164,336 @@ ${formData.message}
   ];
 
   return (
-    
-      <div className={css.pageContainer}>
-        <section className={css.pageContent}>
-          <div className={css.pageInner}>
-            <div className={css.methodsSection}>
-              <h2 className={css.sectionTitle}>Ways to Connect</h2>
+    <div className={css.pageContainer}>
+      <section className={css.pageContent}>
+        <div className={css.pageInner}>
+          <div className={css.methodsSection}>
+            <h2 className={css.sectionTitle}>Ways to Connect</h2>
 
-              <div className={css.methodsGrid}>
-                {contactMethods.map((method, index) => (
-                  <a
-                    key={index}
-                    href={method.link}
-                    target={
-                      method.link.startsWith("http") ? "_blank" : undefined
-                    }
-                    rel={
-                      method.link.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    className={css.methodCard}
-                  >
-                    <div className={css.methodIconWrapper}>{method.icon}</div>
-                    <div className={css.methodContent}>
-                      <span className={css.methodLabel}>{method.label}</span>
-                      <span className={css.methodValue}>{method.value}</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div className={css.formSection}>
-              <h2 className={css.sectionTitle}>Send Me a Message</h2>
-
-              <form onSubmit={handleSubmit} className={css.form}>
-                <div className={css.formRow}>
-                  <div className={css.formGroup}>
-                    <label htmlFor="name" className={css.label}>
-                      Name <span className={css.required}>*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className={css.input}
-                      placeholder="Your Name"
-                    />
+            <div className={css.methodsGrid}>
+              {contactMethods.map((method, index) => (
+                <a
+                  key={index}
+                  href={method.link}
+                  target={method.link.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    method.link.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className={css.methodCard}
+                >
+                  <div className={css.methodIconWrapper}>{method.icon}</div>
+                  <div className={css.methodContent}>
+                    <span className={css.methodLabel}>{method.label}</span>
+                    <span className={css.methodValue}>{method.value}</span>
                   </div>
-
-                  <div className={css.formGroup}>
-                    <label htmlFor="email" className={css.label}>
-                      Email <span className={css.required}>*</span>
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className={css.input}
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-
-                <div className={css.formRow}>
-                  <div className={css.formGroup}>
-                    <label htmlFor="topic" className={css.label}>
-                      What are you looking for?
-                    </label>
-
-                    <CustomDropdown
-                      id="topic"
-                      value={formData.topic}
-                      onChange={(value) => handleDropdownChange("topic", value)}
-                      options={topicOptions}
-                      placeholder="Select a topic"
-                    />
-
-                    {formData.topic === "Other" && (
-                      <input
-                        type="text"
-                        name="topicOther"
-                        value={formData.topicOther}
-                        onChange={handleChange}
-                        className={css.input}
-                        placeholder="Please specify..."
-                      />
-                    )}
-                  </div>
-
-                  <div className={css.formGroup}>
-                    <label htmlFor="howDidYouFind" className={css.label}>
-                      How did you find me?
-                    </label>
-
-                    <CustomDropdown
-                      id="howDidYouFind"
-                      value={formData.howDidYouFind}
-                      onChange={(value) =>
-                        handleDropdownChange("howDidYouFind", value)
-                      }
-                      options={sourceOptions}
-                      placeholder="Select an option"
-                    />
-
-                    {formData.howDidYouFind === "Other" && (
-                      <input
-                        type="text"
-                        name="howDidYouFindOther"
-                        value={formData.howDidYouFindOther}
-                        onChange={handleChange}
-                        className={css.input}
-                        placeholder="Please specify..."
-                      />
-                    )}
-                  </div>
-                </div>
-
-                <div className={css.formGroup}>
-                  <label htmlFor="message" className={css.label}>
-                    Message <span className={css.required}>*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className={css.textarea}
-                    placeholder="Tell me about your project or inquiry..."
-                  />
-                </div>
-
-                <button type="submit" className={css.submitButton}>
-                  <svg
-                    className={css.submitIcon}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                    />
-                  </svg>
-                  Send Message
-                </button>
-              </form>
+                </a>
+              ))}
             </div>
           </div>
-        </section>
-      </div>
-    
+
+          <div className={css.formSection}>
+            <h2 className={css.sectionTitle}>Send Me a Message</h2>
+
+            {status && (
+              <div
+                role="status"
+                style={{
+                  marginBottom: 12,
+                  padding: 12,
+                  borderRadius: 8,
+                  border: "1px solid currentColor",
+                }}
+              >
+                {status.message}
+              </div>
+            )}
+
+            <Formik<FormValues>
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              validateOnBlur
+              validateOnChange={false}
+              onSubmit={async (values, helpers) => {
+                setStatus(null);
+
+                // Honeypot: if filled, silently “succeed”
+                if (values.website && values.website.trim().length > 0) {
+                  helpers.resetForm();
+                  setStatus({
+                    type: "success",
+                    message:
+                      "Message sent! Thank you — I’ll get back to you soon.",
+                  });
+                  return;
+                }
+
+                const finalTopic =
+                  values.topic === "Other"
+                    ? values.topicOther.trim()
+                    : values.topic;
+                const finalSource =
+                  values.howDidYouFind === "Other"
+                    ? values.howDidYouFindOther.trim()
+                    : values.howDidYouFind;
+
+                try {
+                  const res = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      name: values.name.trim(),
+                      email: values.email.trim(),
+                      topic: finalTopic,
+                      howDidYouFind: finalSource,
+                      message: values.message.trim(),
+                      pageUrl:
+                        typeof window !== "undefined"
+                          ? window.location.href
+                          : "",
+                    }),
+                  });
+
+                  const data: ApiErrorResponse = (await res
+                    .json()
+                    .catch(() => ({}))) as ApiErrorResponse;
+
+                  if (!res.ok) {
+                    throw new Error(
+                      data.error || "Failed to send message. Please try again.",
+                    );
+                  }
+
+                  helpers.resetForm();
+                  setStatus({
+                    type: "success",
+                    message:
+                      "Message sent! Thank you — I’ll get back to you soon.",
+                  });
+                } catch (err: unknown) {
+                  setStatus({ type: "error", message: getErrorMessage(err) });
+                } finally {
+                  helpers.setSubmitting(false);
+                }
+              }}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                isSubmitting,
+                handleChange,
+                handleBlur,
+                setFieldValue,
+                setFieldTouched,
+                handleSubmit,
+              }) => {
+                // Clear conditional fields when not “Other”
+                if (values.topic !== "Other" && values.topicOther) {
+                  setFieldValue("topicOther", "", false);
+                }
+                if (
+                  values.howDidYouFind !== "Other" &&
+                  values.howDidYouFindOther
+                ) {
+                  setFieldValue("howDidYouFindOther", "", false);
+                }
+
+                return (
+                  <form onSubmit={handleSubmit} className={css.form} noValidate>
+                    <div className={css.formRow}>
+                      <div className={css.formGroup}>
+                        <label htmlFor="name" className={css.label}>
+                          Name <span className={css.required}>*</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={values.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className={css.input}
+                          placeholder="Your Name"
+                          aria-invalid={Boolean(touched.name && errors.name)}
+                        />
+                        {touched.name && errors.name && (
+                          <div style={{ marginTop: 6 }}>{errors.name}</div>
+                        )}
+                      </div>
+
+                      <div className={css.formGroup}>
+                        <label htmlFor="email" className={css.label}>
+                          Email <span className={css.required}>*</span>
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={values.email}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className={css.input}
+                          placeholder="your.email@example.com"
+                          aria-invalid={Boolean(touched.email && errors.email)}
+                        />
+                        {touched.email && errors.email && (
+                          <div style={{ marginTop: 6 }}>{errors.email}</div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className={css.formRow}>
+                      <div className={css.formGroup}>
+                        <label htmlFor="topic" className={css.label}>
+                          What are you looking for?
+                        </label>
+
+                        <CustomDropdown
+                          id="topic"
+                          value={values.topic}
+                          onChange={(value) => {
+                            setFieldValue("topic", value);
+                            setFieldTouched("topic", true, false);
+                          }}
+                          options={topicOptions}
+                          placeholder="Select a topic"
+                        />
+
+                        {values.topic === "Other" && (
+                          <>
+                            <input
+                              type="text"
+                              name="topicOther"
+                              value={values.topicOther}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              className={css.input}
+                              placeholder="Please specify..."
+                              aria-invalid={Boolean(
+                                touched.topicOther && errors.topicOther,
+                              )}
+                            />
+                            {touched.topicOther && errors.topicOther && (
+                              <div style={{ marginTop: 6 }}>
+                                {errors.topicOther}
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+
+                      <div className={css.formGroup}>
+                        <label htmlFor="howDidYouFind" className={css.label}>
+                          How did you find me?
+                        </label>
+
+                        <CustomDropdown
+                          id="howDidYouFind"
+                          value={values.howDidYouFind}
+                          onChange={(value) => {
+                            setFieldValue("howDidYouFind", value);
+                            setFieldTouched("howDidYouFind", true, false);
+                          }}
+                          options={sourceOptions}
+                          placeholder="Select an option"
+                        />
+
+                        {values.howDidYouFind === "Other" && (
+                          <>
+                            <input
+                              type="text"
+                              name="howDidYouFindOther"
+                              value={values.howDidYouFindOther}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              className={css.input}
+                              placeholder="Please specify..."
+                              aria-invalid={Boolean(
+                                touched.howDidYouFindOther &&
+                                errors.howDidYouFindOther,
+                              )}
+                            />
+                            {touched.howDidYouFindOther &&
+                              errors.howDidYouFindOther && (
+                                <div style={{ marginTop: 6 }}>
+                                  {errors.howDidYouFindOther}
+                                </div>
+                              )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className={css.formGroup}>
+                      <label htmlFor="message" className={css.label}>
+                        Message <span className={css.required}>*</span>
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={values.message}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        rows={6}
+                        className={css.textarea}
+                        placeholder="Tell me about your project or inquiry..."
+                        aria-invalid={Boolean(
+                          touched.message && errors.message,
+                        )}
+                      />
+                      {touched.message && errors.message && (
+                        <div style={{ marginTop: 6 }}>{errors.message}</div>
+                      )}
+                    </div>
+
+                    {/* Honeypot field (hidden from humans) */}
+                    <input
+                      type="text"
+                      name="website"
+                      value={values.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      style={{
+                        position: "absolute",
+                        left: "-9999px",
+                        opacity: 0,
+                        height: 0,
+                        width: 0,
+                        pointerEvents: "none",
+                      }}
+                    />
+
+                    <button
+                      type="submit"
+                      className={css.submitButton}
+                      disabled={isSubmitting}
+                    >
+                      <svg
+                        className={css.submitIcon}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                        />
+                      </svg>
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </button>
+                  </form>
+                );
+              }}
+            </Formik>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
