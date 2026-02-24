@@ -317,10 +317,16 @@ export default function ContactPage() {
                           className={css.input}
                           placeholder="Your Name"
                           aria-invalid={Boolean(touched.name && errors.name)}
+                          aria-describedby="name-error"
                         />
-                        {touched.name && errors.name && (
-                          <div style={{ marginTop: 6 }}>{errors.name}</div>
-                        )}
+
+                        <div
+                          id="name-error"
+                          className={css.errorSlot}
+                          aria-live="polite"
+                        >
+                          {touched.name ? errors.name : ""}
+                        </div>
                       </div>
 
                       <div className={css.formGroup}>
@@ -338,9 +344,13 @@ export default function ContactPage() {
                           placeholder="your.email@example.com"
                           aria-invalid={Boolean(touched.email && errors.email)}
                         />
-                        {touched.email && errors.email && (
-                          <div style={{ marginTop: 6 }}>{errors.email}</div>
-                        )}
+                        <div
+                          id="email-error"
+                          className={css.errorSlot}
+                          aria-live="polite"
+                        >
+                          {touched.email ? errors.email : ""}
+                        </div>
                       </div>
                     </div>
 
@@ -356,6 +366,12 @@ export default function ContactPage() {
                           onChange={(value) => {
                             setFieldValue("topic", value);
                             setFieldTouched("topic", true, false);
+
+                            // If user leaves "Other", clear & reset the conditional field state
+                            if (value !== "Other") {
+                              setFieldValue("topicOther", "", false);
+                              setFieldTouched("topicOther", false, false);
+                            }
                           }}
                           options={topicOptions}
                           placeholder="Select a topic"
@@ -374,12 +390,16 @@ export default function ContactPage() {
                               aria-invalid={Boolean(
                                 touched.topicOther && errors.topicOther,
                               )}
+                              aria-describedby="topicOther-error"
                             />
-                            {touched.topicOther && errors.topicOther && (
-                              <div style={{ marginTop: 6 }}>
-                                {errors.topicOther}
-                              </div>
-                            )}
+
+                            <div
+                              id="topicOther-error"
+                              className={css.errorSlot}
+                              aria-live="polite"
+                            >
+                              {touched.topicOther ? errors.topicOther : ""}
+                            </div>
                           </>
                         )}
                       </div>
@@ -395,6 +415,16 @@ export default function ContactPage() {
                           onChange={(value) => {
                             setFieldValue("howDidYouFind", value);
                             setFieldTouched("howDidYouFind", true, false);
+
+                            // If user leaves "Other", clear & reset the conditional field state
+                            if (value !== "Other") {
+                              setFieldValue("howDidYouFindOther", "", false);
+                              setFieldTouched(
+                                "howDidYouFindOther",
+                                false,
+                                false,
+                              );
+                            }
                           }}
                           options={sourceOptions}
                           placeholder="Select an option"
@@ -414,13 +444,18 @@ export default function ContactPage() {
                                 touched.howDidYouFindOther &&
                                 errors.howDidYouFindOther,
                               )}
+                              aria-describedby="howDidYouFindOther-error"
                             />
-                            {touched.howDidYouFindOther &&
-                              errors.howDidYouFindOther && (
-                                <div style={{ marginTop: 6 }}>
-                                  {errors.howDidYouFindOther}
-                                </div>
-                              )}
+
+                            <div
+                              id="howDidYouFindOther-error"
+                              className={css.errorSlot}
+                              aria-live="polite"
+                            >
+                              {touched.howDidYouFindOther
+                                ? errors.howDidYouFindOther
+                                : ""}
+                            </div>
                           </>
                         )}
                       </div>
@@ -442,10 +477,16 @@ export default function ContactPage() {
                         aria-invalid={Boolean(
                           touched.message && errors.message,
                         )}
+                        aria-describedby="message-error"
                       />
-                      {touched.message && errors.message && (
-                        <div style={{ marginTop: 6 }}>{errors.message}</div>
-                      )}
+
+                      <div
+                        id="message-error"
+                        className={css.errorSlot}
+                        aria-live="polite"
+                      >
+                        {touched.message ? errors.message : ""}
+                      </div>
                     </div>
 
                     {/* Honeypot field (hidden from humans) */}

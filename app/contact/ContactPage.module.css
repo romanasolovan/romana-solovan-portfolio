@@ -178,6 +178,14 @@
   color: #ef4444;
 }
 
+.errorSlot {
+  min-height: 1.125rem; /* reserves space for 1 line of text */
+  margin-top: 0.375rem; /* same as your previous 6px */
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: #ef4444;
+}
+
 .input,
 .textarea {
   width: 100%;
@@ -208,7 +216,7 @@
 }
 
 .textarea {
-  resize: vertical;
+  resize: none;
   min-height: 140px;
 }
 
